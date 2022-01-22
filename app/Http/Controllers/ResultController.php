@@ -92,7 +92,7 @@ class ResultController extends Controller
         \App\Models\Result::create([
             'id' => $this->generateID(),
             'start_id' => $start->id,
-            'penciler'=> $official->penciler,
+            'official_id'=> $official->id,
             'position'=> $official->position,
             'assessment'=>$this->generateEmptyJson($numOfBlocks),
         ]);
@@ -171,9 +171,10 @@ class ResultController extends Controller
        private function generateID(){
 
         //lower limit of the id
-        $limit = 1000000000000000000;
+        $limit = 100000000000000000;
 
         //generating a random id
+
         $id = rand($limit,$limit*10);
 
         //checking if a record already exists with the given id

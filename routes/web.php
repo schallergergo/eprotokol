@@ -2,7 +2,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BroadcastController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ResultController;

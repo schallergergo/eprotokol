@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Result;
 use App\Models\User;
+use App\Models\Official;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 
@@ -79,9 +80,11 @@ class ResultPolicy
     {
 
         if (Auth::User()->role=="admin") return true;
-        if ($result->start->event->competition->active==false) return false;
+        $event=$result->start->event;
+        if ($event->competition->active==false) return false;
         if (Auth::User()->role=="office" && $result->start->event->competition->office==$user->id) return true;
-        if (Auth::User()->role=="penciler" && $result->penciler==$user->id) return true;
+        $officials=Official::where("event_id",$event->id)->where("penciler",$user->id)->get();
+        foreach ($officials as $official) if (Auth::User()->role=="penciler" && $result->official_id==$official->id) return true;
         return false;
     }
 

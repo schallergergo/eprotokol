@@ -12,6 +12,10 @@
                     <span class="ml-2"><a href="/competition/create">{{__("Create competition")}}</a></span>
                     
                     @endcan
+                     @can('create',App\Models\User::class)
+                    <span class="ml-2"><a href="/user/create">{{__("Create user")}}</a></span>
+                    
+                    @endcan
                 </div>
 
                 <div class="card-body">
