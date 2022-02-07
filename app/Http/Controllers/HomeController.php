@@ -73,7 +73,7 @@ class HomeController extends Controller
 
     private function clubIndex(User $user){
         $clubIndex=$user->id;
-        $users=User::where("role","rider")->where("club",$clubIndex)->orderBy('name','desc')->paginate(20); 
+        $users=User::where("role","rider")->where("club",$clubIndex)->orderBy('name')->paginate(20); 
         return view("user.index",["users"=>$users]);
     }
 
