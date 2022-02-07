@@ -46,12 +46,15 @@ Route::patch('/block/update/{block}', [BlockController::class,'update']);
 Route::get('/block/delete/{block}', [BlockController::class,'destroy']);
 
 Route::get('/start/create/{event}', [StartController::class,'create']);
+Route::get('/start/index/{user}', [StartController::class,'index']);
 Route::post('/start/store/{event}', [StartController::class,'store']);
 Route::get('/start/edit/{start}', [StartController::class,'edit']);
 Route::patch('/start/update/{start}', [StartController::class,'update']); 
 Route::post('/start/import/{event}', [StartController::class,'import']);
 Route::get('/start/delete/{start}', [StartController::class,'destroy']);
 
+
+Route::get('/user/index', [UserController::class,'index']);
 Route::get('/user/create', [UserController::class,'create']);
 Route::post('/user/store', [UserController::class,'store']);
 Route::get('/user/profile', [UserController::class,'profile']);

@@ -17,7 +17,10 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if ($user->role=='admin') return true;
+        if ($user->role=='club') return true;
+        return false;
+
     }
 
     /**
@@ -29,9 +32,9 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return true;
-        if ($user->role=="admin") return true;
-        if ($user==null) return false;
+        if ($user->role=='admin') return true;
+        if ($user->role=='club' && $model->club==$user->id) return true;
+        return false;
     }
 
     /**

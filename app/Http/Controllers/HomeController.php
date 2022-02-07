@@ -37,13 +37,15 @@ class HomeController extends Controller
     {$user=Auth::User();
         if ($user->role=="rider") return $this->riderIndex($user);
         if ($user->role=="office") return $this->officeIndex($user);
-         if ($user->role=="penciler") return $this->pencilerIndex($user);
+        if ($user->role=="penciler") return $this->pencilerIndex($user);
+        if ($user->role=="club") return $this->clubIndex($user);
         /*
         
         if ($user->role=="admin") return $this->adminIndex($user);
        
         */
-        return view("home");
+        if ($user->role=="admin") return view("home");
+        
     }
 
     //the home screen for riders
@@ -67,6 +69,14 @@ class HomeController extends Controller
         $competitions=Competition::where($toMatch)->orderBy('date','desc')->paginate(10); 
         return view("competition.index",["competitions"=>$competitions]);
     }
+
+
+    private function clubIndex(User $user){
+        $clubIndex=$user->id;
+        $users=User::where("role","rider")->where("club",$clubIndex)->orderBy('name','desc')->paginate(20); 
+        return view("user.index",["users"=>$users]);
+    }
+
     public function pencilerIndex(User $user){
 
         

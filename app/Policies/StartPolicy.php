@@ -6,6 +6,7 @@ use App\Models\Start;
 use App\Models\User;
 use App\Models\Event;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class StartPolicy
 {
@@ -18,8 +19,12 @@ class StartPolicy
      * @return mixed
      */
     public function viewAny(User $user)
-    {
-        
+    {   $club=Auth::User()->id;
+        $role=$user->role;
+        if ($role=='admin') return true;
+        if ($user->role=='club' && $club==$user->id) return true;
+        return false;
+
     }
 
     /**

@@ -22,9 +22,11 @@ class StartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        if (Auth::User()->role=="penciler") return;
+        $this->authorize('viewAny', [Start::class,$user]);
+        $starts=Start::where("rider_id",$user->username)->where("completed",">","0")->orderByDesc("created_at")->paginate(20);
+        return view("start.rider.index",["starts"=>$starts]);
     }
 
     /**
