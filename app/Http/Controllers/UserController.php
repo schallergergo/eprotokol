@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -97,19 +98,18 @@ private function storeAdmin(array $data){
      */
     public function show(User $user)
     {
-        //
+        $clubs=User::all();
+        return view("user.profile",["user"=>$user,"clubs"=>$clubs]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
+    public function profile()
     {
-        //
+        $user=Auth::User();
+        if ($user==null) return redirect("/login");
+        $clubs=User::where("role","club")->orderBy("name")->get();
+
+        return view("user.profile",["user"=>$user,"clubs"=>$clubs]);
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -118,9 +118,27 @@ private function storeAdmin(array $data){
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(User $user)
     {
-        //
+         $data = request();
+         $newData=$data->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'club' =>['required', 'integer']
+            ]);
+
+         if ($data["email"]!=$user->email)
+            {
+                $email = $data->validate([ 'email' => ['required', 'string', 'email', 'max:255','unique:users']]);
+                $user->email_verified_at=null;
+                $user->email=$email["email"];
+                $user->save();
+            }
+
+
+
+         $user->update($newData);
+         return redirect()->back();
+
     }
 
     /**

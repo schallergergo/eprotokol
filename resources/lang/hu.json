@@ -185,5 +185,7 @@
 	"No results found!":"Nem található eredmény!",
 	"Delete start":"Start törlése",
 	"Edit start":"Start szerkesztése",
-	"Select":"Kiválaszt"
+	"Select":"Kiválaszt",
+	"Individual":"Egyéni induló",
+	"Profile":"Profil"
 }

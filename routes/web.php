@@ -3,6 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BroadcastController;
+use App\Http\Controllers\AdminPanelController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ResultController;
@@ -30,7 +31,7 @@ $user=Auth::User();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 ->name('home')->middleware('verified');;
 
-
+Route::get("/admin/userrider",[AdminPanelController::class,'userrider']);
 Route::get('/program/index', [ProgramController::class,'index']);
 Route::get('/program/show/{program}', [ProgramController::class,'show']);
 Route::get('/program/create', [ProgramController::class,'create']);
@@ -53,6 +54,8 @@ Route::get('/start/delete/{start}', [StartController::class,'destroy']);
 
 Route::get('/user/create', [UserController::class,'create']);
 Route::post('/user/store', [UserController::class,'store']);
+Route::get('/user/profile', [UserController::class,'profile']);
+Route::patch('/user/update/{user}', [UserController::class,'update']);
 
 Route::get('/result/index', [ResultController::class, 'index']);
 Route::get('/result/show/{result}', [ResultController::class, 'show']);

@@ -29,7 +29,9 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        return true;
+        if ($user->role=="admin") return true;
+        if ($user==null) return false;
     }
 
     /**
@@ -67,9 +69,12 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function update(User $user, User $model)
+    public function update(User $user,User $model)
     {
-        //
+         if ($user->role=='admin') return true;
+         if ($user->id==$model->id) return true;
+         return false;
+        
     }
 
     /**

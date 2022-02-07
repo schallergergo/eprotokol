@@ -29,8 +29,7 @@ class ResultImport implements ToModel, WithValidation, WithHeadingRow, SkipsOnEr
                             where("horse_id",$data['horse_licence'])->
                             where("event_id",$event_id)->get();
         if (count($savedAlready)!==0) return null;
-        if (strlen($data['rider_licence'])<5 || strlen($data['rider_licence'])>6) return null;
-        if (strlen($data['horse_licence'])<5 || strlen($data['horse_licence'])>6) return null;   
+       
 
         $newStart=new Start([
             'id' => $this->generateID(),
