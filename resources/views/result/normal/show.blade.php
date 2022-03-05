@@ -159,8 +159,10 @@
                         @if ($result->eliminated==0)
                             {{__("Points")}}: <strong>{{number_format($result->mark, 1) }} {{__("points")}}  </strong>
                             - {{__("Percentage")}}: <strong>{{number_format($result->percent, 2) }} %       </strong>
-                                @if ($result->error!=0)
+                                @if ($result->error!=0 && $program->errortype==1)
                                 - {{__("Deduction")}}: <strong>{{number_format($result->error, 0) }} {{__("points")}}</strong>
+                                 @elseif ($result->error!=0 && $program->errortype==2)
+                                - {{__("Deduction")}}!</strong>
 
                         @endif
                         @else

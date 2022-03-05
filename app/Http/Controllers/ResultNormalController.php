@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Result;
+use App\Models\Program;
 class ResultNormalController extends Controller
 {
     //Shows a given result based on its id
@@ -12,12 +13,12 @@ class ResultNormalController extends Controller
         $start=$result->start;
         if ($result->completed==0) redirect("/event/show/{$start->event->id}");
         $assessment=json_decode($result["assessment"]);
-
+        $program=$result->start->event->program;
         //first part of the program, with the moves to be executed
-        $blocks=$result->start->event->program->block->where("programpart",1); 
+        $blocks=$program->block->where("programpart",1); 
 
         //second part, with the criteria for the collective marks
-        $collectivemarks=$result->start->event->program->block->where("programpart",2); 
+        $collectivemarks=$program->block->where("programpart",2); 
 
         //errors made by the rider, aka deductions
         $error=$result->error; 
@@ -27,6 +28,7 @@ class ResultNormalController extends Controller
 
 
         return view("result.normal.show",[ "result"=>$result, 
+                                    "program"=>$program,
                                     "start"=>$start,
                                     "blocks"=>$blocks,
                                     "collectivemarks"=>$collectivemarks,
@@ -116,13 +118,14 @@ class ResultNormalController extends Controller
         $result->update($dataOut);
     
     }
-      private function mark(Result $result, array $markArray, int $error){
+      private function mark(Result $result, array $markArray, float $error){
         //-1 means elimination: return 0
         if ($error==-1) return 0;
         $points=0;
 
         //the blocks of the program, contains the multiplication coefficient
-        $blocks=$result->start->event->program->block;
+        $program=$result->start->event->program;
+        $blocks=$program->block;
 
         //sanity check: is the number of marks and block equal?
         if (count($blocks)!=count($markArray)) return 0;
@@ -132,7 +135,7 @@ class ResultNormalController extends Controller
             $points+=$markArray[$i]["mark"]*$blocks[$i]->coefficient;
         }
 
-        return $points-$error;
+        return $points-$this->calculateError($program,$points,$error);
     }
 
      private function percent(Result $result, float $point){
@@ -143,7 +146,7 @@ class ResultNormalController extends Controller
     }
 
     //calculating the collective marks
-    private function collectiveMarkPoint(Result $result, array $pointArray, int $error){
+    private function collectiveMarkPoint(Result $result, array $pointArray, float $error){
         //-1 means elimination: return 0
         if ($error==-1) return 0;
 
@@ -159,5 +162,21 @@ class ResultNormalController extends Controller
         }
     
         return $point;
+    }
+    private function calculateError(Program $program, float $mark, float $error){
+        if ($error==0) return 0;
+        if ($program->errortype==1) return $error;
+
+        if ($program->errortype==2) 
+        {
+            if ($error==2) return $this->calculatePercentagePoint($mark,$program->maxMark,0.5);
+            if ($error==6) return $this->calculatePercentagePoint($mark,$program->maxMark,1);
+        }
+
+    }
+
+    private function calculatePercentagePoint(float $mark, float $maxMark, float $deduction){
+        $percent=($mark/$maxMark)-($deduction/100.0);
+        return $mark-($maxMark*$percent);
     }
 }

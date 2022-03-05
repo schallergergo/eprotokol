@@ -14,6 +14,7 @@ use App\Http\Controllers\StartController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\OfficialController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SiteMapController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,6 +104,12 @@ Route::get('/official/delete/{official}', [OfficialController::class, 'destroy']
 Route::get('/broadcast/{event}/display',[BroadcastController::class, 'display']);
 Route::get('/broadcast/{event}/json',[BroadcastController::class, 'json']);
 Route::get('/broadcast/{event}/serialized',[BroadcastController::class, 'serialized']);
+
+Route::get('/sitemap.xml',[SiteMapController::class, 'generate']);
+
+
+Route::get("/faq", function(){ return view("faq"); });
+
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');

@@ -34,12 +34,19 @@ var marks=document.getElementsByClassName("mark");
               }
 
             }
-            $.ajax({
+            var request = $.ajax({
 
               headers: {'X-CSRF-TOKEN': token},
                type:'POST',
                url:'/result/ajaxUpdate/'+resultID,
                data:{"assessment":jsonObj,"error":error},
-               
-            });
+
+                });
+            request.done(function( msg ) {
+            console.log("hello");
+          });
+ 
+          request.fail(function( jqXHR, textStatus ) {
+            alert( "Request failed: " + textStatus );
+          });
          }

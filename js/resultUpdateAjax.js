@@ -21,6 +21,7 @@ var marks=document.getElementsByClassName("mark");
             var error= document.getElementById("error");
             error=error.options[error.selectedIndex].value;
             var token = $('meta[name="csrf-token"]').attr('content');
+            console.log("hello");
             jsonObj=[];
             
             if (remark.length==mark.length){
@@ -34,12 +35,19 @@ var marks=document.getElementsByClassName("mark");
               }
 
             }
-            $.ajax({
+            var request = $.ajax({
 
               headers: {'X-CSRF-TOKEN': token},
                type:'POST',
                url:'/result/ajaxUpdate/'+resultID,
                data:{"assessment":jsonObj,"error":error},
-               
-            });
+
+                });
+            request.done(function( msg ) {
+            console.log(msg);
+          });
+ 
+          request.fail(function( jqXHR, textStatus ) {
+            alert( "Request failed: " + textStatus );
+          });
          }

@@ -11,12 +11,17 @@ use App\Http\Requests\UpdateBroadcastRequest;
 class BroadcastController extends Controller
 {
     public function display(Event $event){
-
     if ($event->last_opened==null)  return ;
+
     $start=Start::findOrFail($event->last_opened);
     $results=$start->result->sortBy("position");
-    
-    return view('broadcast.display',['start'=>$start,'results'=>$results]);
+
+
+    return view('broadcast.display',[
+        'start'=>$start,
+        'results'=>$results,
+
+    ]);
     }
 
     public function json(Event $event){

@@ -18,11 +18,11 @@ class StartPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
-    {   $club=Auth::User()->id;
+      public function viewAny(User $user, User $model)
+    {   
         $role=$user->role;
         if ($role=='admin') return true;
-        if ($user->role=='club' && $club==$user->id) return true;
+        if ($user->role=='club' && $model->club==$user->id) return true;
         return false;
 
     }

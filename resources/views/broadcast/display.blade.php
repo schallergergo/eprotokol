@@ -9,17 +9,30 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    h1 {
+      @if (isset($nameSize))
+  font-size: {{$nameSize}}vw;
+    @else
+    font-size: 6vw;
+    @endif
+}
+  h4 {
+
+  font-size: 3vw;
+}
+  </style>
 </head>
 <body>
 
-<div class="container">
 
-<h1 class="display-1 text-nowrap" style="font-size:6vw;">{{$start->rider_name}}</h1>
-<h1 class="display-1 text-nowrap" style="font-size:6vw;">{{$start->horse_name}}</h1>
-<h1 class="display-1 text-nowrap" style="font-size:6vw;">{{$start->club}}</h1>
-<h4 class="display-1 text-nowrap" style="font-size:4vw;"> |
+<div class="container">
+<h1 id="rider" class="text-nowrap" >{{$start->rider_name}}</h1>
+<h1 id="horse" class=" text-nowrap" >{{$start->horse_name}}</h1>
+<h1 id="club" class=" text-nowrap" >{{$start->club}}</h1>
+<h4 id="result" class=" text-nowrap"> |
 @foreach ($results as $result)
-<span>{{$result->position}}:{{$result->percent}} | </span>
+{{$result->position}}:{{$result->percent}} %| 
 @endforeach
 </h4>
 </div>
