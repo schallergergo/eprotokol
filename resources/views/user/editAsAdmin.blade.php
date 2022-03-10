@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Profile') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/user/updateAsAdmin/{{$user->id}}">
+                    <form method="POST" action="/user/updateAsAdmin/{$user->id}">
                         @csrf
                         @method("patch")
                         <div class="form-group row">

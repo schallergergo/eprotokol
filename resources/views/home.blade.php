@@ -16,12 +16,12 @@
 
 
                     @foreach ($users as $user)
-                        <a href="/user/edit/{$user->id}"><p>{{$user->name}} - {{$user->username}} - {{$user->email}} -  {{$user->club}} - {{$user->role}}</p></a>
+                        <a href="/user/edit/{{$user->id}}"><p>{{$user->name}} - {{$user->username}} - {{$user->email}} -  {{$user->club}} - {{$user->role}}</p></a>
                     @endforeach
 
                      <div class="row">
                         <div class="col-md-12 mt-2">
-                       {{ $results->links() }}
+                       {{ $users->links() }}
                         </div>
                        
                     </div><!-- end of the row-->
