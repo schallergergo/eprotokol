@@ -24,6 +24,7 @@
                     @can('update',$event)
                     <a href="/start/create/{{$event->id}}" >{{__("Add new rider")}}</a>
                     <a href="/event/export/{{$event->id}}" target="_blank">{{__("Export results")}}</a>
+                    <a href="/display/settings/{{$event->id}}" target="_blank">{{__("Display")}}</a>
                     <a href="/event/edit/{{$event->id}}">{{__("Edit event")}}</a>
                     @endcan
                     @if (count($toStart)!=0)

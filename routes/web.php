@@ -101,6 +101,7 @@ Route::get('/official/edit/{official}', [OfficialController::class, 'edit']);
 Route::patch('/official/update/{official}', [OfficialController::class, 'update']);
 Route::get('/official/delete/{official}', [OfficialController::class, 'destroy']);
 
+Route::get('/broadcast/settings/{event}',[BroadcastController::class, 'settings']);
 Route::get('/broadcast/{event}/display',[BroadcastController::class, 'display']);
 Route::get('/broadcast/{event}/json',[BroadcastController::class, 'json']);
 Route::get('/broadcast/{event}/serialized',[BroadcastController::class, 'serialized']);

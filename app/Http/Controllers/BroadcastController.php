@@ -10,17 +10,41 @@ use App\Http\Requests\UpdateBroadcastRequest;
 
 class BroadcastController extends Controller
 {
+
+
+     public function settings(Event $event){
+        return view('broadcast.settings',[
+            'event'=>$event,
+    ]);
+    }
+    
     public function display(Event $event){
+
     if ($event->last_opened==null)  return ;
 
     $start=Start::findOrFail($event->last_opened);
     $results=$start->result->sortBy("position");
 
+    $data=request();
 
-    return view('broadcast.display',[
+    if (!isset($data["nameSize"]) || !isset($data["pointSize"])) 
+
+        return view('broadcast.display',[
+        'nameSize'=>"display-2",
+        'pointSize'=>"display-4",
         'start'=>$start,
         'results'=>$results,
+    ]);
 
+    $data= $data->validate([
+        'nameSize' => ['required', 'string'],
+        'pointSize' => ['required', 'string']
+]);
+    return view('broadcast.display',[
+        'nameSize'=>$data["nameSize"],
+        'pointSize'=>$data["pointSize"],
+        'start'=>$start,
+        'results'=>$results,
     ]);
     }
 
