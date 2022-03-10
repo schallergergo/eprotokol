@@ -66,7 +66,7 @@ class ResultController extends Controller
     }
     private function lastOpened(Result $result){
         $userRole=Auth::User()->role;
-        if ($userRole!=="penciler" && $result->position!="C") return;
+        if ($userRole!=="penciler" || $result->position!="C") return;
         $event=$result->start->event;
         $event->last_opened=$result->start->id;
         $event->save();

@@ -20,7 +20,9 @@ class BroadcastController extends Controller
     
     public function display(Event $event){
 
-    if ($event->last_opened==null)  return ;
+    if ($event->last_opened==null)  return view('broadcast.notstarted',[
+        'event'=>$event
+    ]);
 
     $start=Start::findOrFail($event->last_opened);
     $results=$start->result->sortBy("position");
