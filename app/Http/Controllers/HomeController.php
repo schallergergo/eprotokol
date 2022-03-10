@@ -44,7 +44,7 @@ class HomeController extends Controller
         if ($user->role=="admin") return $this->adminIndex($user);
        
         */
-        if ($user->role=="admin") return view("home");
+        if ($user->role=="admin") return $this->adminIndex();
         
     }
 
@@ -100,8 +100,9 @@ class HomeController extends Controller
     }
 
 
-    private function adminIndex(User $user){
-        $events=Event::orderBy('date','desc')->paginate(10); 
-        return view("event.index",["events"=>$events]);
+    private function adminIndex(){
+        $users=User::orderByDesc("created_at")->paginate(40);
+
+        return view("home",["users"=>$users]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -127,13 +128,39 @@ private function storeAdmin(array $data){
             'club' =>['required', 'integer']
             ]);
 
-         if ($data["email"]!=$user->email)
+         
+
+
+         $user->update($newData);
+         return redirect()->back();
+
+    }
+    public function editAsAdmin(User $user)
+    {   
+        $this->authorize('isAdmin', $user);
+        if ($user==null) return redirect("/login");
+        $clubs=User::where("role","club")->orderBy("name")->get();
+
+        return view("user.editAsAdmin",["user"=>$user,"clubs"=>$clubs]);
+    }
+ public function updateAsAdmin(User $user)
+    {$this->authorize('isAdmin', $user);
+         $data = request();
+         $newData=$data->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
+            'role'=> ['required',Rule::in(["admin","club","rider","office","penciler"])],
+            'club' =>['required', 'integer']
+            ]);
+
+    if ($data["email"]!=$user->email)
             {
                 $email = $data->validate([ 'email' => ['required', 'string', 'email', 'max:255','unique:users']]);
                 $user->email_verified_at=null;
                 $user->email=$email["email"];
                 $user->save();
             }
+
 
 
 

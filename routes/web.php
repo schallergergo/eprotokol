@@ -59,7 +59,9 @@ Route::get('/user/index', [UserController::class,'index']);
 Route::get('/user/create', [UserController::class,'create']);
 Route::post('/user/store', [UserController::class,'store']);
 Route::get('/user/profile', [UserController::class,'profile']);
+Route::get('/user/edit/{user}', [UserController::class,'editAsAdmin']);
 Route::patch('/user/update/{user}', [UserController::class,'update']);
+Route::patch('/user/updateAsAdmin/{user}', [UserController::class,'updateAsAdmin']);
 
 Route::get('/result/index', [ResultController::class, 'index']);
 Route::get('/result/show/{result}', [ResultController::class, 'show']);
@@ -83,7 +85,6 @@ Route::get('/event/edit/{event}', [EventController::class, 'edit']);
 Route::patch('/event/update/{event}', [EventController::class, 'update']);
 Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
 Route::get('/event/export/{event}', [EventController::class, 'exportEvent']);
-Route::get('/user/create', [UserController::class, 'create']);
 
 
 Route::get('/competition/index', [CompetitionController::class, 'index']);
