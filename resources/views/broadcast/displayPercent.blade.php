@@ -14,7 +14,7 @@
 
 <div class="container">
 @foreach ($results as $result)
-<h1 class="display-1 text-nowrap" style="font-size:28vw;">{{ number_format($result->percent, 2) }}%  </h1>
+<h1 class="{{$pointSize}} text-nowrap" style="font-size:20vw;">{{ number_format($result->percent, 2) }}%  </h1>
 @endforeach
 
 

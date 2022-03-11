@@ -29,7 +29,7 @@ class BroadcastController extends Controller
 
     $data=request();
 
-    if (!isset($data["nameSize"]) || !isset($data["pointSize"])) 
+    if (!isset($data["nameSize"]) || !isset($data["nameSize"]) || !isset($data["pointSize"])) 
 
         return view('broadcast.display',[
         'nameSize'=>"display-2",
@@ -39,16 +39,34 @@ class BroadcastController extends Controller
     ]);
 
     $data= $data->validate([
+        'type' => ['required', 'string'],
         'nameSize' => ['required', 'string'],
         'pointSize' => ['required', 'string']
 ]);
-    return view('broadcast.display',[
+    if ($data["type"]=="full") return $this->fullDisplay($data,$start,$results);
+    if ($data["type"]=="percent") return $this->percentDisplay($data,$start,$results);
+    }
+
+
+    private function fullDisplay($data,$start,$results){
+        return view('broadcast.display',[
         'nameSize'=>$data["nameSize"],
         'pointSize'=>$data["pointSize"],
         'start'=>$start,
         'results'=>$results,
     ]);
     }
+    private function percentDisplay($data,$start,$results){
+        return view('broadcast.displayPercent',[
+        'nameSize'=>$data["nameSize"],
+        'pointSize'=>$data["pointSize"],
+        'start'=>$start,
+        'results'=>$results,
+    ]);
+    }
+
+
+
 
     public function json(Event $event){
         return json_encode($this->generateArray($event));
