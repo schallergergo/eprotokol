@@ -20,9 +20,9 @@ class ResultExport implements FromArray {
 
     }
     private function makeArray() {
-    	$starts= Start::where('event_id', $this->event->id)->get();
-        
-    	$output=[];
+    	$starts = Start::where('event_id', $this->event->id)->get();
+        $output = [];
+    	$output[]=$this->head(count($event->official));;
     	foreach ($starts as $start) {
                 $temp=[];
                 if ($start->completed){
@@ -54,6 +54,30 @@ class ResultExport implements FromArray {
         
     
             }
-return $output;
+        return $output;
         }
+
+        private function head($numOfStarts){
+                $temp   = [];
+                $temp[] = "rank";
+                $temp[] = "rider_id";
+                $temp[] = "rider_name";
+                $temp[] = "horse_id";
+                $temp[] = "horse_name";
+                $temp[] = "club";
+                $temp[] = "category";
+            for ($i=0;$i<$numOfStarts;$i++){
+                for ($j=1;$j<=$this->event->program->numofblocks;$j++)
+                    $temp[] = $j;
+            }
+                    $temp[] = "mark";
+                    $temp[] = "percent";
+                    $temp[] = "collective";
+                    $temp[] = "error";
+       
+        $temp[] = "total mark";
+        $temp[] = "total percent";
+        $temp[] = "total collective";
+        return $temp;
+         }
 }
