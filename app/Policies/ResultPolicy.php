@@ -80,6 +80,7 @@ class ResultPolicy
     {
 
         if (Auth::User()->role=="admin") return true;
+
         $event=$result->start->event;
         if ($event->competition->active==false) return false;
         if (Auth::User()->role=="office" && $result->start->event->competition->office==$user->id) return true;
@@ -88,6 +89,19 @@ class ResultPolicy
         return false;
     }
 
+    public function checkAfter(User $user,Result $result)
+    {
+
+        if (Auth::User()->role=="admin") return true;
+        if (Auth::User()->role=="judge") return true;
+
+        $event=$result->start->event;
+        if ($event->competition->active==false) return false;
+        if (Auth::User()->role=="office" && $result->start->event->competition->office==$user->id) return true;
+        $officials=Official::where("event_id",$event->id)->where("penciler",$user->id)->get();
+        foreach ($officials as $official) if (Auth::User()->role=="penciler" && $result->official_id==$official->id) return true;
+        return false;
+    }
   
 
     /**

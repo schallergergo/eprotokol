@@ -84,7 +84,7 @@ class EventController extends Controller
     //riders in the event with completed results
     $started=$event->start->where("completed",1)->sortBy("rank")->sortBy("category");
 
-    return view("/event/show",  ["event"=>$event,
+    return view("event.show",  ["event"=>$event,
                                  "started"=>$started,
                                  "toStart"=>$toStart,
 

@@ -159,8 +159,8 @@
                             @endcan
 
                         @foreach ($start->result->sortBy('position') as $result)
-                        @can ('update', $result)
-                        <a href="/result/show/{{$result->id}}">{{$result->position}} : {{$result->mark}}p  - {{$result->percent}}% - {{$start->collective}}p</a><br>
+                        @can ('checkAfter', $result)
+                        <a href="/result/show/{{$result->id}}">{{$result->position}} : {{$result->mark}}p - {{$result->percent}}% - {{$start->collective}}p</a><br>
                         @else
                         <span class="align-middle">{{$result->position}} : {{$result->mark}}p  - {{$result->percent}}%</span><br>
                         @endcan
