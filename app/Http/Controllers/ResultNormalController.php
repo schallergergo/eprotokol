@@ -80,6 +80,7 @@ class ResultNormalController extends Controller
         {
                 //given mark
                 $mark=$data['mark'][$i];
+                if ($data['mark'][$i]=="") return false;
 
                 //remark: if null replaced with an empty string
                 $remark=$data['remark'][$i]==null?"":$data['remark'][$i];
@@ -116,6 +117,7 @@ class ResultNormalController extends Controller
                     "error"=>$data["error"],
                 ];
         $result->update($dataOut);
+        return true;
     
     }
       private function mark(Result $result, array $markArray, float $error){

@@ -7,6 +7,11 @@
 @section('content')
 
 <div class="container">
+     @if (session('fail'))
+    <div class="alert alert-danger">
+        {{ session('fail') }}
+    </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">

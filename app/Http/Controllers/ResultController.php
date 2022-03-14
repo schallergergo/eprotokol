@@ -118,7 +118,8 @@ class ResultController extends Controller
               $controller = new ResultNormalController();
               break;
           }
-        $controller->update($result);
+        $sucess=$controller->update($result);
+        if (!$sucess) return redirect("result/edit/{$result->id}") ->with("fail",Lang::get("Something is missing!"));
          //creating a log record
         $this->ResultLog($result->id,$result->mark,$result->assessment);
         //$this->sendMail($result);
