@@ -26,6 +26,7 @@
                                 <select id="type"  class="form-control @error('type') is-invalid @enderror" name="type"  required>
                             
                                 <option value="full"> {{__("Full")}} </option>
+                                <option value="lastmark"> {{__("Full with last mark")}} </option>
                                 <option value="percent"> {{__("Percent")}} </option>
                             
                             </select>

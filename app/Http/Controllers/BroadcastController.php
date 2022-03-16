@@ -45,11 +45,20 @@ class BroadcastController extends Controller
 ]);
     if ($data["type"]=="full") return $this->fullDisplay($data,$start,$results);
     if ($data["type"]=="percent") return $this->percentDisplay($data,$start,$results);
+    if ($data["type"]=="lastmark") return $this->fullDisplayLastMark($data,$start,$results);
     }
 
 
     private function fullDisplay($data,$start,$results){
         return view('broadcast.display',[
+        'nameSize'=>$data["nameSize"],
+        'pointSize'=>$data["pointSize"],
+        'start'=>$start,
+        'results'=>$results,
+    ]);
+    }
+    private function fullDisplayLastMark($data,$start,$results){
+        return view('broadcast.displayLastMark',[
         'nameSize'=>$data["nameSize"],
         'pointSize'=>$data["pointSize"],
         'start'=>$start,
