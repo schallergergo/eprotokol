@@ -29,7 +29,7 @@ $i=0;
 
 foreach (json_decode($result->assessment) as $assessment){
   $i++;
-  if ($assessment->mark!=0){
+  if ($assessment->mark!=""){
     $max=$i;
     $maxValue=$assessment->mark;
   }
@@ -37,11 +37,16 @@ foreach (json_decode($result->assessment) as $assessment){
 
 @endphp
 
-
-<span class="@if ($result->completed)text-success font-weight-bold @endif">
-{{$result->position}}: {{$max}}. {{__("movement")}} : {{$maxValue}}p ({{$result->percent}} %)
-
+@if ($result->completed)
+<span class="text-success font-weight-bold ">
+{{$result->position}}: {{$result->mark}} {{__("points")}} - {{$result->percent}} %
 </span>|
+@else
+<span>
+{{$result->position}}: {{$max}}. {{__("movement")}} : {{$maxValue}}p ({{$result->percent}} %)
+</span>|
+@endif
+
 @endforeach
 </h4>
 </div>

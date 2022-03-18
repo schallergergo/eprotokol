@@ -8,7 +8,7 @@
 **{{__("Date")}}**: {{$start->event->competition->date}}<br>
 
 @foreach ($start->result->sortBy('position') as $result)
-@component('mail::button', ['url' => "http://szakdolgozat.schallergergo.hu/result/show/".$result->id])
+@component('mail::button', ['url' => "http://eprotokol.hu/result/show/".$result->id])
 {{$result->position}} {{__("judge")}}
 
 @endcomponent

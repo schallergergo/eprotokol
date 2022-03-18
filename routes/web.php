@@ -14,6 +14,7 @@ use App\Http\Controllers\StartController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\OfficialController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SiteMapController;
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,9 @@ $user=Auth::User();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 ->name('home')->middleware('verified');;
 
-Route::get("/admin/userrider",[AdminPanelController::class,'userrider']);
+Route::get('/contact', [ContactController::class,'create']);
+Route::post('/contact/send', [ContactController::class,'store']);
+
 Route::get('/program/index', [ProgramController::class,'index']);
 Route::get('/program/show/{program}', [ProgramController::class,'show']);
 Route::get('/program/create', [ProgramController::class,'create']);
