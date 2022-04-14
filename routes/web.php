@@ -57,6 +57,9 @@ Route::patch('/start/update/{start}', [StartController::class,'update']);
 Route::post('/start/import/{event}', [StartController::class,'import']);
 Route::get('/start/delete/{start}', [StartController::class,'destroy']);
 
+Route::get('/start/moveUp/{start}', [StartController::class,'moveUp']);
+Route::get('/start/moveDown/{start}', [StartController::class,'moveDown']);
+
 
 Route::get('/user/index', [UserController::class,'index']);
 Route::get('/user/create', [UserController::class,'create']);

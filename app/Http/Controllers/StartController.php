@@ -185,6 +185,50 @@ class StartController extends Controller
         }
     }
 
+
+    public function moveUp(Start $start){
+        $this->authorize('update', $start );
+        $minimumRank=Start::where("event_id",$start->event_id)->min("rank");
+        $rank=$start->rank-1;
+        $startToSwap=Start::where("event_id",$start->event_id)->where("rank",$rank)->get();
+
+        while($rank>$minimumRank && count($startToSwap)==0){
+            $rank=$rank-1;
+            $startToSwap=Start::where("event_id",$start->event_id)->where("rank",$rank)->get();
+        }
+        if (count($startToSwap)!=0){
+            $startToSwap=$startToSwap->first();
+            $temp=$start->rank;
+            $start->rank=$startToSwap->rank;
+            $startToSwap->rank=$temp;
+            $start->save();
+            $startToSwap->save();
+        }
+        return back();
+    }
+
+    public function moveDown(Start $start){
+        $this->authorize('update', $start );
+        $maximumRank=Start::where("event_id",$start->event_id)->max("rank");
+        $rank=$start->rank+1;
+        $startToSwap=Start::where("event_id",$start->event_id)->where("rank",$rank)->get();
+
+        while($rank<$maximumRank && count($startToSwap)==0){
+            $rank=$rank+1;
+            $startToSwap=Start::where("event_id",$start->event_id)->where("rank",$rank)->get();
+        }
+        if (count($startToSwap)!=0){
+            $startToSwap=$startToSwap->first();
+            $temp=$start->rank;
+            $start->rank=$startToSwap->rank;
+            $startToSwap->rank=$temp;
+            $start->save();
+            $startToSwap->save();
+        }
+        return back();
+    }
+
+
     public function calculateAllJudges(Start $start){
         $officials=$start->event->official;
 
@@ -240,6 +284,7 @@ class StartController extends Controller
         
 
     }
+
    private function generateID(){
 
         //lower limit of the id

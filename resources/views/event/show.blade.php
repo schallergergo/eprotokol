@@ -78,6 +78,8 @@
                         <div class="col-md-2 p-1 border">
                              @can('update',$start)
                             <span class="align-middle"><a href="/start/edit/{{$start->id}}" target="_blank">{{__("Edit info")}}</a></span>
+                            <span class="align-middle"><a href="/start/moveUp/{{$start->id}}">⬆️</a></span>
+                            <span class="align-middle"><a href="/start/moveDown/{{$start->id}}">⬇️</a></span>
                             <br>
                             @endcan
                             @foreach ($start->result->sortBy('position') as $result)

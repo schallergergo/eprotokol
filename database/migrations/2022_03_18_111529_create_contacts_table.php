@@ -19,7 +19,6 @@ class CreateContactsTable extends Migration
             $table->string('email');
             $table->string('longText');
             $table->string('score');
-
             $table->timestamps();
         });
     }
