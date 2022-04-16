@@ -88,19 +88,22 @@ Route::get('/event/show/{event}', [EventController::class, 'show']);
 Route::get('/event/create/{competition}', [EventController::class, 'create']);
 Route::post('/event/store/{competition}', [EventController::class, 'store']);
 Route::get('/event/edit/{event}', [EventController::class, 'edit']);
+Route::get('/event/delete/{event}', [EventController::class, 'destroy']);
 Route::patch('/event/update/{event}', [EventController::class, 'update']);
 Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
 Route::get('/event/export/{event}', [EventController::class, 'exportEvent']);
 
 
 Route::get('/competition/index', [CompetitionController::class, 'index']);
-Route::get('/competition/index/closed', [CompetitionController::class, 'indexClosed']);
+
 Route::get('/competition/show/{competition}', [CompetitionController::class, 'show']);
 Route::get('/competition/create', [CompetitionController::class, 'create']);
 Route::post('/competition/store', [CompetitionController::class, 'store']);
 Route::get('/competition/edit/{competition}', [CompetitionController::class, 'edit']);
 Route::patch('/competition/update/{competition}', [CompetitionController::class, 'update']);
 Route::get('/competition/updateActive/{competition}', [CompetitionController::class, 'updateActive']);
+Route::get('/competition/delete/{competition}', [CompetitionController::class, 'destroy']);
+
 
 Route::get('/official/create/{event}', [OfficialController::class, 'create']);
 Route::post('/official/store/{event}', [OfficialController::class, 'store']);

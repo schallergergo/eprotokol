@@ -76,6 +76,7 @@ class EventPolicy
      */
     public function delete(User $user, Event $event)
     {
+        if (count($event->start)!=0) return false;
         if ($user->role=="admin") return  true;
         return false;
     }

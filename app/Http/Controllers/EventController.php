@@ -129,12 +129,13 @@ class EventController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
-     */
+    public function destroy(Event $event){
+
+        $event->delete(); 
+        return back();    
+    }
+
+
     public function recalculateEvent(Event $event){
         $this->authorize('update', $event);
         $startController= new StartController();

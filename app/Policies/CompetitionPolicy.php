@@ -72,6 +72,7 @@ class CompetitionPolicy
     public function delete(User $user, Competition $competition)
     {
         $role=$user->role;
+        if (count($competition->event)!=0) return false;
         if ($role=="admin") return true;
         return false;
     }
