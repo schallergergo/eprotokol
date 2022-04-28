@@ -94,6 +94,8 @@ Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
 Route::get('/event/export/{event}', [EventController::class, 'exportEvent']);
 
 
+
+
 Route::get('/competition/index', [CompetitionController::class, 'index']);
 
 Route::get('/competition/show/{competition}', [CompetitionController::class, 'show']);
@@ -111,6 +113,7 @@ Route::get('/official/edit/{official}', [OfficialController::class, 'edit']);
 Route::patch('/official/update/{official}', [OfficialController::class, 'update']);
 Route::get('/official/delete/{official}', [OfficialController::class, 'destroy']);
 
+Route::get('/broadcast/{event}',[BroadcastController::class, 'broadcast']);
 Route::get('/broadcast/settings/{event}',[BroadcastController::class, 'settings']);
 Route::get('/broadcast/{event}/display',[BroadcastController::class, 'display']);
 Route::get('/broadcast/{event}/json',[BroadcastController::class, 'json']);
