@@ -15,6 +15,7 @@ use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\OfficialController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\SiteMapController;
 /*
 |--------------------------------------------------------------------------
@@ -114,10 +115,14 @@ Route::patch('/official/update/{official}', [OfficialController::class, 'update'
 Route::get('/official/delete/{official}', [OfficialController::class, 'destroy']);
 
 Route::get('/broadcast/{event}',[BroadcastController::class, 'broadcast']);
-Route::get('/broadcast/settings/{event}',[BroadcastController::class, 'settings']);
-Route::get('/broadcast/{event}/display',[BroadcastController::class, 'display']);
 Route::get('/broadcast/{event}/json',[BroadcastController::class, 'json']);
 Route::get('/broadcast/{event}/serialized',[BroadcastController::class, 'serialized']);
+
+
+
+Route::get('/display/settings/{event}',[DisplayController::class, 'settings']);
+Route::get('/display/{event}',[DisplayController::class, 'display']);
+Route::get('/display/vilagos/{event}',[DisplayController::class, 'vilagos']);
 
 Route::get('/sitemap.xml',[SiteMapController::class, 'generate']);
 

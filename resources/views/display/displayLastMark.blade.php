@@ -19,7 +19,7 @@
 <h1 id="horse" class=" text-nowrap {{$nameSize}}" >{{$start->horse_name}}</h1>
 <h1 id="club" class=" text-nowrap {{$nameSize}}" >{{$start->club}}</h1>
 <h4 id="result" class=" text-nowrap {{$pointSize}}">
-@foreach ($results as $result) |
+@foreach ($results as $result) 
 
 
 @php
@@ -38,16 +38,17 @@ foreach (json_decode($result->assessment) as $assessment){
 @endphp
 
 @if ($result->completed)
-<span class="text-success font-weight-bold ">
-{{$result->position}}: {{$result->mark}} {{__("points")}} - {{$result->percent}} %
-</span>|
+| <span class="text-success font-weight-bold ">
+ {{$result->position}}: {{$result->mark}} {{__("points")}} - {{$result->percent}} %
+</span>
 @else
 <span>
-{{$result->position}}: {{$max}}. {{__("movement")}} : {{$maxValue}}p ({{$result->percent}} %)
-</span>|
+| {{$result->position}}: {{$max}}. {{__("movement")}} : {{$maxValue}}p ({{$result->percent}} %)
+</span>
 @endif
 
 @endforeach
+|
 </h4>
 </div>
 </body>

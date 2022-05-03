@@ -48,12 +48,12 @@ function generateResult(json){
    judges=json.judges;
    
    if (judges.length==0) return " ";
-   if (json.lastfilled==-1) return "1. feladat";
+   if (json.lastfilled==-1) return "-";
    output=(json.lastfilled+1)+". feladat | ";
    for (i=0;i<judges.length;i++){
     judge=judges[i];
     console.log(judge);
-    output+=judge.position+" bíró: "+judge.lastMark+" p ("+ judge.percent +" %) | ";
+    output+=judge.position+" bíró: "+judge.lastMark+" p ("+ judge.percent +"%) | ";
    }
    return output;
 }

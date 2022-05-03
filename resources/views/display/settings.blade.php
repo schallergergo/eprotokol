@@ -15,7 +15,7 @@
                 <div class="card-header">{{ __('Display settings') }}</div>
 
                 <div class="card-body">
-                    <form method="GET" action="/broadcast/{{$event->id}}/display">
+                    <form method="GET" action="/display/{{$event->id}}">
                         
 
 

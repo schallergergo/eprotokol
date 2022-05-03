@@ -9,6 +9,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <style type="text/css">
+      h1{
+        font-size: 3em;
+      }
+      h2{
+        font-size: 2em;
+      }
       body  { 
         background-color:#00b140;
         background-size: cover;
@@ -52,7 +58,7 @@
 
 <div class="rounded-pill ribbon mb-2" id="point">
   
-<h2 id="result" class="text-center pt-1  pb-2"></h2>
+<h2 id="result" class="text-center pt-1  pb-2">-</h2>
 </div>
 
 </div>
