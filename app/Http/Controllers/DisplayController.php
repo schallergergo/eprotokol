@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Competition;
 use App\Models\Event;
 use App\Models\Start;
 use App\Models\Result;
@@ -15,11 +16,37 @@ class DisplayController extends Controller
     }
 
 
-    public function vilagos(){
-        return view("display.vilagos");
+    public function vilagos(Competition $competition){
+        return view("display.vilagos",[
+        'competition'=>$competition
+
+    ]);
+    }
+    public function tatter(Competition $competition){
+        return view("display.tatter",[
+        'competition'=>$competition
+
+    ]);
+    }
+
+    public function compsetting(Competition $competition){
+                return view("display.compsetting",[
+        'competition'=>$competition,
+
+    ]);
     }
 
 
+    public function storeCompsetting(Competition $competition){
+        $data=request();
+        $data= $data->validate([
+        'events' => []
+        ]);
+        if (isset($data["events"])) $competition->active_event=json_encode($data["events"]);
+        else $competition->active_event=json_encode([]);
+        $competition->save();
+        return redirect()->back();
+    }
     public function display(Event $event){
 
     if ($event->last_opened==null)  return view('display.notstarted',[

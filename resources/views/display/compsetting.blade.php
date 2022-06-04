@@ -85,44 +85,21 @@
         </style>
 </head>
 <body>
+
 <div id="display">
-<div>
-  <div id="kep">
-    
-  </div>
-</div>
-
-<div class="header line">
-  <img src="/storage/logo/logo_med.png" ><h2 id="header_name" class="pt-1">$event->event_name</h2>
-</div>
-<div id="rider" class="line">
-<h1 id="rider_name" class="text-nowrap" >$start->rider_name</h1>
-</div>
-<div id="horse" class="line">
-<h1 id="horse_name" class="text-nowrap" >$start->horse_name</h1>
-</div>
-<div id="club" class="line">
-
-  <h1 id="club_name" class="text-nowrap" >$start->club</h1>
-
-</div>
-
-<h3 id="result" class="pt-2 text-nowrap">
-
-</h3>
-
-</div>
-<div id="display">
-  <form id="events">
+  <form id="events" method="POST" action="/display/storecompsetting/{{$competition->id}}">
+     @csrf
 @foreach($competition->event as $event)
 <div class="form-check ml-2">
-  <input class="form-check-input" type="checkbox" value="{{$event->id}}"  id="event-{{$event->id}}" name="events">
+  <input class="form-check-input" type="checkbox" value="{{$event->id}}"  id="event-{{$event->id}}" name="events[]" 
+
+  @if ( in_array($event->id,json_decode($competition->active_event))) checked @endif >
   <label class="form-check-label" for="event-{{$event->id}}">
     {{$event->event_name}}
   </label>
 </div>
 @endforeach
-
+<input type="submit" name="send">
 </form>
 </div>
 </body>

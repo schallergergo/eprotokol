@@ -9,6 +9,7 @@ use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ResultlogController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\PhantomEventController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StartController;
 use App\Http\Controllers\CompetitionController;
@@ -94,7 +95,7 @@ Route::patch('/event/update/{event}', [EventController::class, 'update']);
 Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
 Route::get('/event/export/{event}', [EventController::class, 'exportEvent']);
 
-
+Route::get('/event/phantom/{event}', [PhantomEventController::class, 'show']);
 
 
 Route::get('/competition/index', [CompetitionController::class, 'index']);
@@ -106,6 +107,7 @@ Route::get('/competition/edit/{competition}', [CompetitionController::class, 'ed
 Route::patch('/competition/update/{competition}', [CompetitionController::class, 'update']);
 Route::get('/competition/updateActive/{competition}', [CompetitionController::class, 'updateActive']);
 Route::get('/competition/delete/{competition}', [CompetitionController::class, 'destroy']);
+Route::get('/competition/activeEvents/{competition}', [CompetitionController::class, 'activeEvents']);
 
 
 Route::get('/official/create/{event}', [OfficialController::class, 'create']);
@@ -122,10 +124,15 @@ Route::get('/broadcast/{event}/serialized',[BroadcastController::class, 'seriali
 
 Route::get('/display/settings/{event}',[DisplayController::class, 'settings']);
 Route::get('/display/{event}',[DisplayController::class, 'display']);
-Route::get('/display/vilagos/{event}',[DisplayController::class, 'vilagos']);
+Route::get('/display/vilagos/{competition}',[DisplayController::class, 'vilagos']);
+Route::get('/display/tatter/{competition}',[DisplayController::class, 'tatter']);
+Route::get('/display/compsetting/{competition}',[DisplayController::class, 'compsetting']);
+Route::post('/display/storecompsetting/{competition}',[DisplayController::class, 'storeCompsetting']);
 
 Route::get('/sitemap.xml',[SiteMapController::class, 'generate']);
 
+
+Route::get('/caprilli',[ResultController::class, 'caprilli']);
 
 Route::get("/faq", function(){ return view("faq"); });
 

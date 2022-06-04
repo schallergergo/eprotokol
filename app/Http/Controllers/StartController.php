@@ -145,6 +145,7 @@ class StartController extends Controller
 
 
         $start->update($dataOut);
+        $this->calculateRank($start);
         return redirect("/event/show/{$start->event->id}");
         
     }

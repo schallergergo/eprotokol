@@ -14,8 +14,9 @@ class BroadcastController extends Controller
 
 
     public function broadcast(Event $event){
-        $start=Start::findOrFail($event->last_opened);
+
         return view("broadcast.broadcast",[
+        'event'=>$event,
         'start'=>$start,
 
     ]);

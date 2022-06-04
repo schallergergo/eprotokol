@@ -117,6 +117,11 @@ class CompetitionController extends Controller
         $competition->update($data);
         return back();
     }
+
+    public function activeEvents(Competition $competition){
+
+        return $competition->active_event;
+    }
     public function updateActive(Competition $competition)
     {   
         $this->authorize('update', $competition);

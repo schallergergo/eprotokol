@@ -33,6 +33,9 @@ class ResultController extends Controller
            case 'shortform':
               $controller = new ResultShortFormController();
               break;
+            case 'caprilli':
+              $controller = new ResultCaprilliController();
+              break;
           default:
               $controller = new ResultNormalController();
               break;
@@ -55,6 +58,9 @@ class ResultController extends Controller
               break;
           case 'shortform':
               $controller = new ResultShortFormController();
+              break;
+        case 'caprilli':
+              $controller = new ResultCaprilliController();
               break;
           default:
               $controller = new ResultNormalController();
@@ -113,6 +119,9 @@ class ResultController extends Controller
               break;
           case 'shortform':
               $controller = new ResultShortFormController();
+              break;
+               case 'caprilli':
+              $controller = new ResultCaprilliController();
               break;
           default:
               $controller = new ResultNormalController();

@@ -1,10 +1,14 @@
 
-
+var opacity=1;
+var lastRider="";
+$(document).ready(fadeOut);
 $(document).ready(ajax);
+
 setInterval(ajax, 10000);
 
 
 function ajax(){
+
       var url= window.location.href;
       var index = url.lastIndexOf("/");
       var id=url.substring(index+1);
@@ -22,6 +26,11 @@ function ajax(){
            });
            request.done(function(data){
             obj=JSON.parse(data);
+            if (lastRider!=data.rider_name){
+                fadeIn();
+                fadeOut();
+                lastRider=data.rider_name;
+            }
             var name=generateName(obj);
             document.getElementById("name").innerText=name;
 
@@ -56,4 +65,19 @@ function generateResult(json){
     output+=judge.position+" bíró: "+judge.lastMark+" p ("+ judge.percent +"%) | ";
    }
    return output;
+}
+function fadeIn() {
+   if (opacity<1) {
+      opacity += .05;
+      setTimeout(function(){fadeIn()},50);
+   }
+   document.getElementById('ep_logo').style.opacity = opacity;
+}
+
+function fadeOut() {
+   if (opacity>=0) {
+      opacity -= .05;
+      setTimeout(function(){fadeOut()},50);
+   }
+   document.getElementById('ep_logo').style.opacity = opacity;
 }

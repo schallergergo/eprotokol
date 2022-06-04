@@ -34,22 +34,44 @@
 
       
 }
-#horse {
-      bottom: 50px;
-      left: 100px;
+#event {
+      top: 50px;
+      left: -20px;
+      width: auto;
 
 
 }
+
 #point {
       bottom: 32px;
       left: 150px;
 
 }
+#ep_logo {
+
+      position: absolute;
+      top: 140px;
+      left: 33%;
+}
+
+
+
 
         </style>
 </head>
 <body>
 <div class="container">
+
+
+<div class="rounded-pill  p-2" >
+   <img src="/storage/logo/eprotokol_circle.png" width="600" height="600" id="ep_logo">
+</div>
+
+
+<div class="rounded-pill ribbon  p-2" id="event">
+  
+<h3 id="event" class="text-nowrap overflow-hidden pl-5 pr-5">{{$event->event_name}}</h1>
+</div>
 
 <div class="rounded-pill ribbon  p-2" id="rider">
   

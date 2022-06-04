@@ -18,12 +18,12 @@ class ProgramController extends Controller
 
         $data = request();
 
-        if (!isset($data["discipline"])) view("program.index",["discipline"=>""]);
+        if (!isset($data["discipline"])) return view("program.index",["discipline"=>""]);
         $data=$data->validate([
             'discipline' => [],
             ]);
 
-        $programs=Program::where("discipline",$data["discipline"])->get();
+        $programs=Program::where("discipline",$data["discipline"])->where('active',1)->get();
 
         return view("program.index",["programs"=>$programs,
                                     "discipline"=>$data["discipline"]]);
