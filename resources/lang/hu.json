@@ -194,5 +194,13 @@
 	"Display settings":"Kijelző beállítások",
 	"Name size":"Név mérerete",
 	"Point size":"Pontok mérete",
-	"movement":"feladat"
+	"movement":"feladat",
+	"Average":"Átlag",
+	"Show championship": "Megtekintés",
+	"Edit championship": "Szerkesztés",
+	"Name of the championship":"Bajnokság elnevezése",
+	"Add event":"Versenyszám hozzáadása",
+	"Remove event":"Versenyszám eltávolítása",
+	"Remove":"Eltávolít",
+	"Select a competition":"Válassz versenyt"
 }

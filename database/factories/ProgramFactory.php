@@ -14,7 +14,13 @@ class ProgramFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'discipline'=>"poniklub",
+            'name'=>"Program",
+            'numofblocks'=>10,
+            'maxMark'=>10,
+            'typeofevent'=>"normal",
+            'doublesided'=>0,
+            'active'=>1
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Competition;
+use App\Models\Event;
 use App\Http\Requests\StoreCompetitionRequest;
 use App\Http\Requests\UpdateCompetitionRequest;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,7 @@ class CompetitionController extends Controller
     public function create()
     {
 
-        return view("/competition/create");
+        return view("competition.create");
     }
 
     /**
@@ -81,7 +82,7 @@ class CompetitionController extends Controller
      */
     public function show(Competition $competition)
     {
-        $events = $competition->event;
+        $events = Event::where("competition_id",$competition->id)->orderBy("rank")->get();
         return view("/competition/show",[
             "competition"=>$competition,
             "events"=>$events
@@ -122,6 +123,18 @@ class CompetitionController extends Controller
 
         return $competition->active_event;
     }
+
+    public function getEvents(Competition $competition){
+
+        $events=$competition->event;
+        $eventsArray=array();
+        foreach ($events as $event){
+            $eventsArray[]=["event_name"=>$event->event_name,"event_id"=>$event->id];
+        }
+        return json_encode($eventsArray);
+    }
+
+
     public function updateActive(Competition $competition)
     {   
         $this->authorize('update', $competition);

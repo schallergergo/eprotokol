@@ -98,7 +98,7 @@ class ResultController extends Controller
         \App\Models\Result::create([
             'id' => $this->generateID(),
             'start_id' => $start->id,
-            'official_id'=> $official->id,
+            'penciler'=> $official->id,
             'position'=> $official->position,
             'assessment'=>$this->generateEmptyJson($numOfBlocks),
         ]);

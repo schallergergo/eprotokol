@@ -14,7 +14,15 @@ class BlockFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'program_id'=>1,
+            'ordinal'=>1,
+            'programpart'=>1,
+            'letters'=>"X",
+            'criteria'=>"X",
+            'maxmark'=>10,
+            "coefficient"=>1
+
+
         ];
     }
 }

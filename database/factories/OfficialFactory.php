@@ -14,7 +14,10 @@ class OfficialFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'event_id'=>1,
+            'judge'=>"Vincze Zoltán",
+            'penciler'=>2,
+            'position'=>"C"
         ];
     }
 }

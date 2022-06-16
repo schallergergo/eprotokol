@@ -133,8 +133,8 @@
                             </select>
                     </div>
 
-                    <div class="col-md-4 p-2 border">
-                    <input type="submit" class="btn btn-primary btn-block" value="{{__('Send')}}" name="send">
+                    <div class="col-md-4 p-2 border" id="submitDiv">
+                    <input type="submit" class="btn btn-primary btn-block" value="{{__('Send')}}" name="send" id="submitBtn">
                     </div>
                    </div>
                  </form>

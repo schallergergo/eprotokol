@@ -19,6 +19,8 @@ class CreateEventsTable extends Migration
             $table->integer('competition_id');
             $table->integer('program_id');
             $table->unsignedBigInteger('last_opened')->nullable();
+            $table->json('active_events')->default("[]");
+            $table->integer('rank')->default(0);
             $table->timestamps();
         });
     }

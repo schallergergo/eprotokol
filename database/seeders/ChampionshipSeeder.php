@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class CompetitionSeeder extends Seeder
+class ChampionshipSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class CompetitionSeeder extends Seeder
      */
     public function run()
     {
-        Competition::factory()->create();
+        //
     }
 }

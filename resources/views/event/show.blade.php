@@ -98,11 +98,12 @@
                     
                   
                     </div><!-- end of the card-->
-                   
-                <div class="card-header">{{__("Results")}}</div>
+                @foreach($startedArray as $started)
+                @if (count($started)!=0)
+                <div class="card-header">{{$started->first()->category}} {{__("results")}}</div>
 
                 <div class="card-body">
-                    @if (count($started)!=0)
+                    
                     <div class="row mb-2 border">
                         <div class="col-md-2 p-1 border d-none d-md-block">
                             <span class="align-middle font-weight-bold">{{__("Rider")}}</span>
@@ -130,8 +131,8 @@
                         </div>
                     </div><!-- end of the row-->
 
-                    @endif
-                   
+                    
+                    
                     @foreach ($started as $start)
                     <div class="row mb-3 border">
                         <div class="col-md-2 p-1 border">
@@ -172,8 +173,9 @@
                     
                     @endforeach
                     
-                  
-                    </div><!-- end of the card-->                  
+                    @endif
+                    </div><!-- end of the card-->   
+                    @endforeach               
      </div>
     </div>
 </div>

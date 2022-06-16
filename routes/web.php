@@ -13,6 +13,7 @@ use App\Http\Controllers\PhantomEventController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StartController;
 use App\Http\Controllers\CompetitionController;
+use App\Http\Controllers\ChampionshipController;
 use App\Http\Controllers\OfficialController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
@@ -107,7 +108,19 @@ Route::get('/competition/edit/{competition}', [CompetitionController::class, 'ed
 Route::patch('/competition/update/{competition}', [CompetitionController::class, 'update']);
 Route::get('/competition/updateActive/{competition}', [CompetitionController::class, 'updateActive']);
 Route::get('/competition/delete/{competition}', [CompetitionController::class, 'destroy']);
+Route::get('/competition/getEvents/{competition}', [CompetitionController::class, 'getEvents']);
 Route::get('/competition/activeEvents/{competition}', [CompetitionController::class, 'activeEvents']);
+
+
+Route::get('/championship/index', [ChampionshipController::class, 'index']);
+Route::get('/championship/show/{championship}', [ChampionshipController::class, 'show']);
+Route::get('/championship/create', [ChampionshipController::class, 'create']);
+Route::post('/championship/store', [ChampionshipController::class, 'store']);
+Route::get('/championship/edit/{championship}', [ChampionshipController::class, 'edit']);
+Route::patch('/championship/update/{championship}', [ChampionshipController::class, 'update']);
+Route::get('/championship/delete/{championship}', [ChampionshipController::class, 'destroy']);
+Route::post('/championship/addEvent/{championship}', [ChampionshipController::class, 'addEvent']);
+Route::post('/championship/removeEvent/{championship}', [ChampionshipController::class, 'removeEvent']);
 
 
 Route::get('/official/create/{event}', [OfficialController::class, 'create']);

@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EventFactory extends Factory
+class ChampionshipFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,9 +14,7 @@ class EventFactory extends Factory
     public function definition()
     {
         return [
-           'event_name'=>"Saját",
-            'competition_id'=>1,
-            'program_id'=>1
+            //
         ];
     }
 }

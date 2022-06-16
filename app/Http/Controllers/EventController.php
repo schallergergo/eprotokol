@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Start;
 use App\Models\Program;
 use App\Models\Competition;
 use App\Models\User;
@@ -79,15 +80,24 @@ class EventController extends Controller
     {
         
          //riders in the event with no results
-    $toStart=$event->start->where("completed",0)->sortBy("rank");
+    $starts=Start::where("event_id",$event->id)->get();
+    
+    $toStart=$starts->where("completed",0)->sortBy("rank");
 
     //riders in the event with completed results
-    $started=$event->start->where("completed",1)->sortBy("rank")->sortBy("category");
+    $started=$starts->where("completed",">",0)->sortBy("rank")->sortBy("category");
 
+    $categories=$started->unique("category")->sortBy("category")->pluck("category")->all();
+    
+    $startedArray=array();
+    foreach($categories as $category){
+        $startedArray[]=$started->where("completed",">",0)->where("category",$category);
+        
+    }
+    
     return view("event.show",  ["event"=>$event,
-                                 "started"=>$started,
+                                 "startedArray"=>$startedArray,
                                  "toStart"=>$toStart,
-
                                 ]);
     }
 
