@@ -97,6 +97,10 @@ Route::patch('/event/update/{event}', [EventController::class, 'update']);
 Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
 Route::get('/event/export/{event}', [EventController::class, 'exportEvent']);
 
+Route::post('/event/updateCategory/{event}', [EventController::class, 'updateCategory']);
+Route::get('/event/resetCategory/{event}', [EventController::class, 'resetCategory']);
+
+
 Route::get('/event/phantom/{event}', [PhantomEventController::class, 'show']);
 
 

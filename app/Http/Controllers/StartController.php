@@ -79,6 +79,7 @@ class StartController extends Controller
             'horse_name'=> $data['horse_name'],
             'club' => $data['club'],
             'category' => $data['category'],
+            'original_category' => $data['category'],
             'rank'=> $lastRank,
         ]);
 
@@ -258,7 +259,7 @@ class StartController extends Controller
             ];
         $start->update($data);
     }
-    private function calculateRank(Start $start){
+    public function calculateRank(Start $start){
         
         $sameCategoryStarts=Start::where("event_id",$start->event_id)
                             ->where("completed",1)

@@ -34,7 +34,7 @@ class ResultExport implements FromArray {
                 $temp[] = $start->horse_id;
                 $temp[] = $start->horse_name;
                 $temp[] = $start->club;
-                $temp[] = $start->category;
+                $temp[] = $start->original_category;
                 foreach ($start->result as $result){
                     foreach (json_decode($result->assessment) as $assessment)
                     {

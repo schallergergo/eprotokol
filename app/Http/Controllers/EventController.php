@@ -115,10 +115,13 @@ class EventController extends Controller
         $pencilers=User::all()->where("role","penciler");
         $officials=$event->official;
         $sponsors=Sponsor::all()->sortBy("name");
+        $categories=$event->start->pluck("category")->unique();
+       
         return view("/event/edit",["programs"=>$programs,
                                     "event"=>$event,
                                     "officials"=>$officials,
                                     "sponsors"=>$sponsors,
+                                    "categories"=>$categories,
                                 ]);
     }
 
@@ -153,7 +156,7 @@ class EventController extends Controller
         $this->authorize('update', $event);
         $startController= new StartController();
         foreach($event->start as $start){
-            $startController->recalculateStart($start);
+            $startController->calculateRank($start);
         }
         return redirect("/event/show/{event->id}");
     }
@@ -161,4 +164,43 @@ class EventController extends Controller
  public function exportEvent(Event $event){
         return Excel::download(new ResultExport($event), 'result.xlsx');
     }
+
+
+public function resetCategory (Event $event){
+$this->authorize('update', $event);
+    foreach ($event->start as $start){
+        $start->category=$start->original_category;
+        $start->save();
+    }
+    $this->recalculateEvent($event);
+   return  redirect("/event/show/{$event->id}");
+}
+
+public function updateCategory (Event $event){
+$this->authorize('update', $event);
+    $data=request();
+    $data=$data->validate([
+            'new_category' => ['required', 'string', 'max:255'],
+            'first_category' => ['required', 'string', 'max:255'],
+            'second_category' => ['required', 'string', 'max:255'],
+            ]);
+
+    $starts=$event->start->where("category",$data["first_category"]);
+
+    foreach($starts as $start){
+        $start->category=$data["new_category"];
+        $start->save();
+    }
+
+    $starts=$event->start->where("category",$data["second_category"]);
+
+    foreach($starts as $start){
+        $start->category=$data["new_category"];
+        $start->save();
+    }
+    $this->recalculateEvent($event);
+    return redirect()->back();
+}
+
+
 }
