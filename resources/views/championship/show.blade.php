@@ -185,7 +185,7 @@
                             
                         </div>
 
-                        
+                        <a href="tel:"></a>
                         <div class="col-md-2 p-1 border">
                             <span class="align-middle">{{$start->event->competition->date}}</span>
                         </div>

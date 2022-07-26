@@ -37,7 +37,7 @@ class BroadcastController extends Controller
         
         if ($event->last_opened==null) 
 
-            return ["event_name"=>$event->event_name,"rider"=>"","horse"=>"","club"=>"","lastfilled"=>"","judges"=>$judges];;
+            return ["event_name"=>$event->event_name,"sponsor_logo"=>$event->sponsor->logo_url,"rider"=>"","horse"=>"","club"=>"","lastfilled"=>"","judges"=>$judges];;
 
         $start=Start::find($event->last_opened);
         
@@ -52,6 +52,7 @@ class BroadcastController extends Controller
         }
         $outputArray=[
             "event_name"=>$event->event_name,
+            "sponsor_logo"=>$event->sponsor->logo_url,
             "rider"=>$start->rider_name,
             "horse"=>$start->horse_name,
             "club"=>$start->club,

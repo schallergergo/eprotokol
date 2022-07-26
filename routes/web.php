@@ -15,6 +15,7 @@ use App\Http\Controllers\StartController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ChampionshipController;
 use App\Http\Controllers\OfficialController;
+use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DisplayController;
@@ -128,6 +129,13 @@ Route::post('/official/store/{event}', [OfficialController::class, 'store']);
 Route::get('/official/edit/{official}', [OfficialController::class, 'edit']);
 Route::patch('/official/update/{official}', [OfficialController::class, 'update']);
 Route::get('/official/delete/{official}', [OfficialController::class, 'destroy']);
+
+
+Route::get('/sponsor/index', [SponsorController::class, 'index']);
+Route::get('/sponsor/create', [SponsorController::class, 'create']);
+Route::post('/sponsor/store', [SponsorController::class, 'store']);
+Route::get('/sponsor/delete/{sponsor}', [SponsorController::class, 'destroy']);
+
 
 Route::get('/broadcast/{event}',[BroadcastController::class, 'broadcast']);
 Route::get('/broadcast/{event}/json',[BroadcastController::class, 'json']);

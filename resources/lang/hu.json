@@ -202,5 +202,10 @@
 	"Add event":"Versenyszám hozzáadása",
 	"Remove event":"Versenyszám eltávolítása",
 	"Remove":"Eltávolít",
-	"Select a competition":"Válassz versenyt"
+	"Select a competition":"Válassz versenyt",
+	"Sponsor":"Szponsor",
+	"Sponsors":"Szponsorok",
+	"Name of the sponsor":"Szponsor neve",
+	"Logo of the sponsor":"Szponsor logó",
+	"New sponsor":"Szponsor hozzáadása",
 }

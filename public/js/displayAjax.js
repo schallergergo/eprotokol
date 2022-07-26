@@ -10,7 +10,7 @@ function ajax(){
     ln=events.length;
     if (ln==0)
     {
-        notStarted("");
+        notStarted("","/storage/logo/logo_med.png");
         return;
     }
     id=events[count%ln];
@@ -25,8 +25,10 @@ function ajax(){
 
            });
            request.done(function(data){
+
             obj=JSON.parse(data);
-            if (obj.rider=="") notStarted(obj.event_name);
+            console.log(obj.sponsor_logo);
+            if (obj.rider=="") notStarted(obj.event_name,obj.sponsor_logo);
             else generateStart(obj);
             
             
@@ -39,17 +41,16 @@ function ajax(){
 
 function getEvents(){
     events=document.getElementsByName("events");
-    console.log(events);
     eventsArray=Array();
     for (i=0;i<events.length;i++){
         if (events[i].checked) eventsArray.push(events[i].value);
     }
     return eventsArray;
 }
-function notStarted(event_name){
+function notStarted(event_name,sponsor_logo){
 
     document.getElementById("header_name").innerText=event_name;
-    document.getElementById("rider_name").innerHTML='<img src="/storage/logo/logo_med.png" class="img-fluid m-10" alt="Eprotokol logo">';
+    document.getElementById("rider_name").innerHTML='<img src="'+sponsor_logo+'" class="img-fluid m-10" alt="Eprotokol logo">';
         document.getElementById("horse_name").innerText="";
     document.getElementById("club_name").innerText="";
     document.getElementById("result").innerHTML="";
@@ -72,12 +73,13 @@ function generateResult(json){
    judges=json.judges;
    output="";
    if (judges.length==0) return " ";
-   if (json.lastfilled=="" || json.lastfilled==0) return "-";
+   if (json.lastfilled==0 && judges[0].lastMark=="") return "";
    if (json.completed==0)output=(json.lastfilled+1)+". feladat: ";
    for (i=0;i<judges.length;i++){
     judge=judges[i];
     console.log(judge);
-    if (json.completed!=0) output+='<span class="text-success font-weight-bold "> | '+judge.position+': '+judge.mark+'p ('+ judge.percent +'%) </span>';
+    if (json.completed!=0) 
+    output+='<span class="text-success font-weight-bold "> | '+judge.position+': '+judge.mark+'p ('+ judge.percent +'%) </span>';
     else output+='<span> | '+judge.position+': '+judge.lastMark+'p ('+ judge.percent +'%) </span>';
     
    }

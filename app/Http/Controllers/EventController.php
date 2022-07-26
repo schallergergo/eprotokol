@@ -7,6 +7,7 @@ use App\Models\Start;
 use App\Models\Program;
 use App\Models\Competition;
 use App\Models\User;
+use App\Models\Sponsor;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use Illuminate\Support\Facades\Auth;
@@ -113,9 +114,11 @@ class EventController extends Controller
         $programs=Program::all()->where("active",1);
         $pencilers=User::all()->where("role","penciler");
         $officials=$event->official;
+        $sponsors=Sponsor::all()->sortBy("name");
         return view("/event/edit",["programs"=>$programs,
                                     "event"=>$event,
                                     "officials"=>$officials,
+                                    "sponsors"=>$sponsors,
                                 ]);
     }
 
@@ -132,7 +135,7 @@ class EventController extends Controller
         $data = request();
         $data=$data->validate([
             'event_name' => ['required', 'string', 'max:255'],
-
+            "sponsor_id"=>['required', 'integer'],
             ]);
 
         $event->update($data);

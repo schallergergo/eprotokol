@@ -18,7 +18,7 @@ class DisplayController extends Controller
 
     public function vilagos(Competition $competition){
         return view("display.vilagos",[
-        'competition'=>$competition
+        'competition'=>$competition,
 
     ]);
     }
