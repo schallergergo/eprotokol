@@ -128,6 +128,11 @@ Route::post('/championship/addEvent/{championship}', [ChampionshipController::cl
 Route::post('/championship/removeEvent/{championship}', [ChampionshipController::class, 'removeEvent']);
 
 
+Route::get("/qualification/settings/{discipline}",[StartController::class,"qualificationSettings"]);
+Route::post("/qualification/show",[StartController::class,"qualificationShow"]);
+
+
+
 Route::get('/official/create/{event}', [OfficialController::class, 'create']);
 Route::post('/official/store/{event}', [OfficialController::class, 'store']);
 Route::get('/official/edit/{official}', [OfficialController::class, 'edit']);

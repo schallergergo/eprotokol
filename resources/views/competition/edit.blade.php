@@ -23,9 +23,9 @@
                     @if ($competition->active==0)
                     <div class="alert alert-danger">{{__("This competition is closed!")}}</div>
                     @endif
-                <form method="POST" action="/competition/update/{{$competition->id}}" enctype="multipart/form-data">
+                <form method="POST" action="/qualification/show" >
                         @csrf
-                        @method('PATCH')
+                        
 
 
 

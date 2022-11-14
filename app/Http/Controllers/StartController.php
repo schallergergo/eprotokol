@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Start;
 use App\Models\Event;
 use App\Models\Result;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -142,6 +143,7 @@ class StartController extends Controller
             'horse_name' => ['required', 'string', 'max:255'],
             'club' => ['required', 'string', 'max:255'],
             'category' => ['required', 'string',  'max:255'],
+            'original_category' => ['required', 'string',  'max:255'],
             ]);
 
 
@@ -286,7 +288,40 @@ class StartController extends Controller
         
 
     }
+    public function qualificationSettings(){
+        $data=request();
+        $discipline=$data["discipline"];
+        $programs=Program::where("discipline",$discipline)->orderBy("ordinal")->get();
 
+        return view("qualification.show",
+            [
+               "programs"=>$programs
+            ]);
+    }
+
+
+    public function qualificationShow(){
+        dd("hello");
+        $data=request();
+        dd($data);
+        $data=$data->validate([
+            'start' => ['required', 'date'],
+            'end' => ['required', 'date'],
+            'programs' => ['required'],
+            'percent' => ['required', 'integer', 'min:0'],
+            ]);
+        dump($data);
+        $events=Event::whereIn("program_id",$data["programs"])->
+                where("created_at",">=",$data["start"])->
+                where("created_at","<=",$data["end"])->get();
+
+        $starts=collect([]);
+        foreach($events as $event){
+            $starts=$starts->merge($event->start->where("percent",">=",$data["percent"]));
+
+        };
+        dd($starts);
+    }
    private function generateID(){
 
         //lower limit of the id

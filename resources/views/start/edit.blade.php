@@ -92,12 +92,26 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
+                            <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
 
                             <div class="col-md-6">
                                 <input id="category" type="text" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ $start->category }}" required>
 
                                 @error('category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{__("Invalid category")}}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="original_category" class="col-md-4 col-form-label text-md-right">{{ __('Original original_category') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="original_category" type="text" class="form-control @error('original_category') is-invalid @enderror" name="original_category" value="{{ $start->original_category }}" required>
+
+                                @error('original_category')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{__("Invalid category")}}</strong>
                                     </span>
