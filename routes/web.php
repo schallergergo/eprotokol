@@ -20,6 +20,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\SiteMapController;
+use App\Http\Controllers\api\ApiContoller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -201,3 +202,7 @@ Route::get('/lang/{locale}',function($locale){
 
        return redirect()->back();   
 });
+
+//API routes
+
+Route::get('/api/user/{user}', [ApiController::class,'user']);
