@@ -11,7 +11,7 @@ use App\Http\Requests\UpdateBroadcastRequest;
 
 class BroadcastController extends Controller
 {
-
+//this is just a comment to test the ftp thing
 
     public function broadcast(Event $event){
 
