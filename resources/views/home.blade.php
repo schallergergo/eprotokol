@@ -16,7 +16,11 @@
 
 
                     @foreach ($users as $user)
-                        <a href="/user/edit/{{$user->id}}"><p>{{$user->name}} - {{$user->username}} - {{$user->email}} -  {{$user->club}} - {{$user->role}}</p></a>
+                    <p>
+                        <span>{{$user->name}} - {{$user->username}} - {{$user->email}} -  {{$user->club}} - {{$user->role}}</span>
+                        <a href="/user/edit/{{$user->id}}">{{__("Edit")}}</a>
+                        <a href="/admin/login/{{$user->id}}">{{__("Login as user")}}</a>
+                    </p>
                     @endforeach
 
                      <div class="row">

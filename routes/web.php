@@ -36,7 +36,10 @@ Route::get('/', function () {return view('welcome');});
 Auth::routes();
 $user=Auth::User();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-->name('home')->middleware('verified');;
+->name('home')->middleware('verified');
+
+Route::get("/admin/login/{userId}", [App\Http\Controllers\AdminController::class, 'loginAsUser']);
+
 
 Route::get('/contact', [ContactController::class,'create']);
 Route::post('/contact/send', [ContactController::class,'store']);
