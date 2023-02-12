@@ -31,7 +31,7 @@
 
 
                        <div class="form-group row">
-                            <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Name of the sponsor') }}</label>
+                            <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo of the sponsor') }}</label>
                             <div class="col-md-6">
                                 
                                 <input class="form-control" type="file" id="logo" name="logo"accept=".jpg, .png, .jpeg,|image/*">

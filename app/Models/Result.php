@@ -19,9 +19,7 @@ class Result extends Model
     public function start(){
         return $this->belongsTo(Start::class);
     }
-    public function user(){
-        return $this->belongsTo(User::class,'rider_id','username');
-    }
+    
     public function resultlog(){
         return $this->hasMany(Resultlog::class);
     }

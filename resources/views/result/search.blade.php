@@ -15,7 +15,8 @@
                        <div class="form-group row">
                             <label for="search" class="col-md-4 col-form-label text-md-right">{{ __("Name or licence number") }}</label>
                             <div class="col-md-6">
-                                <input id="search" type="text" class="form-control @error('search') is-invalid @enderror" name="search" value="{{ old('search') }}" required>
+
+                                <input id="search" type="text" class="form-control @error('search') is-invalid @enderror" name="search"  value="{{ $search }}"  required>
 
                                 @error('search')
                                     <span class="invalid-feedback" role="alert">
@@ -76,17 +77,17 @@
                         </div>
 
                         <div class="col-md-2 p-1 border">
-                            <span class="align-middle">{{$start->event->event_name}}</span>
+                            <span class="align-middle"><a href="/event/show/{{$start->event->id}}">{{$start->event->event_name}}</a></span>
                         </div>
 
                         <div class="col-md-3 p-1 border">
-                            <span class="align-middle">{{$start->rider_name}} - {{$start->horse_name}}</span>
+                            <span class="align-middle"><a href="/result/search?search={{$start->rider_id}}">{{$start->rider_name}}</a> -<a href="/result/search?search={{$start->horse_id}}"> {{$start->horse_name}}</a></span>
                         </div>
                         <div class="col-md-3 p-1 border">
                             @if ($start->eliminated)
                                 <span class="align-middle">{{__("Eliminated")}}</span>
                             @else
-                                <span class="align-middle">{{$start->mark}} {{__("points")}} - {{number_format($start->percent,2)}}%</span>
+                                <span class="align-middle">({{$start->rank}}.)  {{$start->mark}} {{__("points")}} - {{number_format($start->percent,2)}}%</span>
                             @endif
                         </div>
 

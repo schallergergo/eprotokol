@@ -15,7 +15,10 @@ class Official extends Model
     public function event(){
         return $this->belongsTo(Event::class);
    }
-       public function user(){
+       public function penciler(){
+        return $this->belongsTo(User::class,'penciler','id');
+    }
+    public function user(){
         return $this->belongsTo(User::class,'penciler','id');
     }
 }

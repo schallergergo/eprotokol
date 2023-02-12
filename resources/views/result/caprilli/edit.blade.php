@@ -104,7 +104,7 @@
                         </div>
                         @endif
                         <div class="col-md-1 p-2 border">
-                        <input type="number" class="form-control mark" name="mark[]" value = "{{$assessment[$i]->mark}}" step=0.5 min=0 max=10 required>
+                        <input type="number" class="form-control mark" name="mark[]" value = "{{$assessment[$i]->mark}}" step=0.1 min=0 max=10 required>
                     </div>
                     <div class="col-md-3 p-2 border">
                         <textarea class="form-control" name="remark[]">{{$assessment[$i]->remark}}</textarea>
@@ -127,8 +127,8 @@
                             <select class="custom-select" aria-label="__('Number of errors')" id="error" name="error">
 
                               <option value="0" @if ($result->error==0)selected @endif>{{__("No error")}}</option>
-                              <option value="0.05" @if ($result->error==0.2)selected @endif>{{__("One error")}}</option>
-                              <option value="0.1" @if ($result->error==0.4)selected @endif>{{__("Two errors")}}</option>
+                              <option value="0.2" @if ($result->error==0.2)selected @endif>{{__("One error")}}</option>
+                              <option value="0.4" @if ($result->error==0.4)selected @endif>{{__("Two errors")}}</option>
                               <option value="-1" @if ($result->error==-1)selected @endif>{{__("Three errors! Eliminated!")}}</option>
                             </select>
                     </div>

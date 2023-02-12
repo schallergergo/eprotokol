@@ -25,22 +25,24 @@ class ResultImport implements ToModel, WithValidation, WithHeadingRow, SkipsOnEr
     }
     public function model(array $data)
     {	$event_id=$this->event->id;
-    	$savedAlready=Start::where("rider_id",$data['rider_licence'])->
-                            where("horse_id",$data['horse_licence'])->
+
+    	$savedAlready=Start::where("rider_id",str_replace(" ","",$data['rider_licence']))->
+                            where("horse_id",str_replace(" ","",$data['horse_licence']))->
                             where("event_id",$event_id)->get();
         if (count($savedAlready)!==0) return null;
-       
+
 
         $newStart=new Start([
             'id' => $this->generateID(),
             'rank'=>$this->getLastRank($this->event),
  			'event_id' => $this->event->id,
- 			'rider_id'=> $data['rider_licence'],
+ 			'rider_id'=> str_replace(" ", "",$data['rider_licence']),
  			'rider_name'=> $data['rider_name'],
- 			'horse_id'=> $data['horse_licence'],
+ 			'horse_id'=> str_replace(" ", "",$data['horse_licence']),
  			'horse_name'=> $data['horse_name'],
  			'club' => $data['club'],
- 			'category' => $data['category'],
+ 			'category' => str_replace("õ", "ő",$data['category']),
+            'original_category' => str_replace("õ", "ő",$data['category']),
         ]);
         $startController= new StartController();
         $startController->addResultEntries($newStart);

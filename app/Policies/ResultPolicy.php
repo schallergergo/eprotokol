@@ -57,9 +57,9 @@ class ResultPolicy
     //ezért is van az adatbázisban a kapcsolat úgy jelölve
     public function create(User $user)
     {   
-        if (Auth::User()->role=="office") return true;
-        if (Auth::User()->role=="penciler") return true;
-        if (Auth::User()->role=="admin") return true;
+        if ($user->role=="office") return true;
+        if ($user->role=="penciler") return true;
+        if ($user->role=="admin") return true;
         return false;
     }
 
@@ -79,13 +79,12 @@ class ResultPolicy
     public function update(User $user,Result $result)
     {
 
-        if (Auth::User()->role=="admin") return true;
-
+        if ($user->role=="admin") return true;
         $event=$result->start->event;
         if ($event->competition->active==false) return false;
-        if (Auth::User()->role=="office" && $result->start->event->competition->office==$user->id) return true;
+        if ($user->role=="office" && $result->start->event->competition->office==$user->id) return true;
         $officials=Official::where("event_id",$event->id)->where("penciler",$user->id)->get();
-        foreach ($officials as $official) if (Auth::User()->role=="penciler" && $result->official_id==$official->id) return true;
+        foreach ($officials as $official) if ($user->role=="penciler" && $result->official_id==$official->id) return true;
         return false;
     }
 
@@ -94,7 +93,7 @@ class ResultPolicy
 
         if (Auth::User()->role=="admin") return true;
         if (Auth::User()->role=="judge") return true;
-
+        //if ($user->role="rider" && $result->start->rider_id==$user->username) return true;
         $event=$result->start->event;
         if ($event->competition->active==false) return false;
         if (Auth::User()->role=="office" && $result->start->event->competition->office==$user->id) return true;
@@ -102,7 +101,6 @@ class ResultPolicy
         foreach ($officials as $official) if (Auth::User()->role=="penciler" && $result->official_id==$official->id) return true;
         return false;
     }
-  
 
     /**
      * Determine whether the user can delete the model.
@@ -129,7 +127,7 @@ class ResultPolicy
     //results won't be deleted
     public function restore(User $user, Result $result)
     {
-        if (Auth::User()->role=="admin") return true;
+        if ($user->role=="admin") return true;
         return false;
     }
 
@@ -144,7 +142,7 @@ class ResultPolicy
     //result won't be deleted
     public function forceDelete(User $user, Result $result)
     {
-        if (Auth::User()->role=="admin") return true;
+        if ($user->role=="admin") return true;
         return false;
     }
 }

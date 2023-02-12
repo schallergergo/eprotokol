@@ -8,15 +8,15 @@
             <div class="card">
 
 
-                
+                @foreach($startsWithCategories as $withAllStarts)
                 <div class="card-header">
-                    <span>{{$championship->championshipname}} </span>
+                    <span>{{$championship->championshipname}} - {{$withAllStarts->first()["category"]}} </span>
                     @can('update',$championship)
                     
                     <a href="/championship/edit/{{$championship->id}}"></a>
                     
                     @endcan
-                    <span class="float-right">
+                    <span class="float-right d-print-none">
                         <a href="/championship/index">
                         {{__("Back")}}
                         </a>
@@ -24,7 +24,6 @@
                 </div>
 
                 <div class="card-body">
-                    
                     @if (count($withAllStarts)!=0)
                     
                    
@@ -54,10 +53,12 @@
                     @endif
                     
                     @foreach ($withAllStarts as $starts)
-                    
-                    
 
+                   
+                    <details>
+                    <summary style="list-style-type: none;">
                     <div class="row mb-2 border">
+                        
                         <div class="col-md-3 p-1 border">
                             <span class=" font-weight-bold">{{$starts["starts"]->first()->rider_name}} ({{$starts["starts"]->first()->rider_id}})</span>
                         </div>
@@ -75,9 +76,11 @@
                         </div>
         
                         <div class="col-md-2 p-1 border">
-                            <p class=font-weight-bold>{{__("Average")}}: {{$starts["avg"]}} %</p>
+                            <p class=font-weight-bold>({{$loop->index+1}}.) {{__("Average")}}:       {{ number_format($starts["avg"], 3) }} %</p>
                         </div>
+                        
                     </div><!-- end of the row-->
+                    </summary>
                         @foreach ($starts["starts"]->sortBy("created_at") as $start)
                             <div class="row mb-2 ">
                         
@@ -108,13 +111,14 @@
 
                         @endforeach  <!-- end foreach starts[]-->
                         <div class="row mb-2"> <!--empty row --> </div>
+                        </details>
                     @endforeach  <!-- end foreach withAllStarts-->
                     
                   
                     </div><!-- end of the card-->
-
-
-
+                        <p style="page-break-after:always">&nbsp;</p>
+                    @endforeach<!-- end foreach withCategories-->
+                    
 
                     @can("update",$championship)
 
@@ -159,23 +163,23 @@
 
                     <div class="row mb-2 border">
                         <div class="col-md-3 p-1 border">
-                            <span class="align-middle">{{$starts["starts"]->first()->rider_name}} ({{$starts["starts"]->first()->rider_id}})</span>
+                            <span class="align-middle font-weight-bold">{{$starts["starts"]->first()->rider_name}} ({{$starts["starts"]->first()->rider_id}})</span>
                         </div>
                         
                         <div class="col-md-3 p-1 border">
-                            <span class="align-middle">{{$starts["starts"]->first()->horse_name}} ({{$starts["starts"]->first()->horse_id}})</span>
+                            <span class="align-middle font-weight-bold">{{$starts["starts"]->first()->horse_name}} ({{$starts["starts"]->first()->horse_id}})</span>
                         </div>
 
                         <div class="col-md-2 p-1 border">
-                            <span class="align-middle">{{$starts["starts"]->first()->club}}</span>
+                            <span class="align-middle font-weight-bold">{{$starts["starts"]->first()->club}}</span>
                         </div>
 
                         <div class="col-md-2 p-1 border">
-                            <span class="align-middle">{{$starts["starts"]->first()->category}}</span>
+                            <span class="align-middle font-weight-bold">{{$starts["starts"]->first()->category}}</span>
                         </div>
         
                         <div class="col-md-2 p-1 border">
-                            <p>{{__("Average")}}: {{$starts["avg"]}} %</p>
+                            <span class= font-weight-bold>{{__("Average")}}: {{$starts["avg"]}} %</span>
                         </div>
                     </div><!-- end of the row-->
                         @foreach ($starts["starts"]->sortBy("created_at") as $start)
@@ -185,7 +189,7 @@
                             
                         </div>
 
-                        <a href="tel:"></a>
+                        
                         <div class="col-md-2 p-1 border">
                             <span class="align-middle">{{$start->event->competition->date}}</span>
                         </div>
@@ -193,7 +197,7 @@
                          <div class="col-md-3 p-1 border">
                             <span class="align-middle">{{$start->event->competition->name}}</span>
                         </div>
-                        
+
                         <div class="col-md-3 p-1 border">
                             <span class="align-middle">{{$start->event->event_name}}</span>
                         </div>

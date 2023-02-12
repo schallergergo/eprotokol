@@ -2,15 +2,39 @@
 $(document).ready(ajax);
 setInterval(ajax, 5000);
 count=0;
-getEvents();
+
 
 
 function ajax(){
-    events=getEvents();
+      var url= window.location.href;
+      var index = url.lastIndexOf("/");
+      var id=url.substring(index+1);
+
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+            var output;
+           var request= $.ajax({
+
+            headers: {'X-CSRF-TOKEN': token},
+              url: '/competition/activeEvents/'+id,
+              type: 'get',
+
+           });
+           request.done(function(data){
+            console.log("data"+data);
+            var obj=JSON.parse(data);
+            console.log("node "+obj.length);
+            
+
+
+    events=obj;
+
+    console.log("events"+events);
+
     ln=events.length;
     if (ln==0)
     {
-        notStarted("","/storage/logo/logo_med.png");
+notStarted("","/storage/logo/logo_med.png");
         return;
     }
     id=events[count%ln];
@@ -25,9 +49,7 @@ function ajax(){
 
            });
            request.done(function(data){
-
             obj=JSON.parse(data);
-            console.log(obj.sponsor_logo);
             if (obj.rider=="") notStarted(obj.event_name,obj.sponsor_logo);
             else generateStart(obj);
             
@@ -35,18 +57,13 @@ function ajax(){
 
 
 });
-           
+
+
+});
 
 }
 
-function getEvents(){
-    events=document.getElementsByName("events");
-    eventsArray=Array();
-    for (i=0;i<events.length;i++){
-        if (events[i].checked) eventsArray.push(events[i].value);
-    }
-    return eventsArray;
-}
+
 function notStarted(event_name,sponsor_logo){
 
     document.getElementById("header_name").innerText=event_name;

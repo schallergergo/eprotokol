@@ -8,16 +8,19 @@
 
 
 <div class="container">
+    @if (session('status'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Qualification') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/qualification/show">
+                    <form method="POST" action="/qualification/show/{{$discipline}}">
                         @csrf
-
-
 
 
                       <div class="form-group row">

@@ -43,11 +43,12 @@ class SponsorController extends Controller
     public function store(StoreSponsorRequest $request)
     {
         $data=request();
-        $logo=Storage::disk("public")->put("logo",$data["logo"]);
+        $logo=Storage::put("sponsor",$data["logo"]);
+        //dd(Storage::disk("public")->url($logo));
         $newSponsor=\App\Models\Sponsor::create([
            
             'name' => $data["sponsor_name"],
-            'logo_url' => "/storage/".$logo,
+            'logo_url' => "/storage/app/".$logo,
         ]);
         return redirect()->back();
     }

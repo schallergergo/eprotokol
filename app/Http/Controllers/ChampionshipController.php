@@ -68,7 +68,7 @@ class ChampionshipController extends Controller
         $numberOfEvents=count($events);
         $startsArray=array();
         $mergedStarts= collect([]);
-
+        $uniqueStarts;
 
         foreach ($events as $event){
             $starts        = $event->start;
@@ -76,10 +76,9 @@ class ChampionshipController extends Controller
             $mergedStarts  = $mergedStarts->merge($starts);
         }
 
-
-        $uniqueStarts=$mergedStarts->unique("rider_id","horse_id");
-
-
+        
+        $uniqueStarts=$mergedStarts->unique("twoIds");
+    //dd($uniqueStarts->sortBy("rider_name")); 
         $withAllStarts = array();
         $withoutAllStarts = array();
         foreach($uniqueStarts as $start){
@@ -87,13 +86,19 @@ class ChampionshipController extends Controller
             if (count($foundStarts["starts"])==$numberOfEvents) $withAllStarts[]=$foundStarts;
             else $withoutAllStarts[]=$foundStarts;
         }
-        $withAllStarts=collect($withAllStarts)->sortByDesc("avg")->sortBy("category");
-        //dd($withAllStarts);
+        $withAllStarts=collect($withAllStarts);
+        $categories=collect($withAllStarts)->unique("category");
+        $startsWithCategories=[];
+        foreach($categories as  $category){
+            $startsWithCategories []= $withAllStarts->where("category",$category["category"])->sortByDesc("avg");
+        }
+
+                //dd($withAllStarts);
         $withoutAllStarts=collect($withoutAllStarts)->sortByDesc("avg")->sortBy("category");
 
         return view("championship.show",[
             "championship"=>$championship,
-            "withAllStarts"=>$withAllStarts,
+            "startsWithCategories"=>$startsWithCategories,
             "withoutAllStarts"=>$withoutAllStarts,
         ]);
 

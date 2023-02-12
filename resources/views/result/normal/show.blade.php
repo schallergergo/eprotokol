@@ -1,5 +1,8 @@
 
 @extends('layouts.app')
+@push('meta')
+<meta name="robots" content="noindex">
+@endpush
 @section ('title',$start->event->program->name." - ".$start->rider_name." - ".$start->horse_name)
 @section('content')
 
@@ -17,6 +20,7 @@
                     @can('update',$result)
                         <span class="d-print-none">
                         <a href="/result/edit/{{$result->id}}">{{__("Edit result")}}</a>
+                        <a class="d-flex float-right" href="/event/show/{{$result->start->event->id}}">{{__("Back")}}</a>
                         </span>
                     @endcan
                     @if ($result->completed>1)
@@ -51,12 +55,12 @@
                         <div class="col-md-1 p-1 border">
                             <p>{{ $block['ordinal'] }}</p>
                         </div>
-                        @if ($block["programpart"]===1)
+                        @if ($block["programpart"]==1 && $program->typeofevent!="longe")
                         <div class="col-md-2 p-1 border">
                             <pre>{{ $block['letters'] }}</pre>
                         </div>
                         @endif
-                        @if ($block["programpart"]==1)
+                        @if ($block["programpart"]==1 && $program->typeofevent!="longe")
                         <div class="col-md-4 p-1 border">
                             <pre>{{ $block['criteria'] }}</pre>
                         </div>
@@ -102,11 +106,12 @@
                     <p style="page-break-before: always"></p>
                     @endif
                      <div class="row">
-                    
+                    @if (count($collectivemarks)!=0)
                         <div class="col-md-12 p-1 border">
                             <strong>{{__("Collective marks")}}</strong>
                         </div>
                     </div>
+                    @endif
 <!-- Összbenyomás-->
                     @foreach ($collectivemarks as $block)
                     <div class="row">

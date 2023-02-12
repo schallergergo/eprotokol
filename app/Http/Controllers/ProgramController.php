@@ -23,7 +23,7 @@ class ProgramController extends Controller
             'discipline' => [],
             ]);
 
-        $programs=Program::where("discipline",$data["discipline"])->where('active',1)->get();
+        $programs=Program::where("discipline",$data["discipline"])->where('active',1)->orderBy("ordinal")->get();
 
         return view("program.index",["programs"=>$programs,
                                     "discipline"=>$data["discipline"]]);
@@ -63,7 +63,8 @@ class ProgramController extends Controller
             'typeofevent' => $data['typeofevent'],
             'doublesided' => $data['doublesided'],
         ]);
-
+        $program->ordinal=$program->id;
+        $program->save();
         
         return redirect("/block/create/{$program->id}");
     }

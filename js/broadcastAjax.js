@@ -1,14 +1,12 @@
 
-
-
 $(document).ready(ajax);
+setInterval(ajax, 5000);
 
 
 function ajax(){
       var url= window.location.href;
       var index = url.lastIndexOf("/");
       var id=url.substring(index+1);
-      console.log(id);
 
 
     var token = $('meta[name="csrf-token"]').attr('content');
@@ -48,12 +46,12 @@ function generateResult(json){
    judges=json.judges;
    
    if (judges.length==0) return " ";
-   if (json.lastfilled==-1) return "1. feladat";
-   output=(json.lastfilled+1)+". feladat | ";
+	if (json.lastfilled=="") return "";
+  if (json.lastfilled==0 && judges[0].lastMark=="") return "";
+   output=(json.lastfilled+1)+". feladat ";
    for (i=0;i<judges.length;i++){
     judge=judges[i];
-    console.log(judge);
-    output+=judge.position+" bíró: "+judge.lastMark+" p ("+ judge.percent +" %) | ";
+    output+="| "+judge.position+" bíró: "+judge.lastMark+" p ("+ judge.percent +"%) ";
    }
    return output;
 }

@@ -1,0 +1,36 @@
+[20-Dec-2022 14:49:52 Europe/Budapest] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/eprotokol/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/eprotokol/public_html/config/cache.php on line 18
+[20-Dec-2022 14:49:53 Europe/Budapest] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/eprotokol/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/eprotokol/public_html/config/cache.php on line 18
+[20-Dec-2022 14:49:54 Europe/Budapest] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/eprotokol/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/eprotokol/public_html/config/cache.php on line 18
+[24-Dec-2022 11:09:08 Europe/Budapest] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/eprotokol/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/eprotokol/public_html/config/cache.php on line 18
+[24-Dec-2022 11:09:08 Europe/Budapest] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/eprotokol/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/eprotokol/public_html/config/cache.php on line 18
+[24-Dec-2022 11:09:10 Europe/Budapest] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/eprotokol/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/eprotokol/public_html/config/cache.php on line 18
+[10-Feb-2023 11:22:53 Europe/Budapest] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/eprotokol/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/eprotokol/public_html/config/cache.php on line 18
+[10-Feb-2023 11:22:53 Europe/Budapest] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/eprotokol/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/eprotokol/public_html/config/cache.php on line 18
+[10-Feb-2023 11:22:55 Europe/Budapest] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/eprotokol/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/eprotokol/public_html/config/cache.php on line 18

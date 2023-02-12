@@ -21,7 +21,6 @@ var marks=document.getElementsByClassName("mark");
             var error= document.getElementById("error");
             error=error.options[error.selectedIndex].value;
             var token = $('meta[name="csrf-token"]').attr('content');
-            console.log("hello");
             jsonObj=[];
             
             if (remark.length==mark.length){
@@ -35,19 +34,47 @@ var marks=document.getElementsByClassName("mark");
               }
 
             }
-            var request = $.ajax({
+             request = $.ajax({
 
               headers: {'X-CSRF-TOKEN': token},
                type:'POST',
                url:'/result/ajaxUpdate/'+resultID,
                data:{"assessment":jsonObj,"error":error},
-
-                });
-            request.done(function( msg ) {
-            console.log(msg);
-          });
- 
-          request.fail(function( jqXHR, textStatus ) {
-            alert( "Request failed: " + textStatus );
+               
+            });
+	request.done(function( msg ) {	
+		alerted=false;
+		});
+	request.fail(function( jqXHR, textStatus ) {
+		if (!alerted){
+            		alert( "Request failed: no internet" );
+			download(resultID+".txt",generateText(jsonObj));
+			alerted=true;
+		}
           });
          }
+
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+function generateText(jsonObj){
+
+
+  out="";
+  for (i=0;i<jsonObj.length;i++) out+=jsonObj[i].mark+"\t";
+
+  out+="\n";
+  for (i=0;i<jsonObj.length;i++) out+=i+1+".: "+jsonObj[i].remark+"\n";
+  return out;
+}

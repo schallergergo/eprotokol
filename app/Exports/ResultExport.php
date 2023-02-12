@@ -15,15 +15,15 @@ class ResultExport implements FromArray {
     public function array() :array
         
     {  
-    	 return $this->makeArray();
+         return $this->makeArray();
  
 
     }
     private function makeArray() {
-    	$starts = Start::where('event_id', $this->event->id)->get();
+        $starts = Start::where('event_id', $this->event->id)->get();
         $output = [];
-    	$output[]=$this->head(count($event->official));;
-    	foreach ($starts as $start) {
+        $output[]=$this->head(count($this->event->official));;
+        foreach ($starts as $start) {
                 $temp=[];
                 if ($start->completed){
                      $temp[] = $start->rank;
@@ -69,12 +69,12 @@ class ResultExport implements FromArray {
             for ($i=0;$i<$numOfStarts;$i++){
                 for ($j=1;$j<=$this->event->program->numofblocks;$j++)
                     $temp[] = $j;
-            }
+            
                     $temp[] = "mark";
                     $temp[] = "percent";
                     $temp[] = "collective";
                     $temp[] = "error";
-       
+            }
         $temp[] = "total mark";
         $temp[] = "total percent";
         $temp[] = "total collective";

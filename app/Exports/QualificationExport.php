@@ -21,10 +21,12 @@ class QualificationExport implements FromArray {
 
     }
     private function makeArray() {
-    	$starts = Start::where('event_id', $this->event->id)->get();
+
         $output = [];
     	$output[]=$this->head();
-    	foreach ($starts as $start) {
+
+    	foreach ($this->starts as $start) {
+
                 $temp=[];
                 $temp[] = $start->rider_id;
                 $temp[] = $start->rider_name;
@@ -43,9 +45,8 @@ class QualificationExport implements FromArray {
         return $output;
         }
 
-        private function head($numOfStarts){
+        private function head(){
                 $temp   = [];
-                $temp[] = "rank";
                 $temp[] = "rider_id";
                 $temp[] = "rider_name";
                 $temp[] = "horse_id";

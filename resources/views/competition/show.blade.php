@@ -9,6 +9,7 @@
                 <div class="card-header"><span>{{ $competition->name." - ".$competition->date." - ".$competition->venue }}</span>
                      @can('create',[App\Models\Event::class,$competition])
                     <span class=""><a href="/event/create/{{$competition->id}}">{{__("Create event")}}</a></span>
+                    <span class=""><a href="/display/compsetting/{{$competition->id}}">{{__("Display")}}</a></span>
                     @endcan
 
                 </div>

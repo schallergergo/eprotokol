@@ -1,15 +1,19 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <title>@yield('title',"Eprotokol")</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token --><meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title',"Eprotokol")</title>
+    <meta name="description" content="{{__('Eprotokol is an online dressage show office platform')}} ">
+    <meta name="author" content="Schaller Gergő ">
+    <meta property="og:image" content="https://eprotokol.hu/storage/logo/logo_square.png" />
+    @stack('meta')
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     @stack('head')
-    @yield('pagespecificscripts')
+ 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -21,7 +25,7 @@
     <link rel="shortcut icon" href="/favicon.ico?v=1">
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#ffffff">
-        
+    
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -31,7 +35,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="/storage/logo/logo_small.png" alt="Eprotokol logo">
+                    <img src="/storage/logo/logo_small.png" alt="Eprotokol logo"class="d-print-none">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -63,9 +67,9 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
+                                
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                     <a class="dropdown-item" href="/user/profile">
+                                    <a class="dropdown-item" href="/user/profile">
                                         {{ __('Profile') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -117,9 +121,10 @@
             @yield('content')
         </main>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-     @yield('footerScript')
+ @yield('pagespecificscripts')
+ @yield('footerScript')
 </body>
 </html>

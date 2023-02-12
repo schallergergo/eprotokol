@@ -118,8 +118,16 @@ class CompetitionController extends Controller
         $competition->update($data);
         return back();
     }
+    public function updateActive(Competition $competition)
+    {   
+        $this->authorize('update', $competition);
+        $state=$competition->active;
+         $data=['active' => !$state];
+        $competition->update($data);
+        return redirect()->back();
+    }
 
-    public function activeEvents(Competition $competition){
+     public function activeEvents(Competition $competition){
 
         return $competition->active_event;
     }
@@ -134,15 +142,7 @@ class CompetitionController extends Controller
         return json_encode($eventsArray);
     }
 
-
-    public function updateActive(Competition $competition)
-    {   
-        $this->authorize('update', $competition);
-        $state=$competition->active;
-         $data=['active' => !$state];
-        $competition->update($data);
-        return redirect()->back();
-    }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -152,6 +152,7 @@ class CompetitionController extends Controller
      */
     public function destroy(Competition $competition)
     {
-        //
+        $competition->delete();
+        return redirect("/competition/index");
     }
 }

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Start;
+use App\Models\Sponsor;
 use App\Models\Program;
 use App\Models\Competition;
 use App\Models\User;
-use App\Models\Sponsor;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +16,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class EventController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -32,12 +33,11 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Competition $competition){
-        $this->authorize('create', [Event::class,$competition]);
-        $programs=Program::all()->
-        where("discipline",$competition->discipline)->
-        where("active",1);
+        $this->authorize('create', [App\Models\Event::class,$competition]);
+        $programs=Program::where("discipline",$competition->discipline)->
+        where("active",1)->orderBy("ordinal")->get();
 
-        return view("/event/create",[
+        return view("event.create",[
             "programs"=>$programs,
             "competition"=>$competition]);
     } 
@@ -65,9 +65,9 @@ class EventController extends Controller
             'event_name' => $data["event_name"],
             'program_id' => $data["program_id"],
             'competition_id'=>$competition->id,
-
         ]);
-
+        $newEvent->rank=$newEvent->id;
+        $newEvent->save();
         return redirect("competition/show/{$competition->id}");
     }
 
@@ -77,7 +77,7 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+        public function show(Event $event)
     {
         
          //riders in the event with no results
@@ -95,10 +95,10 @@ class EventController extends Controller
         $startedArray[]=$started->where("completed",">",0)->where("category",$category);
         
     }
-    
     return view("event.show",  ["event"=>$event,
                                  "startedArray"=>$startedArray,
                                  "toStart"=>$toStart,
+
                                 ]);
     }
 
@@ -116,7 +116,6 @@ class EventController extends Controller
         $officials=$event->official;
         $sponsors=Sponsor::all()->sortBy("name");
         $categories=$event->start->pluck("category")->unique();
-       
         return view("/event/edit",["programs"=>$programs,
                                     "event"=>$event,
                                     "officials"=>$officials,
@@ -145,10 +144,10 @@ class EventController extends Controller
         return back();
     }
 
-    public function destroy(Event $event){
+ public function destroy(Event $event){
 
-        $event->delete(); 
-        return back();    
+        $event->delete();
+        return redirect("/competition/show/{$event->competition->id}");    
     }
 
 
@@ -162,44 +161,51 @@ class EventController extends Controller
     }
 
  public function exportEvent(Event $event){
-        return Excel::download(new ResultExport($event), 'result.xlsx');
+        return Excel::download(new ResultExport($event), $event->event_name.'_results.xlsx');
     }
 
+    
 
 public function resetCategory (Event $event){
-$this->authorize('update', $event);
-    foreach ($event->start as $start){
-        $start->category=$start->original_category;
-        $start->save();
-    }
-    $this->recalculateEvent($event);
-   return  redirect("/event/show/{$event->id}");
+        $this->authorize('update', $event);
+            foreach ($event->start as $start){
+                $start->category=$start->original_category;
+                $start->save();
+            }
+            $this->recalculateEvent($event);
+           return  redirect("/event/show/{$event->id}");
+}
+public function resetSponsor (Event $event){
+        $this->authorize('update', $event);
+           $event->last_opened=null;
+           $event->save();
+        return  redirect("/event/edit/{$event->id}");
 }
 
 public function updateCategory (Event $event){
-$this->authorize('update', $event);
-    $data=request();
-    $data=$data->validate([
-            'new_category' => ['required', 'string', 'max:255'],
-            'first_category' => ['required', 'string', 'max:255'],
-            'second_category' => ['required', 'string', 'max:255'],
-            ]);
+        $this->authorize('update', $event);
+            $data=request();
+            $data=$data->validate([
+                    'new_category' => ['required', 'string', 'max:255'],
+                    'first_category' => ['required', 'string', 'max:255'],
+                    'second_category' => ['required', 'string', 'max:255'],
+                    ]);
 
-    $starts=$event->start->where("category",$data["first_category"]);
+            $starts=$event->start->where("category",$data["first_category"]);
 
-    foreach($starts as $start){
-        $start->category=$data["new_category"];
-        $start->save();
-    }
+            foreach($starts as $start){
+                $start->category=$data["new_category"];
+                $start->save();
+            }
 
-    $starts=$event->start->where("category",$data["second_category"]);
+            $starts=$event->start->where("category",$data["second_category"]);
 
-    foreach($starts as $start){
-        $start->category=$data["new_category"];
-        $start->save();
-    }
-    $this->recalculateEvent($event);
-    return redirect()->back();
+            foreach($starts as $start){
+                $start->category=$data["new_category"];
+                $start->save();
+            }
+            $this->recalculateEvent($event);
+            return  redirect("/event/show/{$event->id}");
 }
 
 

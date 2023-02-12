@@ -78,10 +78,7 @@ class ResultShortFormController extends Controller
         {
                 //given mark
                 $mark=$data['mark'][$i];
-
                 if ($data['mark'][$i]=="") return false;
-
-
                 //remark: if null replaced with an empty string
                 $remark=$data['remark'][$i]==null?"":$data['remark'][$i];
 

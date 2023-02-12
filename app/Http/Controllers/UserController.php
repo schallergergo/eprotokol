@@ -82,7 +82,7 @@ private function storePenciler(array $data){
 
 private function storeAdmin(array $data){
     $this->authorize('isAdmin',User::class);
-      $newEvent=\App\Models\User::create([
+      $newUser=\App\Models\User::create([
             'name' => $data["name"],
             'email' => $data["email"],
             'role' =>$data["role"],
@@ -128,13 +128,22 @@ private function storeAdmin(array $data){
             'club' =>['required', 'integer']
             ]);
 
-         
-
-
          $user->update($newData);
+
+             if ($data["email"]!=$user->email)
+            {
+                $email = $data->validate([ 'email' => ['required', 'string', 'email', 'max:255','unique:users']]);
+                $user->email=$email["email"];
+                $user->save();
+            }
+            
+
+
+         
          return redirect()->back();
 
     }
+
     public function editAsAdmin(User $user)
     {   
         $this->authorize('isAdmin', $user);
@@ -143,12 +152,12 @@ private function storeAdmin(array $data){
 
         return view("user.editAsAdmin",["user"=>$user,"clubs"=>$clubs]);
     }
+
  public function updateAsAdmin(User $user)
     {$this->authorize('isAdmin', $user);
          $data = request();
          $newData=$data->validate([
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255'],
             'role'=> ['required',Rule::in(["admin","club","rider","office","penciler"])],
             'club' =>['required', 'integer']
             ]);
@@ -156,8 +165,16 @@ private function storeAdmin(array $data){
     if ($data["email"]!=$user->email)
             {
                 $email = $data->validate([ 'email' => ['required', 'string', 'email', 'max:255','unique:users']]);
-                $user->email_verified_at=null;
+
                 $user->email=$email["email"];
+                $user->save();
+            }
+            
+     if ($data["username"]!=$user->username)
+            {
+                 $username = $data->validate([ 'username' => ['required', 'string',  'max:255', 'unique:users']]);
+
+                $user->username=$username["username"];
                 $user->save();
             }
 

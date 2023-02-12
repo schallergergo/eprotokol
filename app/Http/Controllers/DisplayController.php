@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Competition;
 use App\Models\Event;
 use App\Models\Start;
 use App\Models\Result;
+use Illuminate\Support\Facades\Auth;
 class DisplayController extends Controller
 {
    public function settings(Event $event){
@@ -18,10 +18,11 @@ class DisplayController extends Controller
 
     public function vilagos(Competition $competition){
         return view("display.vilagos",[
-        'competition'=>$competition,
+        'competition'=>$competition
 
     ]);
     }
+
     public function tatter(Competition $competition){
         return view("display.tatter",[
         'competition'=>$competition
@@ -30,6 +31,9 @@ class DisplayController extends Controller
     }
 
     public function compsetting(Competition $competition){
+        $user=Auth::User();
+        if ($user==null) abort(403);
+        if ($user->role!="admin" && $user->role!="office") abort(403);
                 return view("display.compsetting",[
         'competition'=>$competition,
 
@@ -47,6 +51,8 @@ class DisplayController extends Controller
         $competition->save();
         return redirect()->back();
     }
+
+
     public function display(Event $event){
 
     if ($event->last_opened==null)  return view('display.notstarted',[

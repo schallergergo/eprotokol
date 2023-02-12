@@ -2,8 +2,13 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
+        <head>
+  
+        <meta name="description" content="{{__("Eprotokol is an online dressage show office platform")}} ">
+    <meta property="og:image" content="https://eprotokol.hu/storage/logo/logo_square.png" />
+</head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{__("Welcome!")}}</title>
+        <title>{{__("Eprotokol")}}</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <!-- Styles -->
@@ -87,23 +92,26 @@
                     <img src="/storage/logo/logo_med.png" class="img-fluid m-10" alt="Eprotokol logo">
                 </div>
                 <div class="col-md-12">
-                <div class="links row mb-2">
-                    <div class="col-md-2 "><span class="links"><a href="/result/search">{{__("Search")}}</a></span></div>
-                    <div class="col-md-2 "><span class="links"><a href="/competition/index">{{__("Competitions")}}</a></span></div>
-                    <div class="col-md-2 "><span class="links"><a href="/competition/index">{{__("Programs")}}</a></span></div>
-                    <div class="col-md-2 "><span class="links"><a href="/contact">{{__("Contact")}}</a></span></div>
-                    <div class="col-md-2 ">
+                <div class="links row">
+                    <div class="col-md-4 pt-2"><span class="links"><a href="/result/search">{{__("Search")}}</a></span></div>
+                    <div class="col-md-4 pt-2"><span class="links"><a href="/championship/index">{{__("Championships")}}</a></span></div>
+                     <div class="col-md-4 pt-2"><span class="links"><a href="/competition/index">{{__("Competitions")}}</a></span></div>
+                
+                    </div>
+                    <div class="links row">
+                        <div class="col-md-4 pt-2"><span class="links"><a href="/program/index">{{__("Programs")}}</a></span></div>
+                        <div class="col-md-4 pt-2"><span class="links"><a href="/contact">{{__("Contact")}}</a></span></div>
+                     <div class="col-md-4 pt-2">
                     @if (session('locale')=='en')
-                  	
+                    
                     <span class="links"><a href="lang/hu">Magyar</a></span>
-                  	@else
+                    @else
                     <span class="links"><a href="lang/en">English</a></span>
 
-                  	
-                  	
-                  	@endif
+                    
+                    
+                    @endif
                     </div>
-
                      
                     
                 </div>

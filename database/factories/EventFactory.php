@@ -14,9 +14,7 @@ class EventFactory extends Factory
     public function definition()
     {
         return [
-           'event_name'=>"Saját",
-            'competition_id'=>1,
-            'program_id'=>1
+            //
         ];
     }
 }

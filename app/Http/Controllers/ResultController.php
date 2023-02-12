@@ -14,6 +14,9 @@ use App\Mail\ResultMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Log;
+ 
+
 class ResultController extends Controller
 {
         public function __construct()
@@ -23,7 +26,10 @@ class ResultController extends Controller
     
     //Shows a given result based on its id
     public function show(Result $result){
-
+        $user=Auth::user();
+        if ($user==null) $user="anonim";
+        else $user=$user->name;
+    Log::channel("resultOpen")->info($user.' opened '.$result->id);
       $typeofevent=$result->start->event->program->typeofevent;
 
       switch ($typeofevent) {
@@ -96,9 +102,9 @@ class ResultController extends Controller
         $numOfBlocks=$start->event->program->numofblocks;
         
         \App\Models\Result::create([
-            'id' => $this->generateID(),
+            'id' => strval($this->generateID()),
             'start_id' => $start->id,
-            'penciler'=> $official->id,
+            'official_id'=> $official->id,
             'position'=> $official->position,
             'assessment'=>$this->generateEmptyJson($numOfBlocks),
         ]);
@@ -120,7 +126,8 @@ class ResultController extends Controller
           case 'shortform':
               $controller = new ResultShortFormController();
               break;
-               case 'caprilli':
+
+        case 'caprilli':
               $controller = new ResultCaprilliController();
               break;
           default:
@@ -131,7 +138,7 @@ class ResultController extends Controller
         if (!$sucess) return redirect("result/edit/{$result->id}") ->with("fail",Lang::get("Something is missing!"));
          //creating a log record
         $this->ResultLog($result->id,$result->mark,$result->assessment);
-        //$this->sendMail($result);
+       
         //updating the result record
         $start=$result->start;
         $startController = new StartController();
@@ -142,6 +149,7 @@ class ResultController extends Controller
         
     }
     public function ajaxUpdate(Result $result){
+        if ($result->completed>0) return response("Already completed",403);
         $data = request();
         $assessment=json_encode($data->assessment);
         $jsonAssessment=str_replace("null","\"\"",$assessment);
@@ -184,7 +192,6 @@ class ResultController extends Controller
         $limit = 100000000000000000;
 
         //generating a random id
-
         $id = rand($limit,$limit*10);
 
         //checking if a record already exists with the given id
@@ -235,17 +242,13 @@ private function calculatePartialResult(Result $result){
                 }
             }
         }
+        if ($maxPoint==0) return 0;
         $result->mark=$points;
         $result->percent=($points-$error)*100.0/$maxPoint;
         $result->save();
     }
 
-    private function sendMail(Result $result){
-           $user = $result->user;
-           if ($user!=null){
-            Mail::to($user->email)->send(new ResultMail($result));
-           }
-    }
+    
 
     
 

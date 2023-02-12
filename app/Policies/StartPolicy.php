@@ -18,7 +18,7 @@ class StartPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-      public function viewAny(User $user, User $model)
+    public function viewAny(User $user, User $model)
     {   
         $role=$user->role;
         if ($role=='admin') return true;
@@ -49,11 +49,17 @@ class StartPolicy
     {
         $role=$user->role;
         if ($role=='admin') return true;
-        if ($role=='penciler' && $event->official->penciler==$user->id) return true;
+        if ($role=='penciler' && $this->canAPencilerCreateUser($user,$event)) return true;
         if ($role=='office' && $event->competition->office==$user->id) return true;
         return false;
     }
-
+    private function canAPencilerCreateUser(User $user, Event $event){
+        
+        foreach($event->official as $official){
+            if ($official->penciler==$user->id) return true;
+        }
+        return false;
+    }
     /**
      * Determine whether the user can update the model.
      *

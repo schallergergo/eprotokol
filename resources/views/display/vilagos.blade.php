@@ -93,17 +93,17 @@
 </div>
 
 <div class="header line">
-  <img src="/storage/logo/logo_med.png" ><h2 id="header_name" class="pt-1">$event->event_name</h2>
+  <img src="/storage/logo/logo_med.png" ><h2 id="header_name" class="pt-1"></h2>
 </div>
 <div id="rider" class="line">
-<h1 id="rider_name" class="text-nowrap" >$start->rider_name</h1>
+<h1 id="rider_name" class="text-nowrap" ></h1>
 </div>
 <div id="horse" class="line">
-<h1 id="horse_name" class="text-nowrap" >$start->horse_name</h1>
+<h1 id="horse_name" class="text-nowrap" ></h1>
 </div>
 <div id="club" class="line">
 
-  <h1 id="club_name" class="text-nowrap" >$start->club</h1>
+  <h1 id="club_name" class="text-nowrap" ></h1>
 
 </div>
 

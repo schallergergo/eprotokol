@@ -23,12 +23,12 @@
   
 <div class="d-flex justify-content-center pt-4" >
   <!--<img class="img-fluid max-width:20%"src="https://eprotokol.hu/storage/logo/logo_med.png">-->
-    <h1 id="header_name" class=" d-flex justify-content-center text-nowrap display-1 font-weight-bold mt-3" >event</h1></div>
+    <h1 id="header_name" class=" d-flex justify-content-center text-nowrap display-3 font-weight-bold mt-3" >event</h1></div>
   
-<h1 id="rider_name" class=" d-flex justify-content-center text-nowrap display-2 mt-3" >$start->rider_name</h1>
-<h1 id="horse_name" class=" d-flex justify-content-center text-nowrap display-2 mt-3" >$start->horse_name</h1>
-<h1 id="club_name" class="  d-flex justify-content-center text-nowrap display-2 mt-3" >$start->club</h1>
-<h4 id="result" class=" d-flex justify-content-center text-nowrap display-3 mt-3">
+<h1 id="rider_name" class=" d-flex justify-content-center text-nowrap display-3 mt-3" >$start->rider_name</h1>
+<h1 id="horse_name" class=" d-flex justify-content-center text-nowrap display-3 mt-3" >$start->horse_name</h1>
+<h1 id="club_name" class="  d-flex justify-content-center text-nowrap display-3 mt-3" >$start->club</h1>
+<h4 id="result" class=" d-flex justify-content-center text-nowrap display-4 mt-3">
   result
 </h4>
 </div>

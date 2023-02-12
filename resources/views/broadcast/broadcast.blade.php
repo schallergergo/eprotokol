@@ -22,7 +22,7 @@
       }
 
       .ribbon {  
-      background-color:  rgba(99,107,111,0.6);
+      background-color:  rgba(99,107,111,0.85);
       position: absolute;
       width: 80%;
       
@@ -34,53 +34,47 @@
 
       
 }
+
+#logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: auto;
+      }
 #event {
-      top: 50px;
-      left: -20px;
+      top: 45px;
+      left: 120px;
       width: auto;
 
 
 }
 
 #point {
-      bottom: 32px;
+      bottom: 28px;
       left: 150px;
 
 }
-#ep_logo {
-
-      position: absolute;
-      top: 140px;
-      left: 33%;
-}
-
-
-
 
         </style>
 </head>
 <body>
 <div class="container">
+  <div id="logo">
+  <img src="https://eprotokol.hu/storage/logo/logo_circle.png" width="100" height="100">
 
-
-<div class="rounded-pill  p-2" >
-   <img src="/storage/logo/eprotokol_circle.png" width="600" height="600" id="ep_logo">
 </div>
-
-
 <div class="rounded-pill ribbon  p-2" id="event">
-  
+
 <h3 id="event" class="text-nowrap overflow-hidden pl-5 pr-5">{{$event->event_name}}</h1>
 </div>
-
 <div class="rounded-pill ribbon  p-2" id="rider">
   
-<h1 id="name" class="text-nowrap overflow-hidden pl-5">{{$start->rider_name}} - {{$start->horse_name}} - {{$start->club}}</h1>
+<h1 id="name" class="text-nowrap overflow-hidden pl-5"></h1>
 </div>
 
 <div class="rounded-pill ribbon mb-2" id="point">
   
-<h2 id="result" class="text-center pt-1  pb-2">-</h2>
+<h2 id="result" class="text-center pt-2  pb-2">-</h2>
 </div>
 
 </div>

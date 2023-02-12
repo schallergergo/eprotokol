@@ -73,6 +73,7 @@ class OfficialController extends Controller
             'event_id' => $event_id,
             'judge' => $data["judge"],
             'position' => $data["position"],
+            'judge' => $data["judge"],
             'penciler' => $data["penciler"],
 
         ]);

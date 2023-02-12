@@ -43,7 +43,7 @@ class ContactController extends Controller
             'message' => $data["message"],
             'score' => $response->success
         ]);
-            $this->sendMail($data);
+            $this->sendMail($data["email"],$data);
         }
 
         else return redirect()->back()->with("fail",Lang::get("Error! Your message could not be sent!"));
@@ -53,7 +53,7 @@ class ContactController extends Controller
     }
 
 
-    private function sendMail(array $message){
+    private function sendMail(string $email,array $message){
 
 
             Mail::to("info@eprotokol.hu")->send(new ContactMail($message));

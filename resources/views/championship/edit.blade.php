@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@section('title','Bajnokság hozzáadása')
 
 @section('content')
 
@@ -8,7 +7,16 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Edit championship') }}</div>
+                <div class="card-header">{{ __('Edit championship') }}
+
+                    <span class="float-right">
+                        <a href="/championship/index">
+                        {{__("Back")}}
+                        </a>
+                    </span>
+
+
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="/championship/update/{{$championship->id}}" enctype="multipart/form-data">
@@ -87,7 +95,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Add competition') }}
+                                    {{ __('Add event') }}
                                 </button>
                             </div>
                         </div>
@@ -122,7 +130,17 @@
                     </form>                    
                     @endforeach
                    
-                                    
+                       
+
+
+
+            
+
+
+
+                                
+
+                    
                 </div><!-- end of the card-->
 
             </div>

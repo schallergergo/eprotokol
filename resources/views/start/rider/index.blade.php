@@ -30,7 +30,7 @@
                             <span class="align-middle font-weight-bold">{{__("Result")}}</span>
                         </div>
                         <div class="col-md-2 p-1 border d-none d-md-block">
-                             <span class="align-middle font-weight-bold">{{__("Options")}}</span>
+                             <span class="align-middle font-weight-bold">{{__("Test sheet")}}</span>
                             
                         </div>
                     </div><!-- end of the row-->
@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="col-md-2 p-1 border">
-                            <span class="align-middle">{{$start->event->competition->name}}</span>
+                            <span class="align-middle">{{$start->event->event_name}}</span>
                         </div>
 
                         <div class="col-md-2 p-1 border">

@@ -59,14 +59,27 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
-
+        'login' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/login.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        'resultOpen' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/resultOpen.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
         ],
-
+        'mail' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/mail.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),

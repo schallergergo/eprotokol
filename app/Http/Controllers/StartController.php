@@ -6,13 +6,19 @@ use App\Models\Start;
 use App\Models\Event;
 use App\Models\Result;
 use App\Models\Program;
+use App\Mail\ResultMail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Lang;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ResultExport;
 use App\Imports\ResultImport;
+use App\Exports\QualificationExport;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
+
 
 class StartController extends Controller
 {
@@ -23,9 +29,9 @@ class StartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $model)
+   public function index(User $user)
     {
-        $this->authorize('viewAny', [Start::class,$model]);
+        $this->authorize('viewAny', [Start::class,$user]);
         $starts=Start::where("rider_id",$user->username)->where("completed",">","0")->orderByDesc("created_at")->paginate(20);
         return view("start.rider.index",["starts"=>$starts]);
     }
@@ -72,7 +78,7 @@ class StartController extends Controller
         $lastRank=$this->getLastRank($event);
 
         $newStart=\App\Models\Start::create([
-            'id' => $this->generateID(),
+            'id' => strval($this->generateID()),
             'event_id' => $event->id,
             'rider_id'=> $data['rider_id'],
             'rider_name'=> $data['rider_name'],
@@ -148,7 +154,7 @@ class StartController extends Controller
 
 
         $start->update($dataOut);
-        $this->calculateRank($start);
+        $this->calculateAllRank($start);
         return redirect("/event/show/{$start->event->id}");
         
     }
@@ -188,7 +194,6 @@ class StartController extends Controller
      return redirect("event/edit/{$event->id}")->with("status","Import failed!");
         }
     }
-
 
     public function moveUp(Start $start){
         $this->authorize('update', $start );
@@ -232,16 +237,30 @@ class StartController extends Controller
         return back();
     }
 
+    
 
     public function calculateAllJudges(Start $start){
         $officials=$start->event->official;
 
         $completedResults=Result::where("start_id",$start->id)
             ->where("completed",">",0)->get();
-        if (count($officials)==count($completedResults)){
-
+            if (count($officials)==count($completedResults)){
+            $completed=$start->completed;
             $this->markAverage($start,$completedResults);
             $this->calculateRank($start);
+             try {
+                if (env("MAIL_ACTIVE",true)) $this->sendMail($start,$completed);
+            }
+            
+            catch (\Error $e){
+                Log::channel('mail')->info($e);
+        }
+            catch (\Exception $e){
+                Log::channel('mail')->info($e);
+        }
+           catch (\Throwable $e){
+                Log::channel('mail')->info($e);
+        }
         }
     }
 
@@ -261,6 +280,20 @@ class StartController extends Controller
             ];
         $start->update($data);
     }
+
+
+
+    public function calculateAllRank(Start $start){
+        
+        $starts=Start::where("event_id",$start->event_id)
+                            ->where("completed",1)->get();
+        $starts=$starts->unique("category");
+
+       foreach( $starts as $start) $this->calculateRank($start);
+        
+
+    }
+
     public function calculateRank(Start $start){
         
         $sameCategoryStarts=Start::where("event_id",$start->event_id)
@@ -288,6 +321,7 @@ class StartController extends Controller
         
 
     }
+
     public function qualificationSettings(){
         $data=request();
         $discipline=$data["discipline"];
@@ -295,33 +329,38 @@ class StartController extends Controller
 
         return view("qualification.show",
             [
-               "programs"=>$programs
+               "programs"=>$programs,
+               "discipline"=>$discipline
             ]);
     }
 
 
     public function qualificationShow(){
-        dd("hello");
+
         $data=request();
-        dd($data);
+
         $data=$data->validate([
             'start' => ['required', 'date'],
             'end' => ['required', 'date'],
             'programs' => ['required'],
             'percent' => ['required', 'integer', 'min:0'],
             ]);
-        dump($data);
         $events=Event::whereIn("program_id",$data["programs"])->
                 where("created_at",">=",$data["start"])->
                 where("created_at","<=",$data["end"])->get();
 
         $starts=collect([]);
         foreach($events as $event){
-            $starts=$starts->merge($event->start->where("percent",">=",$data["percent"]));
+            $temp=$event->start->where("percent",">=",$data["percent"]);
+            $starts=$starts->merge($temp);
 
         };
-        dd($starts);
+        $starts=$starts->unique("rider_id")->sortBy("rider_name");
+        if (count($starts)==0)       return redirect()->back()
+        ->with("status",Lang::get("Nothing found!"));
+        return Excel::download(new QualificationExport($starts), 'qualification.xlsx');
     }
+
    private function generateID(){
 
         //lower limit of the id
@@ -341,5 +380,12 @@ class StartController extends Controller
 
         return $id;
     }
+    private function sendMail(Start $start,int $completed){
+            //if ($completed>0) return;
+           $user = $start->user;
 
+           if ($user!=null){
+            Mail::to($user->email)->send(new ResultMail($start));
+           }
+    }
 }

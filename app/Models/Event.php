@@ -26,6 +26,6 @@ class Event extends Model
         return $this->hasMany(Official::class);
    }
    public function sponsor(){
-        return $this->belongsTo(Sponsor::class);
+      return $this->belongsTo(Sponsor::class);
    }
 }

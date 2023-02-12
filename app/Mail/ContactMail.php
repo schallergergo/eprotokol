@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Lang;
 
 class ContactMail extends Mailable
 {
@@ -28,10 +29,11 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->subject(Lang::get("New message"))->markdown('mail.contact', [
+        return $this->subject(Lang::get("New message"))->replyTo($this->message["email"])->markdown('mail.contact', [
                     'name' => $this->message["name"],
                     'email' => $this->message["email"],
                     'message' => $this->message["message"],
+
                 ]);
     }
 }

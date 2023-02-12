@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="container">
-     @if (session('fail'))
+    @if (session('fail'))
     <div class="alert alert-danger">
         {{ session('fail') }}
     </div>
@@ -40,7 +40,7 @@
                         <div class="col-md-1 p-2 border">
                             <p>{{ $block['ordinal'] }}</p>
                         </div>
-                        @if ($block["programpart"]===1)
+                        @if ($block["programpart"]==1)
                         <div class="col-md-2 p-2 border">
                             <pre>{{ $block['letters'] }}</pre>
                         </div>

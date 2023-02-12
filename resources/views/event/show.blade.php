@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('pagespecificscripts')
-    <script src="{{ asset('js/refresh.js') }}"></script>
-@endsection
+
 @section('content')
 
 <div class="container">
@@ -13,6 +11,13 @@
                 
                 <div class="card-header">
                     <span>{{$event->competition->name}} - {{$event->event_name}} </span>
+                    @can ("create",[App\Models\Start::class,$event])
+                        <a href="/start/create/{{$event->id}}" >{{__("Add new rider")}}</a>
+                    @endcan
+                    @can('update',$event)
+                        <a href="/event/export/{{$event->id}}" target="_blank">{{__("Export results")}}</a>
+                        <a href="/event/edit/{{$event->id}}">{{__("Edit event")}}</a>
+                    @endcan
                     <span class="float-right">
                         <a href="/competition/show/{{$event->competition->id}}">
                         {{__("Back")}}
@@ -21,12 +26,7 @@
                 </div>
 
                 <div class="card-body">
-                    @can('update',$event)
-                    <a href="/start/create/{{$event->id}}" >{{__("Add new rider")}}</a>
-                    <a href="/event/export/{{$event->id}}" target="_blank">{{__("Export results")}}</a>
-                    <a href="/display/settings/{{$event->id}}" target="_blank">{{__("Display")}}</a>
-                    <a href="/event/edit/{{$event->id}}">{{__("Edit event")}}</a>
-                    @endcan
+
                     @if (count($toStart)!=0)
                     
                    
@@ -77,7 +77,7 @@
         
                         <div class="col-md-2 p-1 border">
                              @can('update',$start)
-                            <span class="align-middle"><a href="/start/edit/{{$start->id}}" target="_blank">{{__("Edit info")}}</a></span>
+                            <span class="align-middle"><a href="/start/edit/{{$start->id}}" target="">{{__("Edit info")}}</a></span>
                             <span class="align-middle"><a href="/start/moveUp/{{$start->id}}">⬆️</a></span>
                             <span class="align-middle"><a href="/start/moveDown/{{$start->id}}">⬇️</a></span>
                             <br>
@@ -86,7 +86,7 @@
                             
                             @can('update',$result)
 
-                             <span class="align-middle"><a href="/result/edit/{{$result->id}}" target="_blank">{{$result->position}} {{__("judge")}}</a></span><br>
+                             <span class="align-middle"><a href="/result/edit/{{$result->id}}" target="">{{$result->position}} {{__("judge")}}</a></span><br>
 
                              @endcan
                              @endforeach
@@ -121,12 +121,12 @@
                             <span class="align-middle font-weight-bold">{{__("Category")}}</span>
                         </div>
                         <div class="col-md-2 p-1 border d-none d-md-block">
-                             <span class="align-middle font-weight-bold">{{__("Result")}}</span>
+                             <span class="align-middle font-weight-bold">{{__("Final result")}}</span>
                             
                         </div>
 
                         <div class="col-md-2 p-1 border d-none d-md-block">
-                             <span class="align-middle font-weight-bold">{{__("Options")}}</span>
+                             <span class="align-middle font-weight-bold">{{__("Results")}}</span>
                             
                         </div>
                     </div><!-- end of the row-->
@@ -157,15 +157,40 @@
 
                         <div class="col-md-2 p-1 border">
                             @can('update',$start)
-                            <span class="align-middle"><a href="/start/edit/{{$start->id}}" target="_blank">{{__("Edit info")}}</a></span>
+                            <span class="align-middle"><a href="/start/edit/{{$start->id}}" target="">{{__("Edit info")}}</a></span>
                             <br>
                             @endcan
 
                         @foreach ($start->result->sortBy('position') as $result)
                         @can ('checkAfter', $result)
-                        <a href="/result/show/{{$result->id}}">{{$result->position}} : {{$result->mark}}p - {{$result->percent}}% - {{$start->collective}}p</a><br>
-                        @else
-                        <span class="align-middle">{{$result->position}} : {{$result->mark}}p  - {{$result->percent}}%</span><br>
+                        <a href="/result/show/{{$result->id}}">
+
+
+                            @if ($result->eliminated) {{__("Eliminated!")}}
+                            @else 
+
+
+                             <span title="{{__('Judge')}}">{{$result->position}}: </span>
+                            <span title="{{__('Point')}}">{{$result->mark}}p </span> - 
+                             <span title="{{__('Percentage')}}">{{$result->percent}}% </span> - 
+                             <span title="{{__('Collective mark')}}">{{$start->collective}}p </span>
+
+
+                            @endif
+
+                        </a><br>
+                        @else <!-- belongs to can. dont look for the if-->
+                        <span class="align-middle">
+
+                         @if ($result->eliminated) {{__("Eliminated!")}}
+                       @else <span title="{{__('Judge')}}">{{$result->position}}: </span>
+                             <span title="{{__('Point')}}">{{$result->mark}}p </span> - 
+                             <span title="{{__('Percentage')}}">{{$result->percent}}% </span> - 
+                             <span title="{{__('Collective mark')}}">{{$start->collective}}p </span>
+
+                        @endif</span>
+                        <br>
+                        
                         @endcan
                         @endforeach
                         </div>

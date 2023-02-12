@@ -11,6 +11,7 @@
   <style type="text/css">
     body{
       color: #636b6f;
+      background-color:#dedede;
     }
     .header{
       width: 120px;
@@ -48,7 +49,7 @@
       #display{
         height: 280px;
         width: 520px;
-        background-color:#dedede;
+        
         float: left;
 
 
@@ -89,6 +90,9 @@
 <div id="display">
   <form id="events" method="POST" action="/display/storecompsetting/{{$competition->id}}">
      @csrf
+
+    <a href="/display/full/{{$competition->id}}" class="p-2" target="_blank">Full {{__("Display")}}</a>
+    <a href="/display/vilagos/{{$competition->id}}" class="p-2">Világos {{__("Display")}}</a>
 @foreach($competition->event as $event)
 <div class="form-check ml-2">
   <input class="form-check-input" type="checkbox" value="{{$event->id}}"  id="event-{{$event->id}}" name="events[]" 
@@ -99,7 +103,7 @@
   </label>
 </div>
 @endforeach
-<input type="submit" name="send">
+<input type="submit"  value="{{__('Refresh')}}" name="send">
 </form>
 </div>
 </body>

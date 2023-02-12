@@ -17,6 +17,7 @@
                     @can('update',$result)
                         <span class="d-print-none">
                         <a href="/result/edit/{{$result->id}}">{{__("Edit result")}}</a>
+                        <a class="d-flex float-right" href="/event/show/{{$result->start->event->id}}">{{__("Back")}}</a>
                         </span>
                     @endcan
                     @if ($result->completed>1)
@@ -127,7 +128,7 @@
                             {{__("Points")}}: <strong>{{number_format($result->mark, 1) }} {{__("points")}}  </strong>
                             - {{__("Percentage")}}: <strong>{{number_format($result->percent, 2) }} %       </strong>
                                 @if ($result->error!=0 && $program->errortype==1)
-                                - {{__("Deduction")}}: <strong>{{number_format($result->error, 0) }} {{__("points")}}</strong>
+                                - {{__("Deduction")}}: <strong>{{number_format($result->error, 1) }} {{__("points")}}</strong>
                                  @elseif ($result->error!=0 && $program->errortype==2)
                                 - {{__("Deduction")}}!</strong>
 

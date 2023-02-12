@@ -55,9 +55,9 @@
                             </div>
                         </div>
 
-                         
-                        <div class="form-group row">
-                            <label for="sponsor" class="col-md-4 col-form-label text-md-right">{{ __('Sponsor') }}</label>
+
+                         <div class="form-group row">
+                            <label for="sponsor" class="col-md-4 col-form-label text-md-right"><a href="/event/resetSponsor/{{$event->id}}">{{ __('Sponsor') }}</a></label>
 
                             <div class="col-md-6">
                                 <select id="sponsor_id"  class="form-control @error('sponsor') is-invalid @enderror" name="sponsor_id"  required>
@@ -69,9 +69,6 @@
 
                             </div>
                         </div>
-
-
-
 
 
 
@@ -114,20 +111,20 @@
                     </div><!-- end of the row-->
                     @foreach($officials as $official)
                     <div class="row mb-2 border">
-                        <div class="col-md-3 p-1 border d-none d-md-block">
+                        <div class="col-md-3 p-1 border  d-md-block">
                             <span class="align-middle">{{$official->judge}}</span>
                         </div>
                         
-                        <div class="col-md-3 p-1 border d-none d-md-block">
+                        <div class="col-md-3 p-1 border  d-md-block">
                             <span class="align-middle">{{$official->user->name}}</span>
                         </div>
 
-                        <div class="col-md-3 p-1 border d-none d-md-block ">
+                        <div class="col-md-3 p-1 border d-md-block ">
                             <span class="align-middle">{{$official->position}} {{__("judge")}}</span>
                         </div>
                         
 
-                        <div class="col-md-3 p-1 border d-none d-md-block">
+                        <div class="col-md-3 p-1 border d-md-block">
                              <span class="align-middle">
                                 <a href="/official/edit/{{$official->id}}" target="_blank">{{__("Edit")}}
                                 </a>
@@ -182,11 +179,7 @@
 
                         
                     </form>
-                </div> <!-- end of card-->
-
-
-               
-
+                </div> <!-- end of  card-->
 
                  <div class="card-header">
                     {{ __('Edit category') }}
@@ -265,6 +258,7 @@
                         
                     </form>
                 </div> <!-- end of  card-->
+                
                 
             </div>
         </div>

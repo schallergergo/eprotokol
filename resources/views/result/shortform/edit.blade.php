@@ -7,7 +7,8 @@
 @section('content')
 
 <div class="container">
-         @if (session('fail'))
+
+    @if (session('fail'))
     <div class="alert alert-danger">
         {{ session('fail') }}
     </div>

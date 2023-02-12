@@ -20,8 +20,10 @@ class ResultlogPolicy
     public function viewAny(User $user, Result $result)
     {
         if ($user->role=="admin") return true;
-        if ($user->role=="office" && $result->start->event->office==$user->id) return true;
+        if ($user->role=="office" && 
+        $result->start->event->competition->office==$user->id) return true;
         if ($user->role=="rider" && $user->username==$result->start->rider_id) return true;
+        return false ;
     }
 
     /**
@@ -33,9 +35,13 @@ class ResultlogPolicy
      */
     public function view(User $user, Resultlog $resultlog)
     {
+               
         if ($user->role=="admin") return true;
-        if ($user->role=="office" && $result->start->event->office==$user->id) return true;
+        if ($user->role=="office" && 
+        $result->start->event->competition->office==$user->id) return true;
+
         if ($user->role=="rider" && $user->username==$result->start->rider_id) return true;
+        return false;
     }
 
     /**

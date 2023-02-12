@@ -17,4 +17,7 @@ class Start extends Model
    public function result(){
         return $this->hasMany(Result::class);
    }
+   public function user(){
+        return $this->belongsTo(User::class,'rider_id','username');
+    }
 }

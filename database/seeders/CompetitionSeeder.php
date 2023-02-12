@@ -13,6 +13,6 @@ class CompetitionSeeder extends Seeder
      */
     public function run()
     {
-        Competition::factory()->create();
+        //
     }
 }

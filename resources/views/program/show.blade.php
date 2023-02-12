@@ -75,10 +75,11 @@
                     </div>
                     @endif
                      <div class="row">
-                    
+                        @if (count($collectivemarks)>0)
                         <div class="col-md-12 p-2 border">
                             <strong><p>{{__("Collective marks")}}</p></strong>
                         </div>
+                        @endif
                     </div>
 <!-- Összbenyomás-->
                     @foreach ($collectivemarks as $block)
@@ -120,21 +121,15 @@
                         
                     </div>
                     <div class="col-md-3 p-2 border">
-                        
-                    </div>
-                            </div> <!--end of the row-->
-
-                           @endforeach
-                    <div class="row">
-                    
-                        
-                    <div class="col-md-4 p-2 border">
-                     @can("update",$block)
+                    @can("update",$block)
                     <span><a href="/block/edit/{{$block->id}}">{{__("Edit block")}}</a></span>
                      <span><a href="/block/delete/{{$block->id}}">{{__("Delete block")}}</a></span>
                     @endcan
                     </div>
-                   </div>
+                            </div> <!--end of the row-->
+
+                           @endforeach
+
 
 
                 </div>

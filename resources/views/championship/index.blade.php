@@ -20,7 +20,7 @@
                         </div>
                         
                         <div class="col-md-5 p-1 border d-none d-md-block">
-                            <span class="align-middle font-weight-bold">{{__("Events")}}</span>
+                            <span class="align-middle font-weight-bold">{{__("Last updated")}}</span>
                         </div>
 
                         <div class="col-md-2 p-1 border d-none d-md-block ">
@@ -36,15 +36,15 @@
                         </div>
                         
                         <div class="col-md-5 p-1 border">
-                            <span class="align-middle">{{$championship->venue}}</span>
+                            <span class="align-middle">{{__("Last updated")}}: {{$championship->updated_at}}</span>
                         </div>
 
                         <div class="col-md-2 p-1 border">
                             <span class="align-middle">
                                 
-                                <a href="/championship/show/{{$championship->id}}">Show championship</a><br>
+                                <a href="/championship/show/{{$championship->id}}">{{__("Show championship")}}</a><br>
                                 @can ("update",$championship)
-                                <a href="/championship/edit/{{$championship->id}}">Edit championship</a>
+                                <a href="/championship/edit/{{$championship->id}}">{{__("Edit championship")}}</a>
                                 @endcan
                             </span>
                         </div>

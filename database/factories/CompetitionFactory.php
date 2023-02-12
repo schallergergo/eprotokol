@@ -14,11 +14,7 @@ class CompetitionFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>"Saját verseny",
-            'venue'=>"Kaposvár",
-            'date'=>"2022-10-01",
-            "discipline"=>"poniklub",
-            "office"=>1
+            //
         ];
     }
 }

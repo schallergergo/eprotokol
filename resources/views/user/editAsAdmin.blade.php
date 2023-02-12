@@ -5,10 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Profile') }}</div>
+                <div class="card-header">{{ __('Profile') }} 
+                    <span><a href="/start/index/{{$user->id}}">{{ __('Results') }}</a></span>
+                    <span><a href="/home">{{ __('Home') }}</a></span> </div>
+                    
+                    
+
 
                 <div class="card-body">
-                    <form method="POST" action="/user/updateAsAdmin/{$user->id}">
+                    <form method="POST" action="/user/updateAsAdmin/{{$user->id}}">
                         @csrf
                         @method("patch")
                         <div class="form-group row">
@@ -29,11 +34,11 @@
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Licence number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="username" type="username" class="form-control" name="username" value="{{ $user->username}}">
+                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ $user->username}}">
 
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ __("Already taken.") }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -60,11 +65,11 @@
                                 <select id="role"  class="form-control @error('role') is-invalid @enderror" name="role"  required>
                                 
                                 <option value=""> {{_("Select role")}} </option>
-                                <option value="rider"   @if ($user->role=="rider") selected @endif> {{_("Rider")}} </option>
-                                <option value="club"   @if ($user->role=="club") selected @endif> {{_("Club")}} </option>
-                                <option value="office"   @if ($user->role=="office") selected @endif> {{_("Office")}} </option>
-                                <option value="penciler"   @if ($user->role=="penciler") selected @endif> {{_("Penciler")}} </option>
-                                <option value="admin"   @if ($user->role=="admin") selected @endif> {{_("Admin")}} </option>
+                                <option value="rider"   @if ($user->role=="rider") selected @endif> {{__("Rider")}} </option>
+                                <option value="club"   @if ($user->role=="club") selected @endif> {{__("Club")}} </option>
+                                <option value="office"   @if ($user->role=="office") selected @endif> {{__("Office")}} </option>
+                                <option value="penciler"   @if ($user->role=="penciler") selected @endif> {{__("Penciler")}} </option>
+
                              </select>
 
                                 @error('role')
@@ -86,6 +91,18 @@
                              </select>
 
                                 @error('club')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ "no bueno" }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email_verified_at" class="col-md-4 col-form-label text-md-right">{{ __('Email verified') }}</label>
+                            <div class="col-md-6">
+                                <input type="datetime-local" name="email_verified_at" class="form-control @error('email') is-invalid @enderror" value="{{$user->email_verified_at}}">
+                                @error('email_verified_at')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ "no bueno" }}</strong>
                                     </span>
