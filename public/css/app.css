@@ -478,14 +478,7 @@ summary {
 progress {
   vertical-align: baseline;
 }
-.links >a  {
-                color: #636b6f;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+
 [hidden] {
   display: none !important;
 }

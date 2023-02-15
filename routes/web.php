@@ -77,9 +77,9 @@ Route::get('/user/edit/{user}', [UserController::class,'editAsAdmin']);
 Route::patch('/user/update/{user}', [UserController::class,'update']);
 Route::patch('/user/updateAsAdmin/{user}', [UserController::class,'updateAsAdmin']);
 
-Route::get('/result/index', [ResultController::class, 'index']);
+
 Route::get('/result/show/{result}', [ResultController::class, 'show']);
-Route::get('/result/create/{event}', [ResultController::class, 'create']);
+
 Route::post('/result/store', [ResultController::class, 'store']);
 Route::get('/result/edit/{result}', [ResultController::class, 'edit']);
 Route::get('/result/search', [SearchController::class, 'show']);

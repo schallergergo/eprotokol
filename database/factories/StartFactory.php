@@ -14,7 +14,21 @@ class StartFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "id"=>rand(1,1000000), 
+            "event_id"=>1,
+            "rider_id"=>rand(10000,100000),
+            "rider_name"=> "fake()->name()",
+            "horse_id"=>rand(10000,100000),
+            "horse_name"=>"fake()->name()",
+            "club"=>"Pony Klub",
+            "category"=>"Kezdő",
+            "original_category"=>"Kezdő",
+            "rank"=>rand(1,100),
+            "mark"=>0,
+            "percent"=>0,
+            "collective"=>0,
+            "completed"=>0,
+            "public"=>0
         ];
     }
 }

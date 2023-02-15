@@ -216,7 +216,7 @@ class ChampionshipController extends Controller
         return redirect()->back();
     }
 
-    private function removeEventFromList(Championship $championship,integer $id){
+    private function removeEventFromList(Championship $championship,int $id){
         
 
         $events=json_decode($championship->events);
