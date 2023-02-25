@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Generator as Faker;
 
 class StartFactory extends Factory
 {
@@ -17,9 +18,9 @@ class StartFactory extends Factory
             "id"=>rand(1,1000000), 
             "event_id"=>1,
             "rider_id"=>rand(10000,100000),
-            "rider_name"=> "fake()->name()",
+            "rider_name"=> "Rider",
             "horse_id"=>rand(10000,100000),
-            "horse_name"=>"fake()->name()",
+            "horse_name"=>"horse",
             "club"=>"Pony Klub",
             "category"=>"Kezdő",
             "original_category"=>"Kezdő",

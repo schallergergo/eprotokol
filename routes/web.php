@@ -3,7 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BroadcastController;
-use App\Http\Controllers\AdminPanelController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ResultController;
@@ -39,7 +39,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 ->name('home')->middleware('verified');
 
 Route::get("/admin/login/{userId}", [App\Http\Controllers\AdminController::class, 'loginAsUser']);
-
+Route::get("/admin/logbackin", [App\Http\Controllers\AdminController::class, 'loginBackInAsAdmin']);
 
 Route::get('/contact', [ContactController::class,'create']);
 Route::post('/contact/send', [ContactController::class,'store']);
@@ -162,6 +162,8 @@ Route::get('/display/vilagos/{competition}',[DisplayController::class, 'vilagos'
 Route::get('/display/tatter/{competition}',[DisplayController::class, 'tatter']);
 Route::get('/display/compsetting/{competition}',[DisplayController::class, 'compsetting']);
 Route::post('/display/storecompsetting/{competition}',[DisplayController::class, 'storeCompsetting']);
+
+
 
 Route::get('/sitemap.xml',[SiteMapController::class, 'generate']);
 
