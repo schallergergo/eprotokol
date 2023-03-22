@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
+
+use App\Http\Controllers\Result\ResultNormalController;
+use App\Http\Controllers\Result\ResultCaprilliController;
+use App\Http\Controllers\Result\ResultShortFormController;
+
+
 use App\Events\ResultChanged;
 use App\Models\Result;
 use App\Models\Event;
