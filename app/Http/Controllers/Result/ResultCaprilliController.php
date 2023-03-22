@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Result;
 
 use Illuminate\Http\Request;
 use App\Models\Result;
 use App\Models\Program;
+use App\Http\Controllers\Controller;
+
 class ResultCaprilliController extends Controller
 {
      public function show(Result $result){

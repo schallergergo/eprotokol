@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Result;
 
 use Illuminate\Http\Request;
 use App\Models\Result;
 use App\Models\Program;
+use App\Http\Controllers\Controller;
 class ResultNormalController extends Controller
 {
     //Shows a given result based on its id

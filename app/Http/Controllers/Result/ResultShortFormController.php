@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Result;
 
 use Illuminate\Http\Request;
 use App\Models\Result;
-
+use App\Http\Controllers\Controller;
 class ResultShortFormController extends Controller
 {
      //Shows a given result based on its id
@@ -26,7 +26,7 @@ class ResultShortFormController extends Controller
         // bool: is the rider eliminated?
         $eliminated=$result->eliminated; 
 
-        return ["hekk"];
+
         return view("result.shortform.show",[ "result"=>$result, 
                                     "start"=>$start,
                                     "blocks"=>$blocks,
