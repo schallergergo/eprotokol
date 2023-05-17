@@ -41,6 +41,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 Route::get("/admin/login/{userId}", [App\Http\Controllers\AdminController::class, 'loginAsUser']);
 Route::get("/admin/logbackin", [App\Http\Controllers\AdminController::class, 'loginBackInAsAdmin']);
 
+Route::get("/admin/notregistered", [App\Http\Controllers\AdminController::class, 'notRegistered']);
+
 Route::get('/contact', [ContactController::class,'create']);
 Route::post('/contact/send', [ContactController::class,'store']);
 

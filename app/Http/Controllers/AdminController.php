@@ -10,12 +10,16 @@ use Illuminate\Support\Facades\Artisan;
 
 class AdminController extends Controller
 {
-    public function loginAsUser($userId){
 
-        
+    private function isAdmin(){
         $user=Auth::user();
+        if (!$user) abort(403);
         if ($user->role!=="admin") abort(403);
 
+    }
+    public function loginAsUser($userId){
+        
+        $this->isAdmin();
         session()->put(["admin_id"=>$user->id]);
         auth()->loginUsingId($userId);
         return redirect("/home");
@@ -24,11 +28,19 @@ class AdminController extends Controller
    
 public function loginBackInAsAdmin(){
 
-        if (!session()->has("admin_id")) abort(403);
-        $user_id=session()->pull("admin_id");
-
+        $this->isAdmin();
         auth()->loginUsingId($user_id);
         return redirect("/home");
+    }
+
+    public function notRegistered(){
+        $this->isAdmin();
+
+        $users=User::where("role","rider")->pluck("username");
+        
+
+        $starts=Start::whereNotIn("rider_id",$users)->distinct()->orderBy("rider_name")->get(["rider_id","rider_name"]);
+        return view("admin.notRegistered",["starts"=>$starts]);
     }
 
 }

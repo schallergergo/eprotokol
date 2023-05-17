@@ -146,7 +146,7 @@
 
                               <option value="0" @if ($result->error==0)selected @endif>{{__("No error")}}</option>
                               <option value="0.05" @if ($result->error==2)selected @endif>{{__("One error")}}</option>
-                              <option value="0.1" @if ($result->error==6)selected @endif>{{__("Two errors")}}</option>
+                              <option value="0.15" @if ($result->error==6)selected @endif>{{__("Two errors")}}</option>
                               <option value="-1" @if ($result->error==-1)selected @endif>{{__("Three errors! Eliminated!")}}</option>
                             </select>
                     </div>
