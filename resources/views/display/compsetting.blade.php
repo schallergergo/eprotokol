@@ -91,7 +91,7 @@
   <form id="events" method="POST" action="/display/storecompsetting/{{$competition->id}}">
      @csrf
 
-    <a href="/display/full/{{$competition->id}}" class="p-2" target="_blank">Full {{__("Display")}}</a>
+    <a href="/display/tatter/{{$competition->id}}" class="p-2" target="_blank">Tatter {{__("Display")}}</a>
     <a href="/display/vilagos/{{$competition->id}}" class="p-2">Világos {{__("Display")}}</a>
 @foreach($competition->event as $event)
 <div class="form-check ml-2">
