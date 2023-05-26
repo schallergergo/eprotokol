@@ -63,6 +63,7 @@ notStarted("","/storage/logo/logo_med.png");
 
 }
 function hasAnyPoints(json){
+    judges=json.judges;
     if (judges.length==0) return false;
    if (json.lastfilled==0 && judges[0].lastMark=="") return false;
    return true;
