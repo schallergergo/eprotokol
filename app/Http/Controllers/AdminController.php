@@ -20,7 +20,7 @@ class AdminController extends Controller
     public function loginAsUser($userId){
         
         $this->isAdmin();
-        session()->put(["admin_id"=>$user->id]);
+        session()->put(["admin_id"=>$userId]);
         auth()->loginUsingId($userId);
         return redirect("/home");
     }
