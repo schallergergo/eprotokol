@@ -90,6 +90,7 @@ class HomeController extends Controller
                      'competitions.name',
                      'competitions.date',
                     'competitions.venue')
+            ->orderBy("event_id")
             ->paginate(30);
             //dd($events);
 
