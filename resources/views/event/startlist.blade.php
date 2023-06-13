@@ -22,15 +22,13 @@
   </tr>
 
 
-@foreach($starts as $start)
+@foreach($results as $result)
   <tr>
-    <td>{{$start->rider_name}}</td>
-    <td>{{$start->horse_name}}</td>
-    <td>{{$start->club}}</td>
+    <td>{{$result->start->rider_name}}</td>
+    <td>{{$result->start->horse_name}}</td>
+    <td>{{$result->start->club}}</td>
     <td>
-    	@foreach($start->result as $result)
     	{{$result->updated_at}} <br>
-    	@endforeach
     </td>
   </tr>
 

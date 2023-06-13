@@ -167,9 +167,15 @@ class EventController extends Controller
 
 public function startlist(Event $event){
 
-        $results=  collect();
 
-        return view("event.startlist",["event"=>$event,"starts"=>$event->start]);
+        $results = collect();
+        foreach($event->start as $start){
+            $results = $results->merge($start->result);
+        }
+        $results->sortBy("updated_at");
+        $starts = $event->start->sortBy("updated_at");
+
+        return view("event.startlist",["event"=>$event,"results"=>$results]);
     }
 
     
