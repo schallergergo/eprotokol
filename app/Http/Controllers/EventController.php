@@ -172,7 +172,7 @@ public function startlist(Event $event){
         foreach($event->start as $start){
             $results = $results->merge($start->result);
         }
-        $results->sortBy("updated_at");
+        $results = $results->sortBy("updated_at");
         $starts = $event->start->sortBy("updated_at");
 
         return view("event.startlist",["event"=>$event,"results"=>$results]);
