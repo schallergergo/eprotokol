@@ -95,6 +95,7 @@ Route::get('/resultlog/show/{resultlog}', [ResultlogController::class, 'show']);
 
 
 Route::get('/event/show/{event}', [EventController::class, 'show']);
+Route::get('/event/startlist/{event}', [EventController::class, 'startlist']);
 Route::get('/event/create/{competition}', [EventController::class, 'create']);
 Route::post('/event/store/{competition}', [EventController::class, 'store']);
 Route::get('/event/edit/{event}', [EventController::class, 'edit']);

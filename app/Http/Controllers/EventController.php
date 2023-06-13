@@ -161,7 +161,15 @@ class EventController extends Controller
     }
 
  public function exportEvent(Event $event){
+        $this->authorize('update', $event);
         return Excel::download(new ResultExport($event), $event->event_name.'_results.xlsx');
+    }
+
+public function startlist(Event $event){
+
+        $results=  collect();
+
+        return view("event.startlist",["event"=>$event,"starts"=>$event->start]);
     }
 
     
