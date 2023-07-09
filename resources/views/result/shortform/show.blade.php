@@ -34,7 +34,7 @@
                 
                 <div class="card-body">
                 <div class="row">
-                    <div class="col-md-7 p-1 border">
+                    <div class="col-md-8 p-1 border">
                         <h5>   {{ $start->event->program['name'] }} </h5>
                     </div>
 
