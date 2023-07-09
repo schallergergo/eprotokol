@@ -114,6 +114,7 @@ class ResultShortFormController extends Controller
                     "error"=>$data["error"],
                 ];
         $result->update($dataOut);
+        return true;
       
     }
 
