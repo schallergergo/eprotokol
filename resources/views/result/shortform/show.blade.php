@@ -37,13 +37,9 @@
                     <div class="col-md-7 p-1 border">
                         <h5>   {{ $start->event->program['name'] }} </h5>
                     </div>
-                 <div class="col-md-1 p-1 border">
-                        <h5>Max</h5>
-                </div>
-                <div class="col-md-1 p-1 border">
-                        <h5>{{__("Mark")}}</h5>
-                </div>
-                <div class="col-md-3 p-1 border">
+
+
+                <div class="col-md-4 p-1 border">
                         <h5>{{__("Remark")}}</h5>
                 </div>
                    
@@ -56,7 +52,7 @@
                             <p>{{ $block['ordinal'] }}</p>
                         </div>
                         @if ($block["programpart"]==1 && $program->typeofevent!="longe")
-                        <div class="col-md-2 p-1 border">
+                        <div class="col-md-3 p-1 border">
                             <pre>{{ $block['letters'] }}</pre>
                         </div>
                         @endif
@@ -71,6 +67,10 @@
                         @endif
                         
                     
+
+                    <div class="col-md-4 p-1 border">
+                        <p>{{$assessment[$i]->remark}}</p>
+                    </div>
                             </div> <!--end of the row-->
                         <?php $i++; ?>
                         @endforeach
