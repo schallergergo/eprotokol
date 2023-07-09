@@ -75,14 +75,14 @@
                         <?php $i++; ?>
                         @endforeach
 
-                    @if ($start->event->program["typeofevent"]=="normal")
+                 
                     <div class="row">
                     
                         <div class="col-md-12 p-1 border">
                             <p>{{__("Leave arena at A in free walk")}}</p>
                         </div>
                     </div>
-                    @endif
+
                     @if ($start->event->program->doublesided)
                     <p style="page-break-before: always"></p>
                     @endif
