@@ -14,8 +14,9 @@ class ResultShortFormController extends Controller
         if ($result->completed==0) redirect("/event/show/{$start->event->id}");
         $assessment=json_decode($result["assessment"]);
 
+        $program = $result->start->event->program;
         //first part of the program, with the moves to be executed
-        $blocks=$result->start->event->program->block->where("programpart",1); 
+        $blocks=$program->block->where("programpart",1); 
 
         //second part, with the criteria for the collective marks
         $collectivemarks=$result->start->event->program->block->where("programpart",2); 
@@ -29,6 +30,7 @@ class ResultShortFormController extends Controller
 
         return view("result.shortform.show",[ "result"=>$result, 
                                     "start"=>$start,
+                                    "program"=>$program,
                                     "blocks"=>$blocks,
                                     "collectivemarks"=>$collectivemarks,
                                     "assessment"=>$assessment,
