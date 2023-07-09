@@ -56,7 +56,7 @@
                             <p>{{ $block['ordinal'] }}</p>
                         </div>
                         @if ($block["programpart"]==1 && $program->typeofevent!="longe")
-                        <div class="col-md-4 p-1 border">
+                        <div class="col-md-2 p-1 border">
                             <pre>{{ $block['letters'] }}</pre>
                         </div>
                         @endif
@@ -69,8 +69,10 @@
                             <pre>{{ $block['criteria'] }}</pre>
                         </div>
                         @endif
-                      
+                        
                     
+                            </div> <!--end of the row-->
+                        <?php $i++; ?>
                         @endforeach
 
                     @if ($start->event->program["typeofevent"]=="normal")
