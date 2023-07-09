@@ -56,7 +56,7 @@
                             <p>{{ $block['ordinal'] }}</p>
                         </div>
                         @if ($block["programpart"]==1 && $program->typeofevent!="longe")
-                        <div class="col-md-2 p-1 border">
+                        <div class="col-md-4 p-1 border">
                             <pre>{{ $block['letters'] }}</pre>
                         </div>
                         @endif
@@ -69,29 +69,8 @@
                             <pre>{{ $block['criteria'] }}</pre>
                         </div>
                         @endif
-                        
-                        @if ($block['coefficient']===2)
-                        <div class="col-md-1 p-1 border">
-                            <center>
-                                <p>{{ $block['maxmark'] }}X2</p>
-                            </center>
-                        </div>
-
-                        @else
-                        <div class="col-md-1 p-1 border">
-                            <center>
-                                <pre>{{ $block['maxmark'] }}</pre>
-                            </center>
-                        </div>
-                        @endif
-                        <div class="col-md-1 p-1 border">
-                <h6 class="text-center">{{number_format($assessment[$i]->mark, 1)}}</h6>
-                    </div>
-                    <div class="col-md-3 p-1 border">
-                        <p>{{$assessment[$i]->remark}}</p>
-                    </div>
-                            </div> <!--end of the row-->
-                        <?php $i++; ?>
+                      
+                    
                         @endforeach
 
                     @if ($start->event->program["typeofevent"]=="normal")
