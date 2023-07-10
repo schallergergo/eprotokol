@@ -99,20 +99,11 @@
                         <div class="col-md-1 p-2 border">
                             <p>{{ $block['ordinal'] }}</p>
                         </div>
-                        @if ($block["programresz"]===1)
-                        <div class="col-md-2 p-2 border">
-                            <pre>{{ $block['letters'] }}</pre>
-                        </div>
-                        @endif
-                        @if ($block["programpart"]==1)
-                        <div class="col-md-4 p-2 border">
-                            <pre>{{ $block['criteria'] }}</pre>
-                        </div>
-                        @else
+
                         <div class="col-md-6 p-2 border">
                             <pre>{{ $block['criteria'] }}</pre>
                         </div>
-                        @endif
+                        
                         
                         @if ($block['coefficient']===2)
                         <div class="col-md-1 p-2 border">

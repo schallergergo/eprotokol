@@ -13,8 +13,20 @@ class ResultShortFormController extends Controller
         $start=$result->start;
         if ($result->completed==0) redirect("/event/show/{$start->event->id}");
         $assessment=json_decode($result["assessment"]);
-
+        
         $program = $result->start->event->program;
+        dd($assessment);
+        $count=count($assessment);
+
+        while (count($program->block) > $count){
+            $temp=["remark"=>"","mark"=>"0"];
+            $temp=[$count=>$temp];
+            //dd($temp);
+            //$assessment = array_merge($assessment,$count=>);
+            $count++;
+        }
+        $result->update(["assessment"=>json_encode($assessment)]);
+
         //first part of the program, with the moves to be executed
         $blocks=$program->block->where("programpart",1); 
 

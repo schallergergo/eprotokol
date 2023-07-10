@@ -96,37 +96,31 @@
                         <div class="col-md-1 p-2 border">
                             <p>{{ $block['ordinal'] }}</p>
                         </div>
-                        @if ($block["programresz"]===1)
-                        <div class="col-md-2 p-2 border">
-                            <pre>{{ $block['letters'] }}</pre>
-                        </div>
-                        @endif
-                        @if ($block["programpart"]==1)
-                        <div class="col-md-4 p-2 border">
-                            <pre>{{ $block['criteria'] }}</pre>
-                        </div>
-                        @else
+                       
+
                         <div class="col-md-6 p-2 border">
                             <pre>{{ $block['criteria'] }}</pre>
                         </div>
-                        @endif
+                        
                         
                         @if ($block['coefficient']===2)
                         <div class="col-md-1 p-2 border">
                             <center>
-                                <p>2</p>
+                                <p>2*10</p>
                             </center>
                         </div>
 
                         @else
                         <div class="col-md-1 p-2 border">
                             <center>
-                                <p>1</p>
+                                <p>10</p>
                             </center>
                         </div>
                         @endif
-                       <input type="number" hidden="hidden" value="0" name="mark[]">
-                    <div class="col-md-4 p-2 border">
+                       <div class="col-md-1 p-2 border">
+                        <input type="number" class="form-control mark" name="mark[]" value = "{{$assessment[$i]->mark}}" step=0.5 min=0 max=10 required>
+                    </div>
+                    <div class="col-md-3 p-2 border">
                         <textarea class="form-control" name="remark[]">{{$assessment[$i]->remark}}</textarea>
                     </div>
                             </div> <!--end of the row-->
@@ -145,22 +139,12 @@
                             <select class="custom-select" aria-label="__('Number of errors')" id="error" name="error">
 
                               <option value="0" @if ($result->error==0)selected @endif>{{__("No error")}}</option>
-                              <option value="0.05" @if ($result->error==2)selected @endif>{{__("One error")}}</option>
-                              <option value="0.15" @if ($result->error==6)selected @endif>{{__("Two errors")}}</option>
+                              <option value="0.05" @if ($result->error==0.01)selected @endif>{{__("One error")}}</option>
+                              <option value="0.15" @if ($result->error==0.1)selected @endif>{{__("Two errors")}}</option>
                               <option value="-1" @if ($result->error==-1)selected @endif>{{__("Three errors! Eliminated!")}}</option>
                             </select>
                     </div>
-                     <div class="col-md-3 p-2 border form-horizontal">
-                                <input id="given_mark" type="number" class="form-control @error('given_mark') is-invalid @enderror" min="0" max="10" step="0.01" 
-                                name="given_mark" value="$result->mark" placeholder="{{__('Given mark')}}" required>
-
-                                @error('given_mark')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{__("Licence number is invalid")}}</strong>
-                                    </span>
-                                @enderror
-
-                        </div>
+                    
                     <div class="col-md-4 p-2 border" id="submitDiv">
                     <input type="submit" class="btn btn-primary btn-block" value="{{__('Send')}}" name="send" id="submitBtn">
                     </div>
