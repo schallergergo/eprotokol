@@ -148,7 +148,7 @@ class ResultShortFormController extends Controller
             $points+=$markArray[$i]["mark"]*$blocks[$i]->coefficient;
         }
 
-        return $points-$this->calculateError($program,$points,$error);
+        return $points-$error;
     }
 
      private function percent(Result $result, float $point){
