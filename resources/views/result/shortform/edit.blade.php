@@ -106,23 +106,30 @@
                         @if ($block['coefficient']===2)
                         <div class="col-md-1 p-2 border">
                             <center>
-                                <p>2*10</p>
+                                <p>2*{{($block->maxmark==0) ? 1:$block->maxmark}}</p>
                             </center>
                         </div>
 
                         @else
                         <div class="col-md-1 p-2 border">
                             <center>
-                                <p>10</p>
+                                <p>{{($block->maxmark==0) ? 1:$block->maxmark}}</p>
                             </center>
                         </div>
                         @endif
+                        @if ($block->maxmark!=0)
                        <div class="col-md-1 p-2 border">
                         <input type="number" class="form-control mark" name="mark[]" value = "{{$assessment[$i]->mark}}" step=0.5 min=0 max=10 required>
                     </div>
                     <div class="col-md-3 p-2 border">
                         <textarea class="form-control" name="remark[]">{{$assessment[$i]->remark}}</textarea>
                     </div>
+                    @else
+
+                        <div class="col-md-4 p-2 border">
+                            <textarea class="form-control" name="remark[]">{{$assessment[$i]->remark}}</textarea>
+                        </div>
+                    @endif
                             </div> <!--end of the row-->
                             <?php $i++; ?>
                            @endforeach
