@@ -118,7 +118,7 @@
                         @if ($block['coefficient']===2)
                         <div class="col-md-1 p-1 border">
                             <center>
-                                <p>{{ {{($block->maxmark==0) ? 1:$block->maxmark}}X2</p>
+                                <p>{{($block->maxmark==0) ? 1:$block->maxmark}}X2</p>
                             </center>
                         </div>
 
