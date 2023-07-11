@@ -44,7 +44,7 @@ class ResultShortFormController extends Controller
                                     "start"=>$start,
                                     "program"=>$program,
                                     "blocks"=>$blocks,
-                                    "collectivemarks"=>[],
+                                    "collectivemarks"=>$collectivemarks,
                                     "assessment"=>$assessment,
                                     "error"=>$error,
                                     "eliminated"=>$eliminated,
