@@ -122,7 +122,7 @@ class ResultShortFormController extends Controller
                     "completed"=>$result->completed+1,
                     "mark"=>$mark,
                     "percent"=>$percent,
-                    "collective"=>$collectivemark,
+                    "collective"=>0
                     "eliminated"=>$eliminated,
                     "error"=>$data["error"],
                 ];
@@ -151,7 +151,7 @@ class ResultShortFormController extends Controller
         return $points-$error;
     }
 
-    
+
 
      private function percent(Result $result, float $point){
         $total=0;
