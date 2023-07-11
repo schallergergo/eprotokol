@@ -119,7 +119,7 @@
                         @endif
                         @if ($block->maxmark!=0)
                        <div class="col-md-1 p-2 border">
-                        <input type="number" class="form-control mark" name="mark[]" value = "{{$assessment[$i]->mark}}" step=0.5 min=0 max=10 required>
+                        <input type="number" class="form-control mark" name="mark[]" value = "{{$assessment[$i]->mark}}" step=0.1 min=0 max=10 required>
                     </div>
                     <div class="col-md-3 p-2 border">
                         <textarea class="form-control" name="remark[]">{{$assessment[$i]->remark}}</textarea>
