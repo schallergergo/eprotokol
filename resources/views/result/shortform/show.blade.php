@@ -118,14 +118,14 @@
                         @if ($block['coefficient']===2)
                         <div class="col-md-1 p-1 border">
                             <center>
-                                <p>{{ $block['maxmark'] }}X2</p>
+                                <p>{{ {{($block->maxmark==0) ? 1:$block->maxmark}}X2</p>
                             </center>
                         </div>
 
                         @else
                         <div class="col-md-1 p-1 border">
                             <center>
-                                <p>{{ $block['maxmark'] }}</p>
+                                <p>{{($block->maxmark==0) ? 1:$block->maxmark}}</p>
                             </center>
                         </div>
                         @endif
@@ -144,7 +144,7 @@
                         <div class="col-md-12 p-1 border text-right">
                         @if ($result->eliminated==0)
                             {{__("Points")}}: <strong>{{number_format($result->mark, 1) }} {{__("points")}}  </strong>
-                            - {{__("Percentage")}}: <strong>{{number_format($result->percent, 2) }} %       </strong>
+                            - {{__("Percentage")}}: <strong>{{number_format($result->percent, 3) }} %       </strong>
                                 @if ($result->error!=0 && $program->errortype==1)
                                 - {{__("Deduction")}}: <strong>{{number_format($result->error, 0) }} {{__("points")}}</strong>
                                  @elseif ($result->error!=0 && $program->errortype==2)
