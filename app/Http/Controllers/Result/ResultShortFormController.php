@@ -80,7 +80,7 @@ class ResultShortFormController extends Controller
 
     public function update(Result $result)
     {
-        // POST data
+ // POST data
         $data = request();
 
         $resultID=$result->id;
@@ -104,13 +104,12 @@ class ResultShortFormController extends Controller
         if ($data["eliminated"]==1) $mark = 0;
 
         //calcalate the result
-        else $mark = $this->mark($result,$data["given_mark"],$data["error"]);
+        else $mark = $this->mark($result,$array,$data["error"]);
 
         //calculate the percentage
         $percent  = $this->percent($result,$mark);
 
-        //calculcate, the collective marks, the second part of the program, used to break up ties
-        $collectivemark=$this->collectiveMarkPoint($result,$data["error"]);
+
 
         //encoding the marks and remarks to json
         $assessment = json_encode($array);
@@ -132,11 +131,24 @@ class ResultShortFormController extends Controller
       
     }
 
-      private function mark(Result $result, float $mark, float $error){
+      private function mark(Result $result, array $markArray, float $error){
         //-1 means elimination: return 0
         if ($error==-1) return 0;
-       
-        return $mark-$error;
+        $points=0;
+
+        //the blocks of the program, contains the multiplication coefficient
+        $program=$result->start->event->program;
+        $blocks=$program->block;
+
+        //sanity check: is the number of marks and block equal?
+        if (count($blocks)!=count($markArray)) return 0;
+
+        //calculating the result based on the mark given and the coefficient
+        for ($i=0;$i<count($blocks);$i++){
+            $points+=$markArray[$i]["mark"]*$blocks[$i]->coefficient;
+        }
+
+        return $points-$this->calculateError($program,$points,$error);
     }
 
      private function percent(Result $result, float $point){
