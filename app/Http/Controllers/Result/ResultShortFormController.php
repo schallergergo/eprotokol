@@ -15,7 +15,7 @@ class ResultShortFormController extends Controller
         $assessment=json_decode($result["assessment"]);
         
         $program = $result->start->event->program;
-        dd($assessment);
+
         $count=count($assessment);
 
         while (count($program->block) > $count){
