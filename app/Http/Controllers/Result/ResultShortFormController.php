@@ -122,7 +122,7 @@ class ResultShortFormController extends Controller
                     "completed"=>$result->completed+1,
                     "mark"=>$mark,
                     "percent"=>$percent,
-                    "collective"=>0
+                    "collective"=>0,
                     "eliminated"=>$eliminated,
                     "error"=>$data["error"],
                 ];
