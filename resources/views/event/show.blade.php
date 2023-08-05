@@ -151,7 +151,7 @@
                         </div>
                     <div class="col-md-2 p-1 border">
                             <span class="align-middle">
-                                ({{$start->rank}}.) {{$start->mark}}p  - {{number_format($start->percent,2)}}% @if ($start->collective!=0)- {{$start->collective}}p @endif
+                                ({{$start->rank}}.) {{$start->mark}}p  - {{number_format($start->percent,3w)}}% @if ($start->collective!=0)- {{$start->collective}}p @endif
                             </span>
                         </div>
 

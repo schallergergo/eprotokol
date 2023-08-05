@@ -20,6 +20,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\SiteMapController;
+use App\Http\Controllers\QualificationController;
 use App\Http\Controllers\api\ApiContoller;
 /*
 |--------------------------------------------------------------------------
@@ -136,8 +137,9 @@ Route::post('/championship/addEvent/{championship}', [ChampionshipController::cl
 Route::post('/championship/removeEvent/{championship}', [ChampionshipController::class, 'removeEvent']);
 
 
-Route::get("/qualification/settings/{discipline}",[StartController::class,"qualificationSettings"]);
-Route::post("/qualification/show",[StartController::class,"qualificationShow"]);
+Route::get("/qualification/settings/{discipline}",[QualificationController::class,"qualificationSettings"])->name("qualification.settings");
+Route::get("/qualification/show",[QualificationController::class,"qualificationShow"]);
+Route::get("/qualification/download",[QualificationController::class,"qualificationDownload"]);
 
 
 

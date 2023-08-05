@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Lang;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ResultExport;
 use App\Imports\ResultImport;
-use App\Exports\QualificationExport;
+
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 
@@ -178,7 +178,6 @@ class StartController extends Controller
         $out=[];
 
         
-        //dd($data["upload"]->path().".xlsx");
         try{
           $import = new ResultImport($event);
 
@@ -313,7 +312,7 @@ class StartController extends Controller
             $currentStart=$sameCategoryStarts[$i];
             if ($lastStart->mark!=$currentStart->mark || 
                 $lastStart->collective!=$currentStart->collective){
-                $rankCounter=$i;
+                    $rankCounter=$i;
             }
             $currentStart->rank=$rankCounter+1;
             $currentStart->save();
@@ -322,44 +321,7 @@ class StartController extends Controller
 
     }
 
-    public function qualificationSettings(){
-        $data=request();
-        $discipline=$data["discipline"];
-        $programs=Program::where("discipline",$discipline)->orderBy("ordinal")->get();
 
-        return view("qualification.show",
-            [
-               "programs"=>$programs,
-               "discipline"=>$discipline
-            ]);
-    }
-
-
-    public function qualificationShow(){
-
-        $data=request();
-
-        $data=$data->validate([
-            'start' => ['required', 'date'],
-            'end' => ['required', 'date'],
-            'programs' => ['required'],
-            'percent' => ['required', 'integer', 'min:0'],
-            ]);
-        $events=Event::whereIn("program_id",$data["programs"])->
-                where("created_at",">=",$data["start"])->
-                where("created_at","<=",$data["end"])->get();
-
-        $starts=collect([]);
-        foreach($events as $event){
-            $temp=$event->start->where("percent",">=",$data["percent"]);
-            $starts=$starts->merge($temp);
-
-        };
-        $starts=$starts->unique("rider_id")->sortBy("rider_name");
-        if (count($starts)==0)       return redirect()->back()
-        ->with("status",Lang::get("Nothing found!"));
-        return Excel::download(new QualificationExport($starts), 'qualification.xlsx');
-    }
 
    private function generateID(){
 
