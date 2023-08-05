@@ -51,7 +51,17 @@ class QualificationController extends Controller
 
 
         };
-        $starts=$starts->unique("rider_id")->sortBy("rider_name");
+        $startsUnique=$starts->unique("rider_id")->sortBy("rider_name");
+        $newStarts=collect([]);
+        foreach($startsUnique as $start){
+
+            $temp=$starts->where("rider_id",$start->rider_id);
+            if (count($temp)>=$data["amount"]) $newStarts=$newStarts->add($start);
+
+
+        };
+        $starts=$newStarts;
+        //dd($starts);
         if (count($starts)==0) return __("Nothing found!");
         //       return redirect(route("qualification.settings"))->with("status",__("Nothing found!"));
         if ($excel) return Excel::download(new QualificationExport($starts), 'qualification.xlsx');

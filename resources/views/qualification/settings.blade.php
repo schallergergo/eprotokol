@@ -79,7 +79,7 @@
                         <div class="form-group row">
                             <label for="download" class="col-md-4 col-form-label text-md-right">{{ __('Excel download') }}</label>
                             <div class="col-md-6">
-                                <input id="download" type="checkbox" class="form-check-input pl-2 @error('download') is-invalid @enderror" name="download" value="download">
+                                <input id="download" type="checkbox" class="form-control form-check-input @error('download') is-invalid @enderror" name="download" value="download">
 
                                 @error('download')
                                     <span class="invalid-feedback" role="alert">
