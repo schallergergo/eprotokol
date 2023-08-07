@@ -60,7 +60,7 @@ class ViewsCanBeRenderedTest extends TestCase
 
     public function test_result_show_can_be_rendered()
     {
-        $
+        
         $response = $this->get('/result/show/100337663091973667');
 
         $response->assertStatus(200);

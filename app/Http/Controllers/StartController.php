@@ -88,6 +88,7 @@ class StartController extends Controller
             'category' => $data['category'],
             'original_category' => $data['category'],
             'rank'=> $lastRank,
+            'twoids'=>$data["rider_id"].$data["horse_id"],
         ]);
 
         $this->addResultEntries($newStart);
@@ -154,6 +155,8 @@ class StartController extends Controller
 
 
         $start->update($dataOut);
+        $start->twoIds=$data["rider_id"].$data["horse_id"];
+        $start->save();
         $this->calculateAllRank($start);
         return redirect("/event/show/{$start->event->id}");
         
