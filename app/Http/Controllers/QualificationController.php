@@ -35,12 +35,23 @@ class QualificationController extends Controller
             'start' => ['required', 'date'],
             'end' => ['required', 'date'],
             'programs' => ['required'],
+            'notprograms'=>[]
             'percent' => ['required', 'integer', 'min:0'],
             'amount' =>['required', 'integer', 'min:1'],
             ]);
-        $events=Event::whereIn("program_id",$data["programs"])->
+                $events=Event::whereIn("program_id",$programs)->
                 where("created_at",">=",$data["start"])->
                 where("created_at","<=",$data["end"])->get();
+        $starts=qualifications($events);
+        //dd($starts);
+        if (count($starts)==0) return __("Nothing found!");
+        //       return redirect(route("qualification.settings"))->with("status",__("Nothing found!"));
+        if ($excel) return Excel::download(new QualificationExport($starts), 'qualification.xlsx');
+        else return view("qualification.show",["starts"=>$starts]);
+    }
+
+    public function qualifications($events){
+
 
         $starts=collect([]);
         foreach($events as $event){
@@ -60,13 +71,7 @@ class QualificationController extends Controller
 
 
         };
-        $starts=$newStarts;
-        //dd($starts);
-        if (count($starts)==0) return __("Nothing found!");
-        //       return redirect(route("qualification.settings"))->with("status",__("Nothing found!"));
-        if ($excel) return Excel::download(new QualificationExport($starts), 'qualification.xlsx');
-        else return view("qualification.show",["starts"=>$starts]);
+        
     }
-
     
 }

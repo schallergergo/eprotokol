@@ -21,6 +21,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\QualificationController;
+use App\Http\Controllers\JumpingRoundController;
 use App\Http\Controllers\api\ApiContoller;
 /*
 |--------------------------------------------------------------------------
@@ -169,6 +170,11 @@ Route::get('/display/tatter/{competition}',[DisplayController::class, 'tatter'])
 Route::get('/display/compsetting/{competition}',[DisplayController::class, 'compsetting']);
 Route::post('/display/storecompsetting/{competition}',[DisplayController::class, 'storeCompsetting']);
 
+
+
+Route::get('/jumpinground/edit/{jumping_round}', [JumpingRoundController::class, 'edit']);
+Route::patch('/jumpinground/update/{jumping_round}', [JumpingRoundController::class, 'update']);
+Route::patch('/jumpinground/update2/{jumping_round}', [JumpingRoundController::class, 'update2']);
 
 
 Route::get('/sitemap.xml',[SiteMapController::class, 'generate']);

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Http\Controllers\Result\ResultNormalController;
 use App\Http\Controllers\Result\ResultCaprilliController;
 use App\Http\Controllers\Result\ResultShortFormController;
-
+use App\Http\Controllers\Result\ResultJumpingRoundController;
 
 use App\Events\ResultChanged;
 use App\Models\Result;
@@ -48,6 +48,9 @@ class ResultController extends Controller
             case 'caprilli':
               $controller = new ResultCaprilliController();
               break;
+            case 'oneround':
+              $controller = new ResultJumpingRoundController();
+              break;
           default:
               $controller = new ResultNormalController();
               break;
@@ -73,6 +76,9 @@ class ResultController extends Controller
               break;
         case 'caprilli':
               $controller = new ResultCaprilliController();
+              break;
+        case 'oneround':
+              $controller = new ResultJumpingRoundController();
               break;
           default:
               $controller = new ResultNormalController();
@@ -201,7 +207,7 @@ class ResultController extends Controller
         $id = rand($limit,$limit*10);
 
         //checking if a record already exists with the given id
-        $result = Result::find($id);
+        $result = Result::withTrashed()->find($id);
 
         // iterating the last two steps until id is found
         while ($result!==null){

@@ -6,6 +6,8 @@ use App\Models\Start;
 use App\Models\Event;
 use App\Models\Result;
 use App\Models\Program;
+use App\Http\Controllers\JumpingRoundController;
+
 use App\Mail\ResultMail;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -91,9 +93,36 @@ class StartController extends Controller
             'twoids'=>$data["rider_id"].$data["horse_id"],
         ]);
 
-        $this->addResultEntries($newStart);
+        if ($event->program->has_result) $this->addResultEntries($newStart);
+        $this->addToExtraTables($newStart);
 
         return redirect("event/show/{$event->id}");
+    }
+
+
+    public function addToExtraTables(Start $newStart){
+        $typeofevent=$newStart->event->program->typeofevent;
+        $jumpingRound= new JumpingRoundController();
+        switch ($typeofevent) {
+            case "pkx":
+
+                $jumpingRound->createRound($newStart);
+                break;
+            case "oneround":
+
+                $jumpingRound->createRound($newStart);
+                break;
+            case "jumpoff":
+                $jumpingRound->createRound($newStart);
+
+                break;
+                
+            case "style":
+
+                $jumpingRound->createStyle($newStart);
+                break;
+
+}
     }
     public function addResultEntries(Start $start){
 
@@ -161,11 +190,16 @@ class StartController extends Controller
         return redirect("/event/show/{$start->event->id}");
         
     }
+
     public function destroy(Start $start){
         $this->authorize('delete', $start );
         $resultController = new ResultController();
         foreach($start->result as $result){
             $resultController->destroy($result);
+        } 
+        $roundController = new JumpingRoundController();
+        foreach($start->jumping_round as $round){
+            $roundController->destroy($round);
         } 
         $start->delete();
         return redirect("event/show/{$start->event->id}");
@@ -244,8 +278,8 @@ class StartController extends Controller
     public function calculateAllJudges(Start $start){
         $officials=$start->event->official;
 
-        $completedResults=Result::where("start_id",$start->id)
-            ->where("completed",">",0)->get();
+        $completedResults=Result::where("start_id",$start->id) ->where("completed",">",0)->get();
+
             if (count($officials)==count($completedResults)){
             $completed=$start->completed;
             $this->markAverage($start,$completedResults);
@@ -325,6 +359,33 @@ class StartController extends Controller
     }
 
 
+    public function calculateRoundRank(Start $start){
+            
+            $sameCategoryStarts=Start::where("event_id",$start->event_id)
+                            ->where("category",$start->category)
+                            ->join("jumping_rounds","starts.id","=","jumping_rounds.start_id")
+                            ->orderByRaw("ISNULL(jumping_rounds.total_fault1), jumping_rounds.total_fault1 ASC")
+                            ->orderByRaw("ISNULL(jumping_rounds.total_fault2), jumping_rounds.total_fault2 ASC")
+                            ->orderByRaw("ISNULL(jumping_rounds.time2), jumping_rounds.time2 ASC")
+                            ->orderByRaw("ISNULL(jumping_rounds.time1), jumping_rounds.time1 ASC")
+                            ->select('starts.*')->get();
+                            
+            $numberOfStarts=count($sameCategoryStarts);
+            $rankCounter=0;
+
+            for($i=0;$i<$numberOfStarts;$i++){
+                $currentStart=$sameCategoryStarts[$i];
+
+                $currentStart->rank=$i+1;
+
+                $currentStart->update();
+
+            } 
+            
+
+        }
+
+
 
    private function generateID(){
 
@@ -335,7 +396,7 @@ class StartController extends Controller
         $id = rand($limit,$limit*10);
 
         //checking if a record already exisits with the given id
-        $result = Start::find($id);
+        $result = Start::withTrashed()->find($id);
 
         // iterating the last two steps until id is found
         while ($result!==null){

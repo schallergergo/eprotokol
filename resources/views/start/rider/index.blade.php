@@ -64,8 +64,11 @@
                             @foreach($start->result->sortBy('position') as $result)
                             <a href="/result/show/{{$result->id}}">{{$result->position}} {{__("judge")}}</a><br>
                             @endforeach
+
+                            
                             
                         </div>
+
                     </div><!-- end of the row-->
                     
                     @endforeach

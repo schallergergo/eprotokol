@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Program;
 use App\Http\Requests\StoreProgramRequest;
 use App\Http\Requests\UpdateProgramRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProgramController extends Controller
 {
@@ -15,19 +16,30 @@ class ProgramController extends Controller
      */
     public function index()
     {
-
+        
         $data = request();
 
         if (!isset($data["discipline"])) return view("program.index",["discipline"=>""]);
         $data=$data->validate([
             'discipline' => [],
             ]);
+        $user = Auth::user();
 
         $programs=Program::where("discipline",$data["discipline"])->where('active',1)->orderBy("ordinal")->get();
+        if ($user==null) $programs = $programs->where("has_result","1");
+
+        return view("program.index",["programs"=>$programs,
+                                    "discipline"=>$data["discipline"]]);
+
+
+
+        if($user->role!="admin") $programs->where("has_result","1");
+
 
         return view("program.index",["programs"=>$programs,
                                     "discipline"=>$data["discipline"]]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -52,7 +64,6 @@ class ProgramController extends Controller
         $data=$request->validated();
 
 
-        
 
 
         $program=\App\Models\Program::create([
@@ -62,7 +73,9 @@ class ProgramController extends Controller
             'maxMark' => $data['maxMark'],
             'typeofevent' => $data['typeofevent'],
             'doublesided' => $data['doublesided'],
+            'has_result'=> $data['numofblocks']!=0,
         ]);
+
         $program->ordinal=$program->id;
         $program->save();
         
@@ -110,7 +123,7 @@ class ProgramController extends Controller
     {
 
         $data=$request->validated();
-
+        $data= array_merge($data,['has_result'=> $data['numofblocks']!=0]);
         $program->update($data);
         return redirect("program/index");
     }

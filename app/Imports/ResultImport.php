@@ -45,7 +45,8 @@ class ResultImport implements ToModel, WithValidation, WithHeadingRow, SkipsOnEr
             'original_category' => str_replace("õ", "ő",$data['category']),
         ]);
         $startController= new StartController();
-        $startController->addResultEntries($newStart);
+        if ($this->event->program->has_result)$startController->addResultEntries($newStart);
+        $startController->addToExtraTables($newStart);
         return $newStart;
     }
 

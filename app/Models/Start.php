@@ -20,4 +20,9 @@ class Start extends Model
    public function user(){
         return $this->belongsTo(User::class,'rider_id','username');
     }
+
+    public function jumping_round(){
+
+        return $this->hasMany(JumpingRound::class);
+    }
 }

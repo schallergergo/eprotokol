@@ -69,6 +69,11 @@ return [
             'path' => storage_path('logs/resultOpen.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
+        'showjumping' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/showjumping.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),

@@ -80,11 +80,16 @@ class ResultPolicy
     {
 
         if ($user->role=="admin") return true;
+        
         $event=$result->start->event;
         if ($event->competition->active==false) return false;
         if ($user->role=="office" && $result->start->event->competition->office==$user->id) return true;
         $officials=Official::where("event_id",$event->id)->where("penciler",$user->id)->get();
-        foreach ($officials as $official) if ($user->role=="penciler" && $result->official_id==$official->id) return true;
+
+        foreach ($officials as $official)
+    
+         if ($user->role=="penciler" && $result->official_id==$official->id) return true; //This works! Leave it alone...
+
         return false;
     }
 

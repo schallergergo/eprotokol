@@ -1,0 +1,116 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\JumpingRound;
+use App\Models\Style;
+use App\Models\Start;
+use App\Models\Result;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreJumpingRoundRequest;
+use App\Http\Requests\UpdateJumpingRoundRequest;
+use App\Http\Requests\UpdateJumpingRoundRequest2;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
+
+class JumpingRoundController extends Controller
+{
+
+    public function createRound(Start $start){
+
+        JumpingRound::create(["start_id"=>$start->id]);
+
+    }
+
+    public function createStyle(Start $start){
+
+        Style::create(["start_id"=>$start->id]);
+
+    }
+
+
+
+public function edit(JumpingRound $jumping_round){
+
+
+        $this->authorize("update",$jumping_round);
+        return view("jumpinground.edit",[ 
+                                    "start"=>$jumping_round->start,
+                                    "round"=>$jumping_round,
+                                ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateBlockRequest  $request
+     * @param  \App\Models\Block  $block
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateJumpingRoundRequest $request, JumpingRound $jumping_round)
+    {
+
+        $this->authorize("update",$jumping_round);
+        
+        $data=$request->validated();
+        $data = array_merge($data,["completed1"=>1]);
+        return $this->updateHelper($data,$jumping_round);
+
+    }
+
+
+    public function update2(UpdateJumpingRoundRequest2 $request, JumpingRound $jumping_round){
+        $this->authorize("update",$jumping_round);
+        
+        $data=$request->validated();
+        $data = array_merge($data,["completed2"=>1]);
+        return $this->updateHelper($data,$jumping_round);
+    }
+    
+    private function updateHelper(array $data,JumpingRound $jumping_round){
+
+        
+        $jumping_round->update($data);
+        if ($jumping_round->eliminated) $jumping_round->total_fault=1000;
+        $jumping_round->save();
+        $start = $jumping_round->start;
+        $start->completed=1;
+
+        $start->save();
+        $this->isAllRoundsCompleted($jumping_round);
+        $this->generateLog($jumping_round);
+        return redirect("event/show/".$jumping_round->start->event->id);
+    }
+    private function generateLog($round){
+
+        $user = Auth::user();
+
+        $message =$user->name;;
+        $message = $message." - rounds -".$round;
+        Log::channel("showjumping")->info($message);
+    }
+
+    private function isAllRoundsCompleted(JumpingRound $jumping_round){
+        $start = $jumping_round->start;
+        $rounds = $start->jumping_round;
+        $completed = $rounds->where("completed",1);
+        
+        if (count($rounds)==count($completed)) {
+            $startController = new StartController();
+            $startController->calculateRoundRank($start);
+         
+        }
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Block  $block
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(JumpingRound $jumping_round)
+    {
+        $jumping_round->delete();
+
+    }
+}

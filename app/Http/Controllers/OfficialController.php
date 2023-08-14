@@ -37,7 +37,9 @@ class OfficialController extends Controller
             "pencilers"=>$pencilers]);
     } 
     private function availablePositions(Event $event){
+        
         $positions=["C","E","B","K","F","M","H"];
+        if (!$event->program->has_result)  $positions= ["SJ"];
         $officials=$event->official;
 
         foreach ($officials as $official ){
@@ -77,8 +79,10 @@ class OfficialController extends Controller
             'penciler' => $data["penciler"],
 
         ]);
-        $this->addResultEntries($newOfficial);
-        $this->notCompleted($newOfficial);
+        if ($event->program->has_result) {
+            $this->addResultEntries($newOfficial);
+            $this->notCompleted($newOfficial);
+        }
         return redirect("event/edit/{$event->id}");
     }
     private function addResultEntries(Official $newOfficial){
