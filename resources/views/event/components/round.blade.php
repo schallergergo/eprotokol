@@ -21,7 +21,7 @@
 
                             <span title="{{__('Total fault')}}">{{$round->total_fault2}}hp </span> 
                             @if ($round->time_fault1!=0) <span title="{{__('Time fault')}}"> (+{{$round->time_fault2}}) </span>hp @endif - 
-                             <span title="{{__('Time')}}"> {{$round->time2}} sec </span> 
+                             <span title="{{__('Time')}}"> {{$round->time1}} sec </span> 
                              @endif
 
 
