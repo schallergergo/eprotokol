@@ -108,14 +108,11 @@ class StartController extends Controller
 
                 $jumpingRound->createRound($newStart);
                 break;
-            case "oneround":
+            case "rounds":
 
                 $jumpingRound->createRound($newStart);
                 break;
-            case "jumpoff":
-                $jumpingRound->createRound($newStart);
 
-                break;
                 
             case "style":
                 $style= new StyleController();
