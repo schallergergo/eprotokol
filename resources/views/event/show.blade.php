@@ -97,6 +97,12 @@
                              @endcan
                              @endforeach
 
+                              @foreach ($start->style as $style)
+                              @can('update',$style)
+                             <span class="align-middle"><a href="/style/edit/{{$style->id}}" target="">{{__("Style")}}</a></span><br>
+                             @endcan
+                             @endforeach
+
                         </div>
                     </div><!-- end of the row-->
 
@@ -169,6 +175,7 @@
 
                             @include("event.components.result")
                             @include("event.components.round")
+                            @include("event.components.style")
                         </div>
                     </div><!-- end of the row-->
                     

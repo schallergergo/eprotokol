@@ -65,7 +65,7 @@
                             <a href="/result/show/{{$result->id}}">{{$result->position}} {{__("judge")}}</a><br>
                             @endforeach
 
-                            @include(event.components.round)
+                            @include("event.components.round")
                             
                         </div>
 

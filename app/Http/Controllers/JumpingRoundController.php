@@ -23,11 +23,6 @@ class JumpingRoundController extends Controller
 
     }
 
-    public function createStyle(Start $start){
-
-        Style::create(["start_id"=>$start->id]);
-
-    }
 
 
 
@@ -93,14 +88,16 @@ public function edit(JumpingRound $jumping_round){
 
     private function isAllRoundsCompleted(JumpingRound $jumping_round){
         $start = $jumping_round->start;
+        $event = $start->event;
         $rounds = $start->jumping_round;
-        $completed = $rounds->where("completed",1);
+
         
-        if (count($rounds)==count($completed)) {
+
             $startController = new StartController();
-            $startController->calculateRoundRank($start);
+            if ($event->program->typeofevent=="pkx") $startController->calculatePKXRank($start);
+            else $startController->calculateRoundRank($start);
          
-        }
+        
     }
     /**
      * Remove the specified resource from storage.

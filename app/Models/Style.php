@@ -11,4 +11,9 @@ class Style extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded =[];
+
+
+    public function start (){
+        return $this->belongsTo(Start::class);
+    }
 }

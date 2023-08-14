@@ -6,15 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateStyleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +15,13 @@ class UpdateStyleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'time' => ['required', 'numeric', 'min:0'],
+            'total_fault' => ['required', 'numeric', 'min:0'],           
+            'given_mark' => ['required', 'numeric', 'min:0'],
+            'deductions' => ['required', 'numeric', 'min:0'],
+            'total_mark' => ['required', 'numeric', 'min:0'],
+            'eliminated'=> ['required', 'boolean'],
+            'comments'=>[],
         ];
     }
 }

@@ -25,4 +25,8 @@ class Start extends Model
 
         return $this->hasMany(JumpingRound::class);
     }
+     public function style(){
+
+        return $this->hasMany(Style::class);
+    }
 }

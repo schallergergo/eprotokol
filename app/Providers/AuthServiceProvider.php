@@ -22,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
          'App\Models\User'        => 'App\Policies\UserPolicy',
          'App\Models\Championship' => 'App\Policies\ChampionshipPolicy',
          'App\Models\JumpingRound' => 'App\Policies\JumpingRoundPolicy',
+         'App\Models\Style'        => 'App\Policies\StylePolicy',
     ];
 
     /**

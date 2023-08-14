@@ -94,7 +94,7 @@
 
                             <div class="col-md-6">
                                 <select id="eliminated1" type="number" class="form-control @error('eliminated1') is-invalid @enderror" name="eliminated1" required> 
-                                    <option value=0>{{__("Not eliminated1!")}}</option>
+                                    <option value=0>{{__("Not eliminated!")}}</option>
                                     <option value=1 @if ($round->eliminated1) selected @endif>{{__("Elimnated!")}}</option>
                                 </select>
                                 @error('eliminated1')
@@ -206,7 +206,7 @@
 
                             <div class="col-md-6">
                                 <select id="eliminated2" type="number" class="form-control @error('eliminated2') is-invalid @enderror" name="eliminated2" required> 
-                                    <option value=0>{{__("Not eliminated2!")}}</option>
+                                    <option value=0>{{__("Not eliminated!")}}</option>
                                     <option value=1 @if ($round->eliminated2) selected @endif>{{__("Elimnated!")}}</option>
                                 </select>
                                 @error('eliminated2')

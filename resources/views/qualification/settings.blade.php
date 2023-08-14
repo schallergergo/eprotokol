@@ -108,25 +108,7 @@
                             
                         </div>
                         
-                        <p>Can't start</p>
-
-                        <div class="form-group row">
-                            
-                            
-                                @foreach ($programs as $program)
-                                <div class="col-md-4"></div>
-                                <div class="form-check ml-2 col-md-6">
-                                  <input class="form-check-input" type="checkbox" value="{{$program->id}}"  id="program-{{$program->id}}" name="notprograms[]">
-                                  <label class="form-check-label" for="program-{{$program->id}}">
-                                    {{$program->name}}
-                                  </label>
-                                </div>
-                                
-                                @endforeach
-                               
-                            
-                        </div>
-                        
+                       
 
                        
 

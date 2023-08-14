@@ -7,7 +7,7 @@ use App\Models\Event;
 use App\Models\Result;
 use App\Models\Program;
 use App\Http\Controllers\JumpingRoundController;
-
+use App\Http\Controllers\StyleController;
 use App\Mail\ResultMail;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -118,8 +118,8 @@ class StartController extends Controller
                 break;
                 
             case "style":
-
-                $jumpingRound->createStyle($newStart);
+                $style= new StyleController();
+                $style->createStyle($newStart);
                 break;
 
 }
@@ -363,6 +363,7 @@ class StartController extends Controller
             
             $sameCategoryStarts=Start::where("event_id",$start->event_id)
                             ->where("category",$start->category)
+                            ->where("starts.completed",1)
                             ->join("jumping_rounds","starts.id","=","jumping_rounds.start_id")
                             ->orderByRaw("ISNULL(jumping_rounds.total_fault1), jumping_rounds.total_fault1 ASC")
                             ->orderByRaw("ISNULL(jumping_rounds.total_fault2), jumping_rounds.total_fault2 ASC")
@@ -370,18 +371,101 @@ class StartController extends Controller
                             ->orderByRaw("ISNULL(jumping_rounds.time1), jumping_rounds.time1 ASC")
                             ->select('starts.*')->get();
                             
-            $numberOfStarts=count($sameCategoryStarts);
-            $rankCounter=0;
+        if ($numberOfStarts!==0) {
+            $start=Start::find($sameCategoryStarts[0]->start_id);
+            $start->rank=1;
+            $start->save();
+        }
+            for($i=1;$i<$numberOfStarts;$i++){
+               $lastStart=$sameCategoryStarts[$i-1];
+            $currentStart=$sameCategoryStarts[$i];
+            if ($lastStart->total_fault1!=$currentStart->total_fault1 || 
+                $lastStart->total_fault2!=$currentStart->total_fault2 || 
+                $lastStart->time1!=$currentStart->time1 || 
+                $lastStart->time2!=$currentStart->time2){
+                    $rankCounter=$i;
+                    }
 
-            for($i=0;$i<$numberOfStarts;$i++){
-                $currentStart=$sameCategoryStarts[$i];
-
-                $currentStart->rank=$i+1;
-
-                $currentStart->update();
+            $start=Start::find($currentStart->start_id);
+            $start->rank = $rankCounter+1;
+            $start->save();
 
             } 
             
+
+        }
+
+    public function calculateStyleRank(Start $start){
+            
+            $sameCategoryStarts=Start::where("event_id",$start->event_id)
+                            ->where("category",$start->category)
+                            ->where("starts.completed",1)
+                            ->join("styles","starts.id","=","styles.start_id")
+                            ->orderByDesc("styles.total_mark")
+
+                            ->get();
+                            
+        $numberOfStarts=count($sameCategoryStarts);
+       // dd($sameCategoryStarts->pluck("rider_name"));
+        $rankCounter=0;
+        if ($numberOfStarts!==0) {
+            $start=Start::find($sameCategoryStarts[0]->start_id);
+            $start->rank=1;
+            $start->save();
+        }
+        for($i=1;$i<$numberOfStarts;$i++){
+            $lastStart=$sameCategoryStarts[$i-1];
+            $currentStart=$sameCategoryStarts[$i];
+
+            if ($lastStart->total_mark!=$currentStart->total_mark){
+                    $rankCounter=$i;
+
+
+            }
+
+            $start=Start::find($currentStart->start_id);
+            $start->rank = $rankCounter+1;
+            $start->save();
+
+             } 
+
+        }
+
+
+
+    public function calculatePKXRank(Start $start){
+            
+            $sameCategoryStarts=Start::where("event_id",$start->event_id)
+                            ->where("category",$start->category)
+                            ->where("starts.completed",1)
+                            ->join("jumping_rounds","starts.id","=","jumping_rounds.start_id")
+                            ->orderBy("jumping_rounds.total_fault1")
+
+                            ->get();
+                            
+        $numberOfStarts=count($sameCategoryStarts);
+
+        $rankCounter=0;
+        if ($numberOfStarts!==0) {
+            $start=Start::find($sameCategoryStarts[0]->start_id);
+            $start->rank=1;
+            $start->save();
+        }
+        for($i=1;$i<$numberOfStarts;$i++){
+            $lastStart=$sameCategoryStarts[$i-1];
+            $currentStart=$sameCategoryStarts[$i];
+
+            if ($lastStart->total_fault1!=$currentStart->total_fault1){
+                    $rankCounter=$i;
+
+
+            }
+
+            $start=Start::find($currentStart->start_id);
+            $start->rank = $rankCounter+1;
+            $start->save();
+
+             } 
 
         }
 

@@ -22,6 +22,8 @@ use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\QualificationController;
 use App\Http\Controllers\JumpingRoundController;
+use App\Http\Controllers\StyleController;
+
 use App\Http\Controllers\api\ApiContoller;
 /*
 |--------------------------------------------------------------------------
@@ -175,6 +177,11 @@ Route::post('/display/storecompsetting/{competition}',[DisplayController::class,
 Route::get('/jumpinground/edit/{jumping_round}', [JumpingRoundController::class, 'edit']);
 Route::patch('/jumpinground/update/{jumping_round}', [JumpingRoundController::class, 'update']);
 Route::patch('/jumpinground/update2/{jumping_round}', [JumpingRoundController::class, 'update2']);
+
+
+
+Route::get('/style/edit/{style}', [StyleController::class, 'edit']);
+Route::patch('/style/update/{style}', [StyleController::class, 'update']);
 
 
 Route::get('/sitemap.xml',[SiteMapController::class, 'generate']);

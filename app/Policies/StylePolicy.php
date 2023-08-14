@@ -53,7 +53,19 @@ class StylePolicy
      */
     public function update(User $user, Style $style)
     {
-        //
+        $role = $user->role;
+        $start = $style->start;
+
+        $event = $start->event;
+        if ($role=="admin") return true;
+        if ($event->competition->active==false) return false;
+        if ($role=="office" && $event->competition->office==$user->id) return true;
+         $officials=$event->official;
+        foreach ($officials as $official)
+    
+         if ($role=="penciler" && $official->penciler==$user->id) return true; 
+
+        return false;
     }
 
     /**

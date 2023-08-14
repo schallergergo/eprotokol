@@ -35,7 +35,7 @@ class QualificationController extends Controller
             'start' => ['required', 'date'],
             'end' => ['required', 'date'],
             'programs' => ['required'],
-            'notprograms'=>[]
+
             'percent' => ['required', 'integer', 'min:0'],
             'amount' =>['required', 'integer', 'min:1'],
             ]);
