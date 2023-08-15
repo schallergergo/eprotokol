@@ -39,10 +39,11 @@ class QualificationController extends Controller
             'percent' => ['required', 'integer', 'min:0'],
             'amount' =>['required', 'integer', 'min:1'],
             ]);
+                $programs = $data["programs"];
                 $events=Event::whereIn("program_id",$programs)->
                 where("created_at",">=",$data["start"])->
                 where("created_at","<=",$data["end"])->get();
-        $starts=qualifications($events);
+        $starts=$this->qualifications($events,$data);
         //dd($starts);
         if (count($starts)==0) return __("Nothing found!");
         //       return redirect(route("qualification.settings"))->with("status",__("Nothing found!"));
@@ -50,7 +51,7 @@ class QualificationController extends Controller
         else return view("qualification.show",["starts"=>$starts]);
     }
 
-    public function qualifications($events){
+    public function qualifications($events,$data){
 
 
         $starts=collect([]);
@@ -71,7 +72,7 @@ class QualificationController extends Controller
 
 
         };
-        
+        return $newStarts;
     }
     
 }

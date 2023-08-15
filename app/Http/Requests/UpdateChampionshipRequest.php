@@ -16,7 +16,6 @@ class UpdateChampionshipRequest extends FormRequest
     {
         return [
             'championshipname' => ['required', 'string', 'max:255'],
-
         ];
     }
 }

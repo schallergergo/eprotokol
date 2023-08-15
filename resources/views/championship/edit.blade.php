@@ -51,6 +51,18 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="type"  class="form-control @error('type') is-invalid @enderror" name="type"  disabled>
+                                <option value=""> {{__("Select type")}} </option>
+                           
+                                <option value=""  selected > {{$championship->type}} </option>
+
+                             </select>
+                            </div>
+                        </div>
 
 
                         <div class="form-group row mb-0">

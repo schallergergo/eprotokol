@@ -18,6 +18,7 @@ class StoreChampionshipRequest extends FormRequest
             return [
             'championshipname' => ['required', 'string', 'max:255'],
             'discipline' => ['required'],
+            'type'=> ['required', 'string', 'max:50'],
         ];
     }
 }
