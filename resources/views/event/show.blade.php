@@ -93,7 +93,7 @@
                              
                               @foreach ($start->jumping_round as $round)
                               @can('update',$round)
-                             <span class="align-middle"><a href="/jumpinground/edit/{{$round->id}}" target="">{{$round->round_number}}. {{__("round")}}</a></span><br>
+                             <span class="align-middle"><a href="/jumpinground/edit/{{$round->id}}" target=""> {{__("Edit rounds")}}</a></span><br>
                              @endcan
                              @endforeach
 
