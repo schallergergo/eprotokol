@@ -29,4 +29,6 @@ class Start extends Model
 
         return $this->hasMany(Style::class);
     }
+
+
 }

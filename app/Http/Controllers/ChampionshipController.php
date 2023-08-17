@@ -10,6 +10,9 @@ use App\Http\Requests\StoreChampionshipRequest;
 use App\Http\Requests\UpdateChampionshipRequest;
 use App\Http\Controllers\ChampionshipType\PKDressageController;
 use App\Http\Controllers\ChampionshipType\PKShowJumpingController;
+use App\Http\Controllers\ChampionshipType\PKTeamDressageController;
+use App\Http\Controllers\ChampionshipType\PKTeamShowJumpingController;
+use App\Http\Controllers\ChampionshipType\PKClubController;
 use Illuminate\Support\Facades\Auth;
 
 class ChampionshipController extends Controller
@@ -64,10 +67,16 @@ class ChampionshipController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Championship $championship)
-    {
+    {   
+        
+
+
+
         if ($championship->type=="pkdressage") $controller = new PKDressageController();
         if ($championship->type=="pkshowjumping") $controller = new PKShowJumpingController();
-
+        if ($championship->type=="pkteamdressage") $controller = new PKTeamDressageController();
+        if ($championship->type=="pkteamshowjumping") $controller = new PKTeamShowJumpingController();
+        if ($championship->type=="pkclub") $controller = new PKClubController();
         return $controller->show($championship);
 
     }
@@ -83,7 +92,7 @@ class ChampionshipController extends Controller
     public function edit(Championship $championship)
     {
         $this->authorize('update', $championship);
-        $competitions=Competition::where("discipline", $championship->discipline)->get();
+        $competitions=Competition::where("discipline", $championship->discipline)->orderBYDesc("created_at")->get();
         $eventIds=json_decode($championship->events);
         $addedEvents=array();
         foreach($eventIds as $id) {

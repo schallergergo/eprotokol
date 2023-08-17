@@ -250,5 +250,17 @@
 	"Login as user":"Bejelentkezés felhasználóként",
 	"Given mark":"Adott pont",
 	"Coefficient":"Szorzó",
-	"Time":"Idő"
+	"Time":"Idő",
+	"Team name":"Csapat neve",
+	"Team members":"Csapattagok",
+	"Total fault":"Össz. hiba",
+	"Total point":"Össz. pontszám",
+	"Club name":"Egyesület neve",
+	"Final mark":"Végső pont",
+	"Comments":"Megjegyzések",
+	"Not eliminated!":"Nincs kizárva!",
+	"Style":"Stílus",
+	"Time fault":"Idő hiba",
+	"Obstacle fault":"Akadály hiba"
+
 }

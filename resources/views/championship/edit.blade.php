@@ -10,9 +10,7 @@
                 <div class="card-header">{{ __('Edit championship') }}
 
                     <span class="float-right">
-                        <a href="/championship/index">
-                        {{__("Back")}}
-                        </a>
+                        <a href="/team/index/{{$championship->id}}">{{__("Teams")}}</a>
                     </span>
 
 

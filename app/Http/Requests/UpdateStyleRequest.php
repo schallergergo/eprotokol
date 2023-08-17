@@ -17,7 +17,7 @@ class UpdateStyleRequest extends FormRequest
         return [
             'time' => ['required', 'numeric', 'min:0'],
             'total_fault' => ['required', 'numeric', 'min:0'],           
-            'given_mark' => ['required', 'numeric', 'min:0'],
+            'given_mark' => ['required', 'numeric', 'min:0','max:10'],
             'deductions' => ['required', 'numeric', 'min:0'],
             'total_mark' => ['required', 'numeric', 'min:0'],
             'eliminated'=> ['required', 'boolean'],

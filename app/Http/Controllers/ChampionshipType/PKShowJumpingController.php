@@ -19,7 +19,7 @@ class PKShowJumpingController extends Controller
         $uniqueStarts;
 
         foreach ($events as $event){
-            $starts        = $event->start;
+            $starts        = $event->start->where("eliminated",0);
             $startsArray[] = $starts;
             $mergedStarts  = $mergedStarts->merge($starts);
         }
@@ -35,6 +35,7 @@ class PKShowJumpingController extends Controller
             else $withoutAllStarts[]=$foundStarts;
         }
         $withAllStarts=collect($withAllStarts);
+
         $categories=collect($withAllStarts)->unique("category");
         $startsWithCategories=[];
         foreach($categories as  $category){

@@ -55,7 +55,8 @@ class StyleController extends Controller
         $style->save();
         $start = $style->start;
         $start->completed=1;
-
+        $start->mark = 10-$data["total_mark"];
+        $start->percent = $data["total_mark"]*10.0;
         $start->save();
         $this->isAllRoundsCompleted($style);
         $this->generateLog($style);

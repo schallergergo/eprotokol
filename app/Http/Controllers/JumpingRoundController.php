@@ -67,11 +67,13 @@ public function edit(JumpingRound $jumping_round){
 
         
         $jumping_round->update($data);
-        if ($jumping_round->eliminated) $jumping_round->total_fault=1000;
+        if ($jumping_round->eliminated1) $jumping_round->total_fault1=1000;
+                if ($jumping_round->eliminated2) $jumping_round->total_fault2=1000;
         $jumping_round->save();
         $start = $jumping_round->start;
         $start->completed=1;
-
+        $start->eliminated = $jumping_round->eliminated1;
+        $start->mark = $jumping_round->total_fault1;
         $start->save();
         $this->isAllRoundsCompleted($jumping_round);
         $this->generateLog($jumping_round);

@@ -18,7 +18,7 @@
                         <div class="card-header">{{$start->rider_name}} - {{$start->horse_name}} 1. {{ __('Jumping round') }}</div>
                          <div class="card-body">
                         <div class="form-group row">
-                            <label for="time1" class="col-md-4 col-form-label text-md-right">{{ __('Time1') }}</label>
+                            <label for="time1" class="col-md-4 col-form-label text-md-right">{{ __('Time') }}</label>
 
                             <div class="col-md-6">
                                 <input id="time1" type="number" class="form-control @error('time1') is-invalid @enderror" name="time1" value="{{ $round->time1 }}" step="any"required>
@@ -76,7 +76,7 @@
                         </div>
 
                          <div class="form-group row">
-                            <label for="comments1" class="col-md-4 col-form-label text-md-right">{{ __('Comments1') }}</label>
+                            <label for="comments1" class="col-md-4 col-form-label text-md-right">{{ __('Comments') }}</label>
 
                             <div class="col-md-6">
                                 <textarea id="comments1" type="number" class="form-control @error('comments1') is-invalid @enderror" name="comments1" > {{$round->comments1}}</textarea>
@@ -130,7 +130,7 @@
                          <div class="card-header">2. {{ __('Jumping round') }}</div>
                          <div class="card-body">
                         <div class="form-group row">
-                            <label for="time2" class="col-md-4 col-form-label text-md-right">{{ __('Time2') }}</label>
+                            <label for="time2" class="col-md-4 col-form-label text-md-right">{{ __('Time') }}</label>
 
                             <div class="col-md-6">
                                 <input id="time2" type="number" class="form-control @error('time2') is-invalid @enderror" name="time2" value="{{ $round->time2 }}" step="any" required >
@@ -188,7 +188,7 @@
                         </div>
 
                          <div class="form-group row">
-                            <label for="comments2" class="col-md-4 col-form-label text-md-right">{{ __('Comments2') }}</label>
+                            <label for="comments2" class="col-md-4 col-form-label text-md-right">{{ __('Comments') }}</label>
 
                             <div class="col-md-6">
                                 <textarea id="comments2" type="number" class="form-control @error('comments2') is-invalid @enderror" name="comments2" > {{$round->comments2}}</textarea>

@@ -37,7 +37,11 @@
                                 <option value=""> {{__("Select type")}} </option>
                            
                                 <option value="pkdressage"> {{__("Pony Club Dressage")}} </option>
+                                <option value="pkteamdressage"> {{__("Pony Club Team Dressage")}} </option>
                                 <option value="pkshowjumping"> {{__("Pony Club Show Jumping")}} </option>
+                                <option value="pkteamshowjumping"> {{__("Pony Club Team Show Jumping")}} </option>
+                                 <option value="pkclub"> {{__("Pony Club Clubs")}} </option>
+
 
                              </select>
                             </div>

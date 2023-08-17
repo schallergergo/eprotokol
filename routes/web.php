@@ -22,6 +22,8 @@ use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\QualificationController;
 use App\Http\Controllers\JumpingRoundController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\StyleController;
 
 use App\Http\Controllers\api\ApiContoller;
@@ -163,7 +165,18 @@ Route::get('/broadcast/{event}',[BroadcastController::class, 'broadcast']);
 Route::get('/broadcast/{event}/json',[BroadcastController::class, 'json']);
 Route::get('/broadcast/{event}/serialized',[BroadcastController::class, 'serialized']);
 
+Route::get('/team/index/{championship}',[TeamController::class, 'index']);
+Route::get('/team/create/{championship}',[TeamController::class, 'create']);
+Route::post('/team/store/{championship}',[TeamController::class, 'store']);
+Route::get('/team/edit/{team}',[TeamController::class, 'edit']);
+Route::post('/team/update/{team}',[TeamController::class, 'update']);
+Route::get('/team/delete/{team}',[TeamController::class, 'destroy']);
 
+
+Route::get('/team_member/create/{team}',[TeamMemberController::class, 'create']);
+Route::post('/team_member/store/{team}',[TeamMemberController::class, 'store']);
+
+Route::get('/team_member/delete/{team_member}',[TeamMemberController::class, 'destroy']);
 
 Route::get('/display/settings/{event}',[DisplayController::class, 'settings']);
 Route::get('/display/{event}',[DisplayController::class, 'display']);

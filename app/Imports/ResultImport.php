@@ -43,6 +43,7 @@ class ResultImport implements ToModel, WithValidation, WithHeadingRow, SkipsOnEr
  			'club' => $data['club'],
  			'category' => str_replace("õ", "ő",$data['category']),
             'original_category' => str_replace("õ", "ő",$data['category']),
+            'twoids'=>str_replace(" ", "",$data['rider_licence'])."".str_replace(" ", "",$data['horse_licence']),
         ]);
         $startController= new StartController();
         if ($this->event->program->has_result)$startController->addResultEntries($newStart);

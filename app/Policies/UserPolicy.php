@@ -17,9 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->role=='admin') return true;
-        if ($user->role=='club') return true;
-        return false;
+
 
     }
 

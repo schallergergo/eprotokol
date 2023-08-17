@@ -366,8 +366,9 @@ class StartController extends Controller
                             ->orderByRaw("ISNULL(jumping_rounds.total_fault2), jumping_rounds.total_fault2 ASC")
                             ->orderByRaw("ISNULL(jumping_rounds.time2), jumping_rounds.time2 ASC")
                             ->orderByRaw("ISNULL(jumping_rounds.time1), jumping_rounds.time1 ASC")
-                            ->select('starts.*')->get();
-                            
+                            ->get();
+              $numberOfStarts = count($sameCategoryStarts);  
+              $rankCounter=0;         
         if ($numberOfStarts!==0) {
             $start=Start::find($sameCategoryStarts[0]->start_id);
             $start->rank=1;
