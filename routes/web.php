@@ -138,6 +138,7 @@ Route::post('/championship/store', [ChampionshipController::class, 'store']);
 Route::get('/championship/edit/{championship}', [ChampionshipController::class, 'edit']);
 Route::patch('/championship/update/{championship}', [ChampionshipController::class, 'update']);
 Route::get('/championship/delete/{championship}', [ChampionshipController::class, 'destroy']);
+Route::get('/championship/changestatus/{championship}', [ChampionshipController::class, 'changeStatus']);
 Route::post('/championship/addEvent/{championship}', [ChampionshipController::class, 'addEvent']);
 Route::post('/championship/removeEvent/{championship}', [ChampionshipController::class, 'removeEvent']);
 

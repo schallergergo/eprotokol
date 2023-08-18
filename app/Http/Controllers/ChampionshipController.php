@@ -24,8 +24,9 @@ class ChampionshipController extends Controller
      */
     public function index()
     {
-        $championships=Championship::orderByDesc("created_at")->paginate(20);
-        return view("championship.index",["championships"=>$championships]);
+        $activeChampionships=Championship::orderBy("created_at")->where("active",1)->paginate(20);
+        $closedChampionships=Championship::orderBy("created_at")->where("active",0)->paginate(20);
+        return view("championship.index",["closedChampionships"=>$closedChampionships,"activeChampionships"=>$activeChampionships]);
     }
 
     /**
@@ -149,6 +150,15 @@ class ChampionshipController extends Controller
         return redirect()->back();
     }
 
+     public function changeStatus(Championship $championship){
+        $this->authorize('update', $championship);
+        
+        $championship->active = !$championship->active;
+        $championship->save();
+        return redirect()->back();
+    }
+    
+
 
     public function removeEvent(Championship $championship){
         $this->authorize('update', $championship);
@@ -178,8 +188,6 @@ class ChampionshipController extends Controller
         $championship->save();
 
     }
-
-
 
 
     /**

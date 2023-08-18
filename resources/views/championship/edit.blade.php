@@ -9,8 +9,16 @@
             <div class="card">
                 <div class="card-header">{{ __('Edit championship') }}
 
-                    <span class="float-right">
+                    <span class="">
                         <a href="/team/index/{{$championship->id}}">{{__("Teams")}}</a>
+                    </span>
+
+                    <span class="float-right">
+                        @if ($championship->active)
+                        <a href="/team/changestatus/{{$championship->id}}">{{__("Active")}}</a>
+                        @else
+                        <a class="text-danger" href="/team/changestatus/{{$championship->id}}">{{__("Closed")}}</a>
+                        @endif
                     </span>
 
 
