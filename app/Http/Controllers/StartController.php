@@ -6,6 +6,7 @@ use App\Models\Start;
 use App\Models\Event;
 use App\Models\Result;
 use App\Models\Program;
+use App\Http\Controllers\ResultController;
 use App\Http\Controllers\JumpingRoundController;
 use App\Http\Controllers\StyleController;
 use App\Mail\ResultMail;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Lang;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ResultExport;
+
 use App\Imports\ResultImport;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -466,7 +467,26 @@ class StartController extends Controller
              } 
 
         }
+    public function replicateStart(Event $fromEvent, Event $toEvent){
 
+        foreach($fromEvent->start as $start){
+            $newStart = $start->replicate();
+            $newStart->id = $this->generateID();
+            $newStart->event_id = $toEvent->id;
+            $newStart->save();
+            $controller = new ResultController();
+            $controller->replicateResult($start,$newStart,$toEvent->official);
+
+            $controller = new JumpingRoundController();
+            $controller->replicateJumpingRound($start,$newStart);
+
+            $controller = new StyleController();
+            $controller->replicateStyle($start,$newStart);
+
+        }
+
+
+    }
 
 
    private function generateID(){

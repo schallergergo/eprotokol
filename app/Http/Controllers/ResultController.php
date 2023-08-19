@@ -9,6 +9,7 @@ use App\Http\Controllers\Result\ResultNormalController;
 use App\Http\Controllers\Result\ResultCaprilliController;
 use App\Http\Controllers\Result\ResultShortFormController;
 use App\Http\Controllers\Result\ResultJumpingRoundController;
+use App\Http\Controllers\ResultlogController;
 
 use App\Events\ResultChanged;
 use App\Models\Result;
@@ -198,6 +199,27 @@ class ResultController extends Controller
 
         return view("result.search",["results"=>$results]);
     }
+
+    public function replicateResult(Start $start, Start $newStart, $officials){
+
+
+         foreach($start->result as $result) {
+            $newResult = $result->replicate();
+            $newResult->start_id = $newStart->id;
+            $newResult->official_id = $officials->where("position",$result->position)->first()->id;
+
+            $newResult->id = $this->generateID();
+            $newResult->save();
+            $controller = new ResultlogController();
+            $controller->replicateResultlog( $newResult);
+        }
+
+    
+
+    }
+
+
+
        private function generateID(){
 
         //lower limit of the id

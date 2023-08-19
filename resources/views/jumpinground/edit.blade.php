@@ -10,7 +10,7 @@
 
 
                
-                    <form method="POST" action="/jumpinground/update/{{$round->id}}" enctype="multipart/form-data">
+                    <form method="POST" action="/jumpinground/update/{{$round->id}}" enctype="multipart/form-data" name='form1' onsubmit="return validateForm1()">
                         @csrf
                         @method("PATCH")
 
@@ -115,7 +115,7 @@
                         </div>
                         </div>
                     </form>
-                        <form method="POST" action="/jumpinground/update2/{{$round->id}}" enctype="multipart/form-data">
+                        <form method="POST" action="/jumpinground/update2/{{$round->id}}" enctype="multipart/form-data" name='form2' onsubmit="return validateForm2()">
                         @csrf
                         @method("PATCH")
 
@@ -236,4 +236,33 @@
     </div>
     </div>
 </div>
+@endsection
+@section('pagespecificscripts')
+<script type="text/javascript">
+            function validateForm1() {
+          let obstacle_fault1 = parseFloat(document.forms["form1"]["obstacle_fault1"].value);
+          let time_fault1 = parseFloat(document.forms["form1"]["time_fault1"].value);
+          let total_fault1 = parseFloat(document.forms["form1"]["total_fault1"].value);
+
+            console.log(obstacle_fault1+time_fault1,total_fault1);
+          if (obstacle_fault1+time_fault1 != total_fault1) {
+            document.forms["form1"]["total_fault1"].value = "";
+            return false;
+
+          }
+        }
+
+         function validateForm2() {
+          let obstacle_fault2 = parseFloat(document.forms["form2"]["obstacle_fault2"].value);
+          let time_fault2 = parseFloat(document.forms["form2"]["time_fault2"].value);
+          let total_fault2 = parseFloat(document.forms["form2"]["total_fault2"].value);
+
+          if (obstacle_fault2+time_fault2 != total_fault2) {
+            document.forms["form2"]["total_fault2"].value = "";
+            return false;
+
+          }
+        }
+    
+ </script>
 @endsection

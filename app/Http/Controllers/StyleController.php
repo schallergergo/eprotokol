@@ -63,6 +63,19 @@ class StyleController extends Controller
         return redirect("event/show/".$style->start->event->id);
     }
 
+
+    public function replicateStyle(Start $start,Start $newStart){
+
+
+        foreach($start->style as $style) {
+            dd($style);
+            $newStyle = $style->replicate();
+            $newStyle->start_id = $newStart->id;
+            $newStyle->save();
+
+        }
+    }
+
     private function generateLog($round){
 
         $user = Auth::user();

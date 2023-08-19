@@ -15,9 +15,9 @@
 
                     <span class="float-right">
                         @if ($championship->active)
-                        <a href="/team/changestatus/{{$championship->id}}">{{__("Active")}}</a>
+                        <a href="/championship/changestatus/{{$championship->id}}">{{__("Active")}}</a>
                         @else
-                        <a class="text-danger" href="/team/changestatus/{{$championship->id}}">{{__("Closed")}}</a>
+                        <a class="text-danger" href="/championship/changestatus/{{$championship->id}}">{{__("Closed")}}</a>
                         @endif
                     </span>
 

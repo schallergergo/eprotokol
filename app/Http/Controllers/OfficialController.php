@@ -161,4 +161,18 @@ class OfficialController extends Controller
         $official->delete();
         return redirect("event/edit/{$official->event->id}");
     }
-}
+
+    public function replicateOfficial(Event $fromEvent, Event $toEvent){
+
+        foreach($fromEvent->official as $official){
+            $newOfficial = $official->replicate();
+            $newOfficial->event_id = $toEvent->id;
+            $newOfficial->save();
+
+           
+
+        }
+    }
+
+
+    }

@@ -63,6 +63,18 @@ public function edit(JumpingRound $jumping_round){
         return $this->updateHelper($data,$jumping_round);
     }
     
+    public function replicateJumpingRound(Start $start,Start $newStart){
+
+
+        foreach($start->jumping_round as $round) {
+            $newRound = $round->replicate();
+            $newRound->start_id = $newStart->id;
+            $newRound->save();
+
+        }
+       
+        }
+
     private function updateHelper(array $data,JumpingRound $jumping_round){
 
         

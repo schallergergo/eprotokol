@@ -10,6 +10,9 @@ use App\Models\Competition;
 use App\Models\User;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Http\Controllers\StartController;
+use App\Http\Controllers\OfficialController;
+
 use Illuminate\Support\Facades\Auth;
 use App\Exports\ResultExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -221,6 +224,19 @@ public function updateCategory (Event $event){
             $this->recalculateEvent($event);
             return  redirect("/event/show/{$event->id}");
 }
+    
+    public function copyEvent(Event $fromEvent, Event $toEvent){
 
+        $this->authorize("update",$toEvent);
+        if ($fromEvent->program->id != $toEvent->program->id ) return "Nem egyezik a program!!!";
+        if ($fromEvent->program->typeofevent !="rounds" ||  $fromEvent->program->typeofevent !="style") return "Ezt nem tudja másolni!!!";
+        $controller = new OfficialController();
+        $controller->replicateOfficial($fromEvent,$toEvent);
+
+        $controller = new StartController();
+        $controller->replicateStart($fromEvent,$toEvent);
+            
+        return redirect("/event/show/".$toEvent->id);
+    }
 
 }

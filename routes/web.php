@@ -114,6 +114,9 @@ Route::post('/event/updateCategory/{event}', [EventController::class, 'updateCat
 Route::get('/event/resetCategory/{event}', [EventController::class, 'resetCategory']);
 Route::get('/event/resetSponsor/{event}', [EventController::class, 'resetSponsor']);
 
+Route::get('/event/copy/from/{fromEvent}/to/{toEvent}', [EventController::class, 'copyEvent']);
+
+
 
 Route::get('/event/phantom/{event}', [PhantomEventController::class, 'show']);
 

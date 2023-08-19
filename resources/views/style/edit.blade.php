@@ -10,7 +10,7 @@
 
 
                
-                    <form method="POST" action="/style/update/{{$style->id}}" enctype="multipart/form-data">
+                    <form method="POST" action="/style/update/{{$style->id}}" enctype="multipart/form-data" name="styleForm" onsubmit="return validateForm()">
                         @csrf
                         @method("PATCH")
 
@@ -137,4 +137,21 @@
     </div>
     </div>
 </div>
+@endsection
+@section('pagespecificscripts')
+<script type="text/javascript">
+            function validateForm() {
+          let given_mark = document.forms["styleForm"]["given_mark"].value;
+          let deductions = document.forms["styleForm"]["deductions"].value;
+          let total_mark = document.forms["styleForm"]["total_mark"].value;
+          console.log(given_mark)-deductions;
+
+          if (given_mark-deductions != total_mark) {
+            document.forms["styleForm"]["total_mark"].value = "";
+            return false;
+
+          }
+        }
+    
+ </script>
 @endsection

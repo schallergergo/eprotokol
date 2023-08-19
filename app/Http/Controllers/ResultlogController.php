@@ -111,4 +111,19 @@ class ResultlogController extends Controller
     {
         //
     }
+
+     public function replicateResultLog(Result $result){
+
+
+         foreach($result->resultlog as $resultlog) {
+            $newlog = $resultlog->replicate();
+            $newlog->result_id = $result->id;
+            $newlog->save();
+        }
+}
+       
+
+        
+       
+
 }
