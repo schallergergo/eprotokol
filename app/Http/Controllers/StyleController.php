@@ -68,7 +68,7 @@ class StyleController extends Controller
 
 
         foreach($start->style as $style) {
-            dd($style);
+
             $newStyle = $style->replicate();
             $newStyle->start_id = $newStart->id;
             $newStyle->save();

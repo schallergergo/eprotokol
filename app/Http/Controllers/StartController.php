@@ -329,7 +329,10 @@ class StartController extends Controller
     }
 
     public function calculateRank(Start $start){
-        
+        $typeofevent = $start->event->program->typeofevent;
+        if ($typeofevent=="rounds")  $this->calculateRoundRank($start);
+        else if($typeofevent=="style" ) $this->calculateStyleRank($start);
+        else{
         $sameCategoryStarts=Start::where("event_id",$start->event_id)
                             ->where("completed",1)
                             ->where("category",$start->category)
@@ -352,7 +355,7 @@ class StartController extends Controller
             $currentStart->rank=$rankCounter+1;
             $currentStart->save();
         } 
-        
+        }
 
     }
 
@@ -405,7 +408,7 @@ class StartController extends Controller
                             ->get();
                             
         $numberOfStarts=count($sameCategoryStarts);
-       // dd($sameCategoryStarts->pluck("rider_name"));
+
         $rankCounter=0;
         if ($numberOfStarts!==0) {
             $start=Start::find($sameCategoryStarts[0]->start_id);
