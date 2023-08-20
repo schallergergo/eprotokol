@@ -229,7 +229,8 @@ public function updateCategory (Event $event){
 
         $this->authorize("update",$toEvent);
         if ($fromEvent->program->id != $toEvent->program->id ) return "Nem egyezik a program!!!";
-        if ($fromEvent->program->typeofevent =="rounds" ||  $fromEvent->program->typeofevent =="style") {
+        if ($fromEvent->program->typeofevent =="rounds" ||  $fromEvent->program->typeofevent =="style"){ 
+        $controller = new OfficialController();
         $controller->replicateOfficial($fromEvent,$toEvent);
 
         $controller = new StartController();
@@ -238,7 +239,6 @@ public function updateCategory (Event $event){
         return redirect("/event/show/".$toEvent->id);
     }
     else return "Ezt nem tudja másolni!!!";
-    
 }
 
 }
