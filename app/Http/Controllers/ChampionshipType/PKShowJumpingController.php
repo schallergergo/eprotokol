@@ -89,7 +89,7 @@ class PKShowJumpingController extends Controller
             {
                 $rank = $start->rank;
 
-                $total = $rank<10 ? $total + 11-$start->rank : 0;
+                $total = $rank<10 ? $total + 11-$start->rank : $total;
             }
           return $total;  
     }

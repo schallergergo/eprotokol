@@ -263,6 +263,9 @@
 	"Time fault":"Idő hiba",
 	"Obstacle fault":"Akadály hiba",
 	"Active championships":"Aktív bajnokságok",
-	"Closed championships":"Lezárt bajnokságok"
+	"Closed championships":"Lezárt bajnokságok",
+	"Rank":"Helyezés",
+	"Edit rounds":"Pályák szerkesztése",
+	"Jumping round":"Ugró pálya"
 
 }
