@@ -59,7 +59,7 @@ class PKClubController extends Controller
                     //dump($clubs);
                 }  
                 else{
-                    $doesNotHaveEverything[] = ["club"=>$start->club,"riderArray"=>$riderArray];
+                    $doesNotHaveEverything[] = ["club"=>$start->club,"riderArray"=>$riderArray,"score"=>0];
 
                 }
 

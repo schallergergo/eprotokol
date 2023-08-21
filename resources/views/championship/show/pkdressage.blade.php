@@ -78,9 +78,9 @@
                         <div class="col-md-2 p-1 border">
                             <p class=font-weight-bold>({{$loop->index+1}}.) {{__("Average")}}:       {{ number_format($starts["avg"], 3) }} %</p>
                         </div>
+                        </div>
                         </summary>
-                    </div>
-                    </div><!-- end of the row-->
+
                     
                         @foreach ($starts["starts"]->sortBy("created_at") as $start)
                     <div class="row mb-2 ">
