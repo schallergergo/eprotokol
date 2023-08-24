@@ -32,16 +32,16 @@ class PKTeamDressageController extends Controller
                 $team_results[] = [
                                     "team"=>$team,
                                     "event_results"=>$event_results,
-                                    "best_two"=>$event_results->avg("best_two_average"),
+                                    "best_two"=>$event_results->avg("best_two"),
                                     "average"=>$event_results->avg("average"),
-                                    "last_average"=>$event_results->last()["best_two_average"],
+                                    "last_average"=>$event_results->last()["best_two"],
 
 
                                 ];
 
         }
         $team_results = collect($team_results);
-        $team_results = $team_results->sortByDesc("average")->sortBy("last_average")->sortByDesc("best_two_average");
+        $team_results = $team_results->sortByDesc("average")->sortBy("last_average")->sortByDesc("best_two");
         
 
 
