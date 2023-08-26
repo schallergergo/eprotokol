@@ -66,8 +66,6 @@
                     </summary>
                        
 
-
-
                        <div class="row mb-2 ">
                             <div class="col-md-1 p-1"> </div>
                             <div class="col-md-3 p-1 border">

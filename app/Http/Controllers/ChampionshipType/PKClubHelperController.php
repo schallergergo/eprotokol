@@ -30,6 +30,13 @@ class PKClubHelperController extends Controller
         return $this->arrayOut;
     }
 
+    public function getPk1Score(){
+        if (count($this->arrayOut)<4) return 0;
+        $pkbest=$this->arrayOut[3];
+
+        return $this->riderArray[$pkbest]["data"][3]->percent;
+
+    }
     public function calculateScore(int $col, float $point){
 
             if ($col==4)
@@ -53,11 +60,7 @@ class PKClubHelperController extends Controller
             }
     }
 
-    public function getPK1Score(){
-        $pkBest = $this->arrayOut[3];
-        $pkScore = $this->riderArray[$pkBest][3];
-        return $pkScore;
-    }
+
     private function allDiferent(){
 
         $checkArray=[0,0,0,0];

@@ -50,15 +50,16 @@ class PKClubController extends Controller
 
                 if ($this->doesTheClubHaveEverything($riderArray))
                 {
-                    $riderNames = 
                     $helper = new PKClubHelperController($riderArray);
                     $helper->calculateScore(0,0);
                     $score = $helper->getMaxPoint();
                     $pointArray = $helper->getPointArray();
-                    $pk1Score = $helper->getPK1Score();
-                    $clubs[]=["club"=>$start->club,"riderArray"=>$riderArray,"pointArray"=>$pointArray,"score"=>$score,"pk1Score"=>$pk1Score];
+                    $pkscore = $helper->getPk1Score();
+                    if (count($pointArray)==0) $doesNotHaveEverything[] = ["club"=>$start->club,"riderArray"=>$riderArray,"score"=>0];
+                    else $clubs[]=["club"=>$start->club,"riderArray"=>$riderArray,"pointArray"=>$pointArray,"score"=>$score,"pkscore"=>$pkscore];
                     //dump($clubs);
                 }  
+
                 else{
                     $doesNotHaveEverything[] = ["club"=>$start->club,"riderArray"=>$riderArray,"score"=>0];
 
@@ -66,9 +67,9 @@ class PKClubController extends Controller
 
         }
         $clubs = collect($clubs);
-        $clubs = $clubs->sortByDesc("pk1Score")->sortByDesc("score");
+        $clubs = $clubs->sortByDesc("pkscore")->sortByDesc("score");
 
-
+        //dd($clubs);
 
      
         return view("championship.show.pkclub",[
