@@ -116,7 +116,7 @@ Route::get('/event/resetSponsor/{event}', [EventController::class, 'resetSponsor
 
 Route::get('/event/copy/from/{fromEvent}/to/{toEvent}', [EventController::class, 'copyEvent']);
 
-
+Route::get('/event/copycategory/from/{fromEvent}/to/{toEvent}', [EventController::class, 'copyCategory']);
 
 Route::get('/event/phantom/{event}', [PhantomEventController::class, 'show']);
 

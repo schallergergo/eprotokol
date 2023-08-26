@@ -165,7 +165,7 @@ class EventController extends Controller
 
  public function exportEvent(Event $event){
         $this->authorize('update', $event);
-        return Excel::download(new ResultExport($event), $event->event_name.'_results.xlsx');
+        return Excel::download(new ResultExport($event), str_replace("/", "-", $event->event_name.'_results.xlsx'));
     }
 
 public function startlist(Event $event){
@@ -240,5 +240,28 @@ public function updateCategory (Event $event){
     }
     else return "Ezt nem tudja másolni!!!";
 }
+
+public function copyCategory(Event $fromEvent, Event $toEvent){
+        $textOut="";
+        $this->authorize("update",$toEvent);
+
+
+        $fromStarts = $fromEvent->start;
+        $toStarts = $toEvent->start;
+        foreach($fromStarts as $start){
+           $found = $toStarts->where("twoIds",$start->twoIds);
+           if (count($found)==1) 
+            {
+                $found= $found->first();
+                $found->category=$start->category;
+                $found->save();
+            }
+           else $textOut=$textOut."nincs startja:".$start->rider_name." ".$start->horse_name."<br>";
+        }
+         $textOut .= "Minden ok";
+        return $textOut;
+
+        }
+        
 
 }

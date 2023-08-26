@@ -40,7 +40,7 @@ class ResultImport implements ToModel, WithValidation, WithHeadingRow, SkipsOnEr
  			'rider_name'=> $data['rider_name'],
  			'horse_id'=> str_replace(" ", "",$data['horse_licence']),
  			'horse_name'=> $data['horse_name'],
- 			'club' => $data['club'],
+ 			'club' => str_replace("õ", "ő",$data['club']),
  			'category' => str_replace("õ", "ő",$data['category']),
             'original_category' => str_replace("õ", "ő",$data['category']),
             'twoids'=>str_replace(" ", "",$data['rider_licence'])."".str_replace(" ", "",$data['horse_licence']),
