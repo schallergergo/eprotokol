@@ -111,7 +111,7 @@
                             <div class="col-md-6">
                                 <select id="eliminated" type="number" class="form-control @error('eliminated') is-invalid @enderror" name="eliminated" required> 
                                     <option value=0>{{__("Not eliminated!")}}</option>
-                                    <option value= @if ($style->eliminated) selected @endif>{{__("Eliminated")}}</option>
+                                    <option value=1 @if ($style->eliminated) selected @endif>{{__("Eliminated")}}</option>
                                 </select>
                                 @error('eliminated')
                                     <span class="invalid-feedback" role="alert">

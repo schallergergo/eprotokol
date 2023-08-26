@@ -3,7 +3,7 @@
                     
                         @foreach ($team_result["event_results"] as $event_result)
 
-
+                        @if (count($team_result["starts"])>0)
                             <div class="row mb-2 ">
                         
 
@@ -51,7 +51,7 @@
                         
                         </div><!-- end of the row-->
                         @endforeach <!-- end foreach starts-->
-
+                        @endif
                         @endforeach  <!-- end foreach eventresults-->
 
 

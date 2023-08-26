@@ -28,7 +28,7 @@ function ajax(){
 
             obj=JSON.parse(data);
             console.log(obj.sponsor_logo);
-            if (obj.rider=="") notStarted(obj.event_name,obj.sponsor_logo);
+            if (obj.rider=="" || !hasAnyPoints(obj)) notStarted(obj.event_name,obj.sponsor_logo);
             else generateStart(obj);
             
             
@@ -38,6 +38,13 @@ function ajax(){
            
 
 }
+function hasAnyPoints(json){
+    judges=json.judges;
+    if (judges.length==0) return false;
+   if (json.lastfilled==0 && judges[0].lastMark=="") return false;
+   return true;
+}
+
 
 function getEvents(){
     events=document.getElementsByName("events");

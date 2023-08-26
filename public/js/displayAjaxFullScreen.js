@@ -1,6 +1,6 @@
 
 $(document).ready(ajax);
-//setInterval(ajax, 5000);
+setInterval(ajax, 5000);
 count=0;
 
 
@@ -50,7 +50,7 @@ notStarted("","/storage/logo/logo_med.png");
            });
            request.done(function(data){
             obj=JSON.parse(data);
-            if (obj.rider=="") notStarted(obj.event_name,obj.sponsor_logo);
+            if (obj.rider=="" || !hasAnyPoints(obj)) notStarted(obj.event_name,obj.sponsor_logo);
             else generateStart(obj);
             
             
@@ -62,12 +62,17 @@ notStarted("","/storage/logo/logo_med.png");
 });
 
 }
-
+function hasAnyPoints(json){
+    judges=json.judges;
+    if (judges.length==0) return false;
+   if (json.lastfilled==0 && judges[0].lastMark=="") return false;
+   return true;
+}
 
 function notStarted(event_name,sponsor_logo){
 
     document.getElementById("header_name").innerText=event_name;
-    document.getElementById("rider_name").innerHTML='<img src="'+sponsor_logo+'" class="img-fluid m-10" alt="Eprotokol logo">';
+    document.getElementById("rider_name").innerHTML='<img src="'+sponsor_logo+'" class="img-fluid m-10" height="350"  width="900" alt="Eprotokol logo">';
         document.getElementById("horse_name").innerText="";
     document.getElementById("club_name").innerText="";
     document.getElementById("result").innerHTML="";
