@@ -53,7 +53,11 @@ class PKClubHelperController extends Controller
             }
     }
 
-
+    public function getPK1Score(){
+        $pkBest = $this->arrayOut[3];
+        $pkScore = $this->riderArray[$pkBest][3];
+        return $pkScore;
+    }
     private function allDiferent(){
 
         $checkArray=[0,0,0,0];

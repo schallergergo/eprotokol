@@ -55,7 +55,8 @@ class PKClubController extends Controller
                     $helper->calculateScore(0,0);
                     $score = $helper->getMaxPoint();
                     $pointArray = $helper->getPointArray();
-                    $clubs[]=["club"=>$start->club,"riderArray"=>$riderArray,"pointArray"=>$pointArray,"score"=>$score];
+                    $pk1Score = $helper->getPK1Score();
+                    $clubs[]=["club"=>$start->club,"riderArray"=>$riderArray,"pointArray"=>$pointArray,"score"=>$score,"pk1Score"=>$pk1Score];
                     //dump($clubs);
                 }  
                 else{
@@ -65,7 +66,7 @@ class PKClubController extends Controller
 
         }
         $clubs = collect($clubs);
-        $clubs = $clubs->sortByDesc("score");
+        $clubs = $clubs->sortByDesc("pk1Score")->sortByDesc("score");
 
 
 
