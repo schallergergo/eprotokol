@@ -69,7 +69,7 @@ class PKShowJumpingController extends Controller
         $collection=collect([]);
         foreach ($startsArray as $starts){
             
-            $foundStart=$starts->where("rider_id",$start->rider_id)->where("horse_id",$start->horse_id);
+            $foundStart=$starts->where("rider_id",$start->rider_id)->where("horse_id",$start->horse_id)->where("eliminated",0);
 
             if (count($foundStart)>0) $collection=$collection->merge($foundStart);
         }
