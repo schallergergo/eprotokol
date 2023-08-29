@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ChampionshipType;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Championship;
+use App\Models\Competition;
 use App\Models\Event;
 use App\Models\Start;
 use App\Models\Team;
@@ -12,41 +13,57 @@ class PKTeamDressageController extends Controller
 {
     public function show(Championship $championship)
     {       
-        $events=$this->getEventsArray(json_decode($championship->events));
+        $events=collect($this->getEventsArray(json_decode($championship->events)));
         $numberOfEvents=count($events);
         $team_results = array();
         $uniqueStarts;
         $teams = $championship->team;
+        $competitions = array();
+
+
+        foreach ($events as $event) $competitions[] = $event->competition;
+
+        $competitions = competition::whereIn("id",$events->pluck("competition_id"))->get();
 
         foreach ($teams as $team){
-                $event_results=array();
-            foreach($events as $event) 
+            $competition_results=array();
+            foreach($competitions as $competition){
+                
+                $competitionEvents = $events->where("competition_id",$competition->id);
+                $starts = collect();
+            foreach($competitionEvents as $event) 
                 {
-                    $starts        = $event->start->where("eliminated",0);
-                    $event_result = $this->getTeamResult($event,$starts,$team);
-                    $event_results[] = $event_result;
+                     $starts = $starts->merge($event->start->where("eliminated",0));
+                   
                     
                 }
 
-                $event_results = collect($event_results);
+                    $competition_result = $this->getTeamResult($competition,$starts,$team);
+                    $competition_results[] = $competition_result;
+
+            }
+
+                $competition_results = collect($competition_results);
+
                 $team_results[] = [
                                     "team"=>$team,
-                                    "event_results"=>$event_results,
-                                    "best_two"=>$event_results->avg("best_two"),
-                                    "average"=>$event_results->avg("average"),
-                                    "last_average"=>$event_results->last()["best_two"],
+                                    "competition_results"=>$competition_results,
+
+                                    "best_two"=>$competition_results->avg("best_two"),
+                                    "average"=>$competition_results->avg("average"),
+                                    "last_average"=>$competition_results->last()["best_two"],
 
 
                                 ];
+     }
 
-        }
         $team_results = collect($team_results);
         $team_results = $team_results->sortByDesc("average")->sortBy("last_average")->sortByDesc("best_two");
         
 
 
 
-        //dd($team_results);
+
 
         return view("championship.show.pkteamdressage",[
             "championship"=>$championship,
@@ -57,12 +74,12 @@ class PKTeamDressageController extends Controller
     }
 
 
-        private function getTeamResult($event,$starts,$team){
+        private function getTeamResult($competition,$starts,$team){
             $teamStarts = $starts->whereIn("twoIds",$team->team_member->pluck("twoIds"));
             $teamStarts = $teamStarts->sortByDesc("percent");
             
 
-            return ["event"=>$event,"starts"=>$teamStarts,"best_two"=>$teamStarts->slice(0,2)->avg("percent"),"average"=>$teamStarts->avg("percent")];
+            return ["competition"=>$competition,"starts"=>$teamStarts,"best_two"=>$teamStarts->slice(0,2)->avg("percent"),"average"=>$teamStarts->avg("percent")];
         }
 
         private function getEventsArray (array $events){
