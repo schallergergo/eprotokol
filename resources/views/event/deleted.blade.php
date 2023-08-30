@@ -24,17 +24,22 @@
                    
                     <div class="row mb-2 border">
 
-                        <div class="col-md-3 p-1 border d-none d-md-block">
+                        <div class="col-md-2 p-1 border d-none d-md-block">
                             <span class="align-middle font-weight-bold">{{__("Rider")}}</span>
                         </div>
                         
-                        <div class="col-md-3 p-1 border d-none d-md-block">
+                        <div class="col-md-2 p-1 border d-none d-md-block">
                             <span class="align-middle font-weight-bold">{{__("Horse")}}</span>
                         </div>
 
                         <div class="col-md-3 p-1 border d-none d-md-block ">
                             <span class="align-middle font-weight-bold">{{__("Club")}}</span>
                         </div>
+
+                         <div class="col-md-2 p-1 border d-none d-md-block">
+                            <span class="align-middle font-weight-bold">{{__("Mark/Percent")}}</span>
+                        </div>
+
                          <div class="col-md-3 p-1 border d-none d-md-block ">
                             <span class="align-middle font-weight-bold">{{__("Deleted_at")}}</span>
                         </div>
@@ -49,16 +54,20 @@
                     
 
                     <div class="row mb-2 border">
-                        <div class="col-md-3 p-1 border">
+                        <div class="col-md-2 p-1 border">
                             <span class="align-middle">{{$start->rider_name}} </span>
                         </div>
                         
-                        <div class="col-md-3 p-1 border">
+                        <div class="col-md-2 p-1 border">
                             <span class="align-middle">{{$start->horse_name}}</span>
                         </div>
 
                         <div class="col-md-3 p-1 border">
                             <span class="align-middle">{{$start->club}}</span>
+                        </div>
+
+                        <div class="col-md-2 p-1 border">
+                            <span class="align-middle">{{$start->mark}} - {{$start->mark}}</span>
                         </div>
 
                          <div class="col-md-3 p-1 border">
