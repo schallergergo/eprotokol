@@ -110,6 +110,8 @@ Route::patch('/event/update/{event}', [EventController::class, 'update']);
 Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
 Route::get('/event/export/{event}', [EventController::class, 'exportEvent']);
 
+Route::get('/event/deletedstarts/{event}', [EventController::class, 'deletedStarts']);
+
 Route::post('/event/updateCategory/{event}', [EventController::class, 'updateCategory']);
 Route::get('/event/resetCategory/{event}', [EventController::class, 'resetCategory']);
 Route::get('/event/resetSponsor/{event}', [EventController::class, 'resetSponsor']);

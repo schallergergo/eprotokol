@@ -181,6 +181,15 @@ public function startlist(Event $event){
         return view("event.startlist",["event"=>$event,"results"=>$results]);
     }
 
+public function deletedStarts(Event $event){
+
+        $this->authorize('update', $event);
+       $trashed = Start::onlyTrashed()->where("event_id",$event->id)->get();
+
+
+        return view("event.deleted",["event"=>$event,"starts"=>$trashed]);
+    }
+
     
 
 public function resetCategory (Event $event){
