@@ -66,6 +66,7 @@
                             @endforeach
 
                             @include("event.components.round")
+                            @include("event.components.style")
                             
                         </div>
 
