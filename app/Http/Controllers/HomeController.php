@@ -49,12 +49,14 @@ class HomeController extends Controller
 
     //the home screen for riders
     private function riderIndex(User $user){
+        $user_names = json_decode($user->extrariders);
+        $user_names [] = $user->username;
         $toMatch=[
-            "rider_id"=>$user->username,
             "completed"=>1,
             "public"=>1,
             ];
-        $starts=Start::where($toMatch)->orderBy('created_at','desc')->paginate(10); 
+            dd($user_names);
+        $starts=Start::where($toMatch)->whereIn("rider_id",$user_names)->orderBy('created_at','desc')->paginate(10); 
         //dd($starts);
         return view("start.rider.index",["starts"=>$starts]);
     }
