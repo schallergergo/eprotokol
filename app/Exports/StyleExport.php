@@ -37,8 +37,8 @@ class StyleExport implements FromArray {
                 $temp[] = $start->horse_name;
                 $temp[] = $start->club;
                 $temp[] = $start->original_category;
-                $temp[] = "".$style->time;
                 $temp[] = "".$style->total_fault;
+                $temp[] = "".$style->time;
                 $temp[] = "".$style->given_mark;
                 $temp[] = "".$style->deductions;
                 $temp[] = "".$style->total_mark;
@@ -61,8 +61,9 @@ class StyleExport implements FromArray {
                 $temp[] = "horse_name";
                 $temp[] = "club";
                 $temp[] = "category";
-                $temp[] = "time";
                 $temp[] = "total fault";
+                $temp[] = "time";
+
                 $temp[] = "given mark";
                 $temp[] = "deductions";
                 $temp[] = "total mark";
