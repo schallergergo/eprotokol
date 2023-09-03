@@ -15,6 +15,10 @@ use App\Http\Controllers\OfficialController;
 
 use Illuminate\Support\Facades\Auth;
 use App\Exports\ResultExport;
+use App\Exports\JumpingRoundExport;
+use App\Exports\StyleExport;
+
+
 use Maatwebsite\Excel\Facades\Excel;
 
 class EventController extends Controller
@@ -165,7 +169,17 @@ class EventController extends Controller
 
  public function exportEvent(Event $event){
         $this->authorize('update', $event);
-        return Excel::download(new ResultExport($event), str_replace("/", "-", $event->event_name.'_results.xlsx'));
+        $event_name = str_replace("/", "-", $event->event_name.'_results.xlsx');
+         $typeofevent = $event->program->typeofevent;
+        if ($typeofevent=="rounds")
+             return Excel::download(new JumpingRoundExport($event), $event_name);
+
+         if ($typeofevent=="style")
+            return Excel::download(new StyleExport($event), $event_name);
+
+            return Excel::download(new ResultExport($event), $event_name);
+
+        return Excel::download(new ResultExport($event), $event_name);
     }
 
 public function startlist(Event $event){
