@@ -36,16 +36,16 @@ class JumpingRoundExport implements FromArray {
                 $temp[] = $start->horse_name;
                 $temp[] = $start->club;
                 $temp[] = $start->original_category;
-                $temp[] = "".$round->time1;
+
                 $temp[] = "".$round->obstacle_fault1;
                 $temp[] = "".$round->time_fault1;
                 $temp[] = "".$round->total_fault1;
+                $temp[] = "".$round->time1;
 
-                $temp[] = "".$round->time2;
                 $temp[] = "".$round->obstacle_fault2;
                 $temp[] = "".$round->time_fault2;
                 $temp[] = "".$round->total_fault2;
-
+                $temp[] = "".$round->time2;
                 $output[]=$temp;
 
 
@@ -62,14 +62,15 @@ class JumpingRoundExport implements FromArray {
                 $temp[] = "horse_name";
                 $temp[] = "club";
                 $temp[] = "category";
-                $temp[] = "time 1. round";
                 $temp[] = "obstacle_fault 1. round";
                 $temp[] = "time fault 1. round";
                 $temp[] = "total fault 1. round";
-                $temp[] = "time 2. round";
+                $temp[] = "time 1. round";
+
                 $temp[] = "obstacle_fault 2. round";
                 $temp[] = "time fault 2. round";
                 $temp[] = "total fault 2. round";
+                $temp[] = "time 2. round";
 
 
         return $temp;

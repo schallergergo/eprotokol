@@ -37,6 +37,7 @@ class PKClubHelperController extends Controller
         return $this->riderArray[$pkbest]["data"][3]->percent;
 
     }
+    
     public function calculateScore(int $col, float $point){
 
             if ($col==4)
@@ -45,7 +46,6 @@ class PKClubHelperController extends Controller
                 if( $this->allDiferent() && $point > $this->maxPoint){
                     $this->maxPoint = $point;
                     $this->arrayOut = $this->maxPointArray;
-
                 }
                 return;
             }

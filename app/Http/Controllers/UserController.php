@@ -65,6 +65,7 @@ class UserController extends Controller
         else $this->storeAdmin($data);
         return redirect("/home");
     }
+
 private function storePenciler(array $data){
 
         $this->authorize('createPenciler',User::class);
@@ -103,6 +104,24 @@ private function storeAdmin(array $data){
         $clubs=User::all();
         return view("user.profile",["user"=>$user,"clubs"=>$clubs]);
     }
+
+    public function search(){
+        $this->authorize('isAdmin',User::class);
+        $data = request();
+
+        if (!isset($data["search"])) return view("result.search",["search"=>""]);
+        $data=$data->validate([
+            'search' => ["string","max:256","nullable"],
+            ]);
+        $searchTerm=$data["search"];
+
+        $users=User::where("username","LIKE",$searchTerm)->orWhere("name","LIKE","%".$searchTerm."%")->paginate();
+
+        return view("home",["users"=>$users]);
+    }
+
+
+
     public function profile()
     {
         $user=Auth::User();
@@ -196,4 +215,5 @@ private function storeAdmin(array $data){
     {
         //
     }
+
 }
