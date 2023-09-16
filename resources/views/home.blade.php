@@ -28,26 +28,48 @@
 
                     @endif
 
-                        <form method="POST" action="/user/search/" enctype="multipart/form-data">
-                        @csrf
+                       <form  action="/user/search/" method="GET">
+
+                           
+
+
                       <div class="form-group row">
+
                             <div class="col-md-6">
-                                <input id="search" type="text" class="form-control @error('search') is-invalid @enderror" name="search" value="{{ old('search') }}"    
+
+                                <input id="search" type="text" class="form-control @error('search') is-invalid @enderror" name="search" value="{{ $search }}"    
+
                                 placeholder="{{__('Search')}}">
 
+
+
                                 @error('search')
+
                                     <span class="invalid-feedback" role="alert">
+
                                         <strong>{{__("Too long")}}</strong>
+
                                     </span>
+
                                 @enderror
+
                             </div>
 
+
+
                             <div class="col-md-6 ">
+
                                 <button type="submit" class="btn btn-primary">
+
                                     {{ __('Search') }}
+
                                 </button>
+
                             </div>
+
                         </div>
+
+
 
                         </form>
 

@@ -84,7 +84,7 @@ Route::get('/user/profile', [UserController::class,'profile']);
 Route::get('/user/edit/{user}', [UserController::class,'editAsAdmin']);
 Route::patch('/user/update/{user}', [UserController::class,'update']);
 Route::patch('/user/updateAsAdmin/{user}', [UserController::class,'updateAsAdmin']);
-Route::post('/user/search', [UserController::class,'search']);
+Route::get('/user/search', [UserController::class,'search']);
 
 
 Route::get('/result/show/{result}', [ResultController::class, 'show']);

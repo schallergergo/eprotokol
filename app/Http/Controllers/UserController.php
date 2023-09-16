@@ -106,18 +106,25 @@ private function storeAdmin(array $data){
     }
 
     public function search(){
-        $this->authorize('isAdmin',User::class);
+
+        //$this->authorize('isAdmin',User::class);
+
         $data = request();
 
-        if (!isset($data["search"])) return view("result.search",["search"=>""]);
+
+
+
+
         $data=$data->validate([
+
             'search' => ["string","max:256","nullable"],
+
             ]);
+        if (count($data)==0) $data = ["search"=>null];
         $searchTerm=$data["search"];
+        $users=User::where("username","LIKE",$searchTerm)->orWhere("name","LIKE","%".$searchTerm."%")->paginate(20);
+        return view("home",["users"=>$users,"search"=>$searchTerm]);
 
-        $users=User::where("username","LIKE",$searchTerm)->orWhere("name","LIKE","%".$searchTerm."%")->paginate();
-
-        return view("home",["users"=>$users]);
     }
 
 
