@@ -203,6 +203,25 @@ class StartController extends Controller
         return redirect("event/show/{$start->event->id}");
     }
 
+     public function restore($id){
+
+        $start  = Start::onlyTrashed()->where("id",$id)->first();
+
+        $this->authorize('restore', $start );
+        $resultController = new ResultController();
+        $results = Result::onlyTrashed()->where("start_id",$start->id)->get();
+        foreach($results as $result){
+            $resultController->restore($result);
+        } 
+        $roundController = new JumpingRoundController();
+
+        foreach($start->jumping_round as $round){
+            $roundController->destroy($round);
+        } 
+        $start->restore();
+        return redirect("event/show/{$start->event->id}");
+    }
+
     public function import(Event $event){
         $this->authorize('create', [Start::class,$event]);
          $data = request();
@@ -227,6 +246,12 @@ class StartController extends Controller
     catch (Exception $e) {
      return redirect("event/edit/{$event->id}")->with("status","Import failed!");
         }
+    }
+
+    public function compare(Start $start){
+
+        $program = $start->event->program;
+        return view("start.compare",["start"=>$start,"program"=>$program]);
     }
 
     public function moveUp(Start $start){

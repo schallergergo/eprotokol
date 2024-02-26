@@ -282,6 +282,15 @@ private function calculatePartialResult(Result $result){
         $result->save();
     }
 
+     public function restore(Result $result){
+
+
+
+            $result->restore($result);
+
+       
+
+    }
     
 
     

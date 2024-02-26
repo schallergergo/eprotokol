@@ -37,7 +37,7 @@
 
                             <div class="col-md-6">
 
-                                <input id="search" type="text" class="form-control @error('search') is-invalid @enderror" name="search" value="{{ $search }}"    
+                                <input id="search" type="text" class="form-control @error('search') is-invalid @enderror" name="search" @if(isset($search))value="{{ $search }}"  @endif  
 
                                 placeholder="{{__('Search')}}">
 

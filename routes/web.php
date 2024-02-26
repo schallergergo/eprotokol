@@ -69,9 +69,11 @@ Route::get('/start/create/{event}', [StartController::class,'create']);
 Route::get('/start/index/{user}', [StartController::class,'index']);
 Route::post('/start/store/{event}', [StartController::class,'store']);
 Route::get('/start/edit/{start}', [StartController::class,'edit']);
+Route::get('/start/compare/{start}', [StartController::class,'compare']);
 Route::patch('/start/update/{start}', [StartController::class,'update']); 
 Route::post('/start/import/{event}', [StartController::class,'import']);
 Route::get('/start/delete/{start}', [StartController::class,'destroy']);
+Route::get('/start/restore/{start}', [StartController::class,'restore']);
 
 Route::get('/start/moveUp/{start}', [StartController::class,'moveUp']);
 Route::get('/start/moveDown/{start}', [StartController::class,'moveDown']);
@@ -106,12 +108,13 @@ Route::get('/event/startlist/{event}', [EventController::class, 'startlist']);
 Route::get('/event/create/{competition}', [EventController::class, 'create']);
 Route::post('/event/store/{competition}', [EventController::class, 'store']);
 Route::get('/event/edit/{event}', [EventController::class, 'edit']);
+
 Route::get('/event/delete/{event}', [EventController::class, 'destroy']);
 Route::patch('/event/update/{event}', [EventController::class, 'update']);
 Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
 Route::get('/event/export/{event}', [EventController::class, 'exportEvent']);
 
-Route::get('/event/deletedstarts/{event}', [EventController::class, 'deletedStarts']);
+Route::get('/event/deletedStarts/{event}', [EventController::class, 'deletedStarts']);
 
 Route::post('/event/updateCategory/{event}', [EventController::class, 'updateCategory']);
 Route::get('/event/resetCategory/{event}', [EventController::class, 'resetCategory']);
