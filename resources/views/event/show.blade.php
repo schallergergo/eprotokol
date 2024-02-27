@@ -15,8 +15,7 @@
                         <a href="/start/create/{{$event->id}}" >{{__("Add new rider")}}</a>
                     @endcan
                     @can('update',$event)
-                        <a href="/event/export/{{$event->id}}" target="_blank">{{__("Export results")}} </a>
-                        <a href="/event/export/{{$event->id}}" target="_blank">{{__("Kondor")}}</a>
+
                         <a href="/event/edit/{{$event->id}}">{{__("Edit event")}}</a>
                     @endcan
                     <span class="float-right">

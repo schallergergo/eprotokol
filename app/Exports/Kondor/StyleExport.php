@@ -1,5 +1,5 @@
 <?php
-namespace App\Exports;
+namespace App\Exports\Kondor;
 use Illuminate\Http\Request;
 use App\Models\Start;
 use App\Models\Event;
@@ -27,16 +27,19 @@ class StyleExport implements FromArray {
                 $temp=[];
                 $style = $start->style->first();
 
-                if ($start->completed){
-                     $temp[] = $start->rank;
-                }
-                else  $temp[] = "";
                 $temp[] = $start->rider_id;
                 $temp[] = $start->rider_name;
                 $temp[] = $start->horse_id;
                 $temp[] = $start->horse_name;
                 $temp[] = $start->club;
                 $temp[] = $start->original_category;
+
+                $temp[] = "";
+                if ($start->completed){
+                     $temp[] = $start->rank;
+                }
+                else  $temp[] = "";
+
                 $temp[] = "".$style->total_fault;
                 $temp[] = "".$style->time;
                 $temp[] = "".$style->given_mark;
@@ -55,13 +58,16 @@ class StyleExport implements FromArray {
 
         private function head(){
                 $temp   = [];
-                $temp[] = "rank";
+
                 $temp[] = "rider_id";
                 $temp[] = "rider_name";
                 $temp[] = "horse_id";
                 $temp[] = "horse_name";
                 $temp[] = "club";
                 $temp[] = "category";
+                $temp[] = "empty";
+                $temp[] = "rank";
+
                 $temp[] = "total fault";
                 $temp[] = "time";
 

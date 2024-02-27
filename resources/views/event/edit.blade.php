@@ -14,6 +14,10 @@
             <div class="card">
                 <div class="card-header">
                     {{ __('Edit event') }}
+
+                        <a href="/event/export/{{$event->id}}" target="_blank">{{__("Export results")}} </a>
+                        <a href="/event/exportByKondor/{{$event->id}}" target="_blank">/ {{__("by Kondor")}}</a>
+
                     <span class="float-right"><a href="/event/show/{{$event->id}}">{{__("Back to event")}}</a></span>
                 </div>
 

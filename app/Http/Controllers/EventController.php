@@ -187,14 +187,14 @@ class EventController extends Controller
         $event_name = str_replace("/", "-", $event->event_name.'_results.xlsx');
          $typeofevent = $event->program->typeofevent;
         if ($typeofevent=="rounds" || $typeofevent=="pkx")
-             return Excel::download(new JumpingRoundExport($event), $event_name);
+             return Excel::download(new \App\Exports\Kondor\JumpingRoundExport($event), $event_name);
 
          if ($typeofevent=="style")
-            return Excel::download(new StyleExport($event), $event_name);
+            return Excel::download(new \App\Exports\Kondor\StyleExport($event), $event_name);
 
 
 
-        return Excel::download(new \App\Exports\Kondor\ResultExport;($event), $event_name);
+        return Excel::download(new \App\Exports\Kondor\ResultExport($event), $event_name);
     }
 
 public function startlist(Event $event){

@@ -1,5 +1,5 @@
 <?php
-namespace App\Exports;
+namespace App\Exports\Kondor;
 use Illuminate\Http\Request;
 use App\Models\Start;
 use App\Models\Event;
