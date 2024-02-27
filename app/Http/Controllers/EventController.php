@@ -194,7 +194,7 @@ class EventController extends Controller
 
 
 
-        return Excel::download(new ResultExport($event), $event_name);
+        return Excel::download(new \App\Exports\Kondor\ResultExport;($event), $event_name);
     }
 
 public function startlist(Event $event){
