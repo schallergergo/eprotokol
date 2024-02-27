@@ -20,7 +20,7 @@ class StyleExport implements FromArray {
 
     }
      private function makeArray() {
-        $starts = Start::where('event_id', $this->event->id)->get();
+        $starts = Start::where('event_id', $this->event->id)->orderBy("updated_at")->get();
         $output = [];
         $output[]=$this->head();;
         foreach ($starts as $start) {
