@@ -113,7 +113,7 @@ Route::get('/event/delete/{event}', [EventController::class, 'destroy']);
 Route::patch('/event/update/{event}', [EventController::class, 'update']);
 Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
 Route::get('/event/export/{event}', [EventController::class, 'exportEvent']);
-Route::get('/event/exportByKondor/{event}', [EventController::class, 'exportEvent']);
+Route::get('/event/exportByKondor/{event}', [EventController::class, 'exportEventByKondor']);
 
 Route::get('/event/deletedStarts/{event}', [EventController::class, 'deletedStarts']);
 
