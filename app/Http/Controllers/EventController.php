@@ -171,7 +171,7 @@ class EventController extends Controller
         $this->authorize('update', $event);
         $event_name = str_replace("/", "-", $event->event_name.'_results.xlsx');
          $typeofevent = $event->program->typeofevent;
-        if ($typeofevent=="rounds")
+        if ($typeofevent=="rounds" || $typeofevent=="pkx")
              return Excel::download(new JumpingRoundExport($event), $event_name);
 
          if ($typeofevent=="style")
