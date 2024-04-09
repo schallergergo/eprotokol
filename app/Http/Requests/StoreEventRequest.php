@@ -17,6 +17,7 @@ class StoreEventRequest extends FormRequest
         return [
             'event_name' => ['required', 'string', 'max:255'],
             'program_id' => ['required', 'integer', 'min:0'],
+            "start_fee" => ['required', 'integer', 'min:0'],
         ];
     }
 }

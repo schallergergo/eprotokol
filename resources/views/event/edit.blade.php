@@ -59,6 +59,21 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="start_fee" class="col-md-4 col-form-label text-md-right">{{ __('Start fee') }}</label>
+                            <div class="col-md-6">
+                                <input id="start_fee" type="number" class="form-control @error('start_fee') is-invalid @enderror" name="start_fee"  value="{{$event->start_fee}}" disabled>
+
+                                @error('start_fee')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{__("Something is wrong... I know very helpful.")}}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+
 
                          <div class="form-group row">
                             <label for="sponsor" class="col-md-4 col-form-label text-md-right"><a href="/event/resetSponsor/{{$event->id}}">{{ __('Sponsor') }}</a></label>

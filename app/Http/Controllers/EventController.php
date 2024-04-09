@@ -46,7 +46,8 @@ class EventController extends Controller
 
         return view("event.create",[
             "programs"=>$programs,
-            "competition"=>$competition]);
+            "competition"=>$competition
+        ]);
     } 
     /**
      * Store a newly created resource in storage.
@@ -71,6 +72,7 @@ class EventController extends Controller
            
             'event_name' => $data["event_name"],
             'program_id' => $data["program_id"],
+            'start_fee' => $data["start_fee"],
             'competition_id'=>$competition->id,
         ]);
         $newEvent->rank=$newEvent->id;
@@ -95,6 +97,8 @@ class EventController extends Controller
     //riders in the event with completed results
     $started=$starts->where("completed",">",0)->sortBy("rank")->sortBy("category");
 
+    $notStarted=$starts->where("completed",-1)->sortBy("rider_name");
+
     $categories=$started->unique("category")->sortBy("category")->pluck("category")->all();
     
     $startedArray=array();
@@ -105,6 +109,7 @@ class EventController extends Controller
     return view("event.show",  ["event"=>$event,
                                  "startedArray"=>$startedArray,
                                  "toStart"=>$toStart,
+                                 "notStarted"=>$notStarted,
 
                                 ]);
     }

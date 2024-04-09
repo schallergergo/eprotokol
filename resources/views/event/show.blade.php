@@ -183,7 +183,89 @@
                     
                     @endif
                     </div><!-- end of the card-->   
-                    @endforeach               
+                    @endforeach  
+
+
+
+@can ("update",$event)
+@if (count($notStarted)!=0)
+<div class="card-header">
+                    <span>Not started</span>
+                    
+                </div>
+
+                <div class="card-body">
+
+                    
+                    
+                   
+                   
+                    <div class="row mb-2 border">
+                        <div class="col-md-3 p-1 border d-none d-md-block">
+                            <span class="align-middle font-weight-bold">{{__("Rider")}}</span>
+                        </div>
+                        
+                        <div class="col-md-3 p-1 border d-none d-md-block">
+                            <span class="align-middle font-weight-bold">{{__("Horse")}}</span>
+                        </div>
+
+                        <div class="col-md-2 p-1 border d-none d-md-block ">
+                            <span class="align-middle font-weight-bold">{{__("Club")}}</span>
+                        </div>
+
+                        <div class="col-md-2 p-1 border d-none d-md-block">
+                            <span class="align-middle font-weight-bold">{{__("Category")}}</span>
+                        </div>
+                        <div class="col-md-2 p-1 border d-none d-md-block">
+                             <span class="align-middle font-weight-bold">{{__("Options")}}</span>
+                        </div>
+
+                    </div><!-- end of the row-->
+                    
+                    
+                    @foreach ($notStarted as $start)
+                    
+                    
+
+                    <div class="row mb-2 border">
+                        <div class="col-md-3 p-1 border">
+                            <span class="align-middle">{{$start->rider_name}} ({{$start->rider_id}})</span>
+                        </div>
+                        
+                        <div class="col-md-3 p-1 border">
+                            <span class="align-middle">{{$start->horse_name}} ({{$start->horse_id}})</span>
+                        </div>
+
+                        <div class="col-md-2 p-1 border">
+                            <span class="align-middle">{{$start->club}}</span>
+                        </div>
+
+                        <div class="col-md-2 p-1 border">
+                            <span class="align-middle">{{$start->category}}</span>
+                        </div>
+        
+                        <div class="col-md-2 p-1 border">
+                             @can('update',$start)
+                            <span class="align-middle">
+                                <a href="{{route('start.notStarted',$start)}}" target="" class = "text-danger">
+                            {{__("Started after all")}}</a>
+                            </span>
+                            <br>
+                            @endcan
+                            
+
+                        </div>
+                    </div><!-- end of the row-->
+
+                    
+                    
+           @endforeach       
+                    </div><!-- end of the card-->
+
+
+@endif
+@endcan
+
      </div>
     </div>
 </div>

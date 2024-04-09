@@ -13,6 +13,19 @@
                     <span class="float-right">
                         <a href="/start/delete/{{$start->id}}">{{__("Delete start")}}</a>
                     </span>
+                    <span class="float-right mr-2">
+                        
+                        <a href="{{route('start.notStarted',$start)}}" class = "text-danger">
+                    @if ($start->completed ==0)
+
+                        {{__("Not started")}}
+
+                    
+                    @elseif($start->completed==-1)
+                        {{__("Started after all")}}
+                    @endif
+                        </a>
+                    </span>
                     @endcan
                 </div>
 
@@ -35,7 +48,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="rider_name" class="col-md-4 col-form-label text-md-right">{{ __('Rider name') }}</label>
+                            <label for="rider_name" class="col-md-4 col-form-label text-md-right">{{ __('Rider name') }}
+                                <a href="#" id="findRiderName" onclick="fillRider()"></a> 
+                                <a href="#" id="findRiderId" onclick="fillRider()"></a>
+                                <span id="findRiderClub"  hidden></span>
+
+
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="rider_name" type="text" class="form-control @error('rider_name') is-invalid @enderror" name="rider_name" value="{{ $start->rider_name }}" required>
@@ -49,7 +68,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="horse_id" class="col-md-4 col-form-label text-md-right">{{ __('Horse licence number') }}</label>
+                            <label for="horse_id" class="col-md-4 col-form-label text-md-right">{{ __('Horse licence number') }}
+
+                                <a href="#" id="findHorseName" onclick="fillHorse()"></a> 
+                                <a href="#" id="findHorseId" onclick="fillHorse()"></a>
+
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="horse_id" type="text" class="form-control @error('horse_id') is-invalid @enderror" name="horse_id" value="{{ $start->horse_id }}" required>
@@ -135,4 +159,10 @@
         </div>
     </div>
 </div>
+@endsection
+@section('pagespecificscripts')
+
+    <script src="{{ asset('js/newStartRiderAjax.js') }}"></script>
+    <script src="{{ asset('js/newStartHorseAjax.js') }}"></script>
+
 @endsection

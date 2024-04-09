@@ -266,6 +266,8 @@
 	"Closed championships":"Lezárt bajnokságok",
 	"Rank":"Helyezés",
 	"Edit rounds":"Pályák szerkesztése",
-	"Jumping round":"Ugró pálya"
+	"Jumping round":"Ugró pálya",
+	"Not started":"Nem indul",
+	"Started after all":"Végül indul"
 
 }

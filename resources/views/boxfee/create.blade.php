@@ -4,13 +4,49 @@
 
 
 <div class="container">
+     @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+    @endif
+    
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            
+            <div class="card mb-2">
+                <div class="card-header">{{ __('Import box fee') }} 
+
+
+                    <span class="float-right"><a href="/files/box_template.xlsx">{{__("Import template")}}</a></span>
+
+
+                </div>
+
+                <div class="card-body">
+                    <form method="POST" action="/boxfee/import/{{$competition->id}}" enctype="multipart/form-data">
+                        @csrf
+                       
+                        <input type="file" name="importFile">
+
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Import') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+           
             <div class="card">
                 <div class="card-header">{{ __('Add new start') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/start/store/{{$event->id}}" enctype="multipart/form-data">
+                    <form method="POST" action="/boxfee/store/{{$competition->id}}" enctype="multipart/form-data">
                         @csrf
                        
 
@@ -97,14 +133,14 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
+                            <label for="amount" class="col-md-4 col-form-label text-md-right">{{ __('Amount') }}</label>
 
                             <div class="col-md-6">
-                                <input id="category" type="text" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" required>
+                                <input id="amount" type="text" class="form-control @error('amount') is-invalid @enderror" name="amount" value="{{ old('amount') }}" required>
 
-                                @error('category')
+                                @error('amount')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{__("Invalid category")}}</strong>
+                                        <strong>{{__("Invalid amount")}}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -115,7 +151,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('New start') }}
+                                    {{ __('New box fee') }}
                                 </button>
                             </div>
                         </div>
@@ -125,11 +161,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('pagespecificscripts')
-
-    <script src="{{ asset('js/newStartRiderAjax.js') }}"></script>
-    <script src="{{ asset('js/newStartHorseAjax.js') }}"></script>
-
 @endsection

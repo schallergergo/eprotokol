@@ -27,6 +27,12 @@ use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\StyleController;
 
 use App\Http\Controllers\api\ApiContoller;
+use App\Http\Controllers\AJAX\StartDataController;
+
+use App\Http\Controllers\Finance\TransactionController;
+use App\Http\Controllers\Finance\FinanceController;
+use App\Http\Controllers\Finance\BoxFeeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +49,27 @@ Auth::routes();
 $user=Auth::User();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 ->name('home')->middleware('verified');
+
+Route::get("/finance/show/{competition}", [FinanceController::class, 'show'])->name("finance.show");
+
+Route::get("/finance/filter/competition/{competition}/filter/{club}", [FinanceController::class, 'filterByClub'])->name("finance.filter.club");
+Route::get("/finance/filter/competition/{competition}/rider/{rider_id}", [FinanceController::class, 'filterByRider'])->name("finance.filter.rider");
+Route::get("/finance/didnotpay/competition/{competition}", [FinanceController::class, 'didNotPay'])->name("finance.didnotpay");
+
+
+
+
+Route::get("/transaction/index/{competition}", [TransactionController::class, 'index'])->name("transaction.index");
+Route::get("/transaction/show/{transaction}", [TransactionController::class, 'show'])->name("transaction.show");
+Route::post("/transaction/create/{competition}", [TransactionController::class, 'transactionCreate'])->name("transaction.create");
+
+
+Route::get("/boxfee/index/{competition}", [BoxFeeController::class, 'index'])->name("boxfee.index");
+Route::get("/boxfee/create/{competition}", [BoxFeeController::class, 'create'])->name("boxfee.create");
+Route::post("/boxfee/store/{competition}", [BoxFeeController::class, 'store'])->name("boxfee.store");
+Route::post("/boxfee/import/{competition}", [BoxFeeController::class, 'import'])->name("boxfee.import");
+
+
 
 Route::get("/admin/login/{userId}", [App\Http\Controllers\AdminController::class, 'loginAsUser']);
 Route::get("/admin/logbackin", [App\Http\Controllers\AdminController::class, 'loginBackInAsAdmin']);
@@ -72,12 +99,16 @@ Route::get('/start/edit/{start}', [StartController::class,'edit']);
 Route::get('/start/compare/{start}', [StartController::class,'compare']);
 Route::patch('/start/update/{start}', [StartController::class,'update']); 
 Route::post('/start/import/{event}', [StartController::class,'import']);
-Route::get('/start/delete/{start}', [StartController::class,'destroy']);
+Route::get('/start/delete/{start}', [StartController::class,'destroy'])->name("start.delete");
+
 Route::get('/start/restore/{start}', [StartController::class,'restore']);
+Route::get('/start/notStarted/{start}', [StartController::class,'notStarted'])->name("start.notStarted");
 
 Route::get('/start/moveUp/{start}', [StartController::class,'moveUp']);
 Route::get('/start/moveDown/{start}', [StartController::class,'moveDown']);
 
+Route::get('/ajax/getRiderData', [StartDataController::class,'getRiderData'])->name("ajax.riderData");
+Route::get('/ajax/getHorseData/{club}', [StartDataController::class,'getHorseData'])->name("ajax.horseData");
 
 Route::get('/user/index', [UserController::class,'index']);
 Route::get('/user/create', [UserController::class,'create']);

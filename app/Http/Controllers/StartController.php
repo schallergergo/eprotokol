@@ -139,6 +139,23 @@ class StartController extends Controller
         $start->update($data);
       
     }
+        public function notStarted(Start $start){
+
+        $this->authorize('update', $start );
+        if ($start->completed>0) abort(403);
+
+        $started = $start->completed==0 ? -1:0;
+         $data=[
+            
+            'completed'=>$started, 
+            ];
+        $start->update($data);
+      return back();
+    }
+
+
+
+
    private function getLastRank(Event $event){
     $lastRank= Start::where('event_id',$event->id)->max("rank");
     if ($lastRank==null) return 1;

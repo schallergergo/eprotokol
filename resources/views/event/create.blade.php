@@ -33,15 +33,6 @@
                             </div>
                         </div>
 
-
-
-                       
-
-                       
- 
-
-
-
                         <div class="form-group row">
                             <label for="program" class="col-md-4 col-form-label text-md-right">{{ __('Program') }}</label>
 
@@ -55,6 +46,21 @@
 
                             </div>
                         </div>
+
+
+                        <div class="form-group row">
+                            <label for="start_fee" class="col-md-4 col-form-label text-md-right">{{ __('Start fee') }}</label>
+                            <div class="col-md-6">
+                                <input id="start_fee" type="number" class="form-control @error('start_fee') is-invalid @enderror" name="start_fee" value="{{old('start_fee',0) }}" required>
+
+                                @error('start_fee')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{__("Something is wrong... I know very helpful.")}}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

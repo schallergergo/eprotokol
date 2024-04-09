@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Finance;
 
-use App\Models\Finance;
+use App\Models\StartFee;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreFinanceRequest;
-use App\Http\Requests\UpdateFinanceRequest;
+use App\Http\Requests\StoreStartFeeRequest;
+use App\Http\Requests\UpdateStartFeeRequest;
 
-class FinanceController extends Controller
+class StartFeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class FinanceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreFinanceRequest  $request
+     * @param  \App\Http\Requests\StoreStartFeeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFinanceRequest $request)
+    public function store(StoreStartFeeRequest $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class FinanceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Finance  $finance
+     * @param  \App\Models\StartFee  $startFee
      * @return \Illuminate\Http\Response
      */
-    public function show(Finance $finance)
+    public function show(StartFee $startFee)
     {
         //
     }
@@ -54,10 +54,10 @@ class FinanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Finance  $finance
+     * @param  \App\Models\StartFee  $startFee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Finance $finance)
+    public function edit(StartFee $startFee)
     {
         //
     }
@@ -65,11 +65,11 @@ class FinanceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateFinanceRequest  $request
-     * @param  \App\Models\Finance  $finance
+     * @param  \App\Http\Requests\UpdateStartFeeRequest  $request
+     * @param  \App\Models\StartFee  $startFee
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFinanceRequest $request, Finance $finance)
+    public function update(UpdateStartFeeRequest $request, StartFee $startFee)
     {
         //
     }
@@ -77,10 +77,10 @@ class FinanceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Finance  $finance
+     * @param  \App\Models\StartFee  $startFee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Finance $finance)
+    public function destroy(StartFee $startFee)
     {
         //
     }
