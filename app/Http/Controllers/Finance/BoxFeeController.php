@@ -45,8 +45,8 @@ class BoxFeeController extends Controller
         $data = $request->validated();
         $data = array_merge($data,["competition_id"=>$competition->id]);
         $boxfee = BoxFee::create($data);
-        return $boxfee;
-        //return route("finance.show",$competition);
+        return redirect("finance/show/".$competition->id);
+        
     }
 
 

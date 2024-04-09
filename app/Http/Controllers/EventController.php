@@ -157,7 +157,8 @@ class EventController extends Controller
     }
 
  public function destroy(Event $event){
-
+        if (count($event->start->where("completed",">","0"))!=0) abort(403);
+        $event->start->each->delete();
         $event->delete();
         return redirect("/competition/show/{$event->competition->id}");    
     }

@@ -104,7 +104,6 @@ class EventPolicy
     public function forceDelete(User $user, Event $event)
     {
         if (count($event->start)!=0) return false;
-        dd("ketto");
         if ($user->role=="admin") return  true;
         return false;
     }
