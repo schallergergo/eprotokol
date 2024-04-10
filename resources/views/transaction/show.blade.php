@@ -29,3 +29,6 @@ $start = $startfee->start;
 </p>
 	
 @endforeach
+
+
+<p>{{$transaction->comment}}</p>
