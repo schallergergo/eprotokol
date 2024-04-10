@@ -21,4 +21,10 @@ class Transaction extends Model
         return $this->hasMany(StartFee::class);
         
     }
+
+    public function box_fee(){
+
+        return $this->hasMany(BoxFee::class);
+        
+    }
 }

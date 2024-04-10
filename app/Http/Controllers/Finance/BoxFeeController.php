@@ -21,7 +21,7 @@ class BoxFeeController extends Controller
     public function index(Competition $competition)
     {
         $this->authorize("update",$competition);
-        $box_fees = $competition->box_fee->sortBy("rider_name")->sortBy("paid");
+        $box_fees = $competition->box_fee->sortBy("club")->sortBy("rider_name")->sortBy("paid");
         return view("boxfee.index",["competition"=>$competition,"box_fees"=>$box_fees]);
     }
 
@@ -32,7 +32,7 @@ class BoxFeeController extends Controller
      */
     public function create(Competition $competition)
     {
-        
+        $this->authorize("update",$competition);
         return view("boxfee.create",["competition"=>$competition,"fees"=>$competition->box_fee]);
     }
 
@@ -44,6 +44,7 @@ class BoxFeeController extends Controller
      */
     public function store(StoreBoxFeeRequest $request,Competition $competition)
     {
+        $this->authorize("update",$competition);
         $data = $request->validated();
         $data = array_merge($data,["competition_id"=>$competition->id]);
         $boxfee = BoxFee::create($data);
@@ -53,7 +54,7 @@ class BoxFeeController extends Controller
 
 
     public function import(Competition $competition){
-        //$this->authorize('create', [Start::class,$event]);
+        $this->authorize('create', [Start::class,$event]);
          $data = request();
         $data=$data->validate([
             'importFile' => ['required','file','mimes:xlsx' ],

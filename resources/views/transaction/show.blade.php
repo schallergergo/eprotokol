@@ -17,3 +17,15 @@ $start = $startfee->start;
 </p>
 	
 @endforeach
+
+
+@foreach ($transaction->box_fee as $boxfee)
+
+
+<p>
+	
+	{{$boxfee->rider_name}} {{$boxfee->horse_name}} 
+
+</p>
+	
+@endforeach
