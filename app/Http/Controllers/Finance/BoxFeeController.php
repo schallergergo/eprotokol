@@ -20,6 +20,7 @@ class BoxFeeController extends Controller
      */
     public function index(Competition $competition)
     {
+        $this->authorize("update",$competition);
         $box_fees = $competition->box_fee->sortBy("rider_name")->sortBy("paid");
         return view("boxfee.index",["competition"=>$competition,"box_fees"=>$box_fees]);
     }
@@ -31,6 +32,7 @@ class BoxFeeController extends Controller
      */
     public function create(Competition $competition)
     {
+        
         return view("boxfee.create",["competition"=>$competition,"fees"=>$competition->box_fee]);
     }
 

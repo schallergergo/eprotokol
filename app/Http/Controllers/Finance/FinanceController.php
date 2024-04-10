@@ -14,6 +14,7 @@ class FinanceController extends Controller
 {
     public function show(Competition $competition){
 
+        $this->authorize("update",$competition);
         $ids = $events = $this->getEventIds($competition);
         $clubs = Start::whereIn("event_id",$ids)->orderBy("club")->select("club")->distinct()->get();
         return view("finance.show",["competition"=>$competition,"clubs"=>$clubs]);
@@ -21,6 +22,7 @@ class FinanceController extends Controller
 
     public function filterByClub(Competition $competition, $club)
     {
+        $this->authorize("update",$competition);
         $ids = $events = $this->getEventIds($competition);
         $start_ids = Start::whereIn("event_id",$ids)->where("club",$club)->orderBy("rider_name")->pluck("id");
         $start_fees = StartFee::whereIn("start_id",$start_ids)->orderBy("paid")->get();
@@ -29,6 +31,7 @@ class FinanceController extends Controller
 
     public function didNotPay(Competition $competition)
     {
+        $this->authorize("update",$competition);
         $ids = $events = $this->getEventIds($competition);
         $start_fees = StartFee::where("competition_id",$competition->id)->where("paid",0)->get();
         return view("finance.filter",["competition"=>$competition,"start_fees"=>$start_fees,"filterTerm"=>""]);
@@ -36,6 +39,7 @@ class FinanceController extends Controller
 
     public function filterByRider(Competition $competition, $rider_id)
     {
+        $this->authorize("update",$competition);
         $ids = $events = $this->getEventIds($competition);
         $start_ids = Start::whereIn("event_id",$ids)->where("rider_id",$rider_id)->orderBy("rider_name")->pluck("id");
         $start_fees = StartFee::whereIn("start_id",$start_ids)->get();
