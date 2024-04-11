@@ -9,6 +9,7 @@ use App\Models\Start;
 use App\Models\Transaction;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FinanceController extends Controller
 {
@@ -32,8 +33,24 @@ class FinanceController extends Controller
     public function didNotPay(Competition $competition)
     {
         $this->authorize("update",$competition);
-        $ids = $events = $this->getEventIds($competition);
-        $start_fees = StartFee::where("competition_id",$competition->id)->where("paid",0)->get();
+        $records = DB::table('start_fees')
+    ->join('starts', 'starts.id', '=', 'start_fees.start_id')
+    ->join("events","events.id",'=',"starts.event_id")
+    ->join("competitions","competitions.id","=","events.competition_id")
+    ->where('start_fees.paid',0)
+    ->where('competitions.id',$competition->id)
+    ->orderBy("starts.club")
+    ->orderBy("rider_name")
+    ->get();
+
+    $start_fees = [];
+    foreach ($records as $record) {
+    $model = new StartFee();
+    $model->fill((array)$record);
+    $start_fees[] = $model;
+}
+
+
         return view("finance.filter",["competition"=>$competition,"start_fees"=>$start_fees,"filterTerm"=>""]);
     }
 
