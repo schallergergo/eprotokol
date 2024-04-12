@@ -4,7 +4,8 @@
                 
                 <div class="card-header">
                     <span>{{$competition->name}} {{$filterTerm}} {{__("finance")}} </span>
-                    {{__("Amount")}} : <span id="startFeeTotal" class="ml-2 text-info"></span>
+                    {{__("Amount")}} : <span id="startFeeTotal" class="ml-2 text-info">0</span>
+                    <span id="startFeeCount" class="ml-2 text-info">0 start</span>
 
 
                     
