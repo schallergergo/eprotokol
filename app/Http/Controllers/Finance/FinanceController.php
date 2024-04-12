@@ -24,9 +24,21 @@ class FinanceController extends Controller
     public function filterByClub(Competition $competition, $club)
     {
         $this->authorize("update",$competition);
-        $ids = $events = $this->getEventIds($competition);
-        $start_ids = Start::whereIn("event_id",$ids)->where("club",$club)->orderBy("rider_name")->pluck("id");
-        $start_fees = StartFee::whereIn("start_id",$start_ids)->orderBy("rider_name")->orderBy("paid")->get();
+           $this->authorize("update",$competition);
+        $records = DB::table('start_fees')
+    ->join('starts', 'starts.id', '=', 'start_fees.start_id')
+    ->join("events","events.id",'=',"starts.event_id")
+    ->join("competitions","competitions.id","=","events.competition_id")
+    ->where('starts.club',$club)
+    ->where('competitions.id',$competition->id)
+    ->orderBy("starts.club")
+    ->orderBy("rider_name")
+    ->get();
+     $start_fees = [];
+    foreach ($records as $record) {
+    $model = new StartFee();
+    $model->fill((array)$record);
+    $start_fees[] = $model;
         return view("finance.filter",["competition"=>$competition,"start_fees"=>$start_fees,"filterTerm"=>$club]);
     }
 
