@@ -26,7 +26,7 @@ class FinanceController extends Controller
         $this->authorize("update",$competition);
         $ids = $events = $this->getEventIds($competition);
         $start_ids = Start::whereIn("event_id",$ids)->where("club",$club)->orderBy("rider_name")->pluck("id");
-        $start_fees = StartFee::whereIn("start_id",$start_ids)->orderBy("paid")->get();
+        $start_fees = StartFee::whereIn("start_id",$start_ids)->orderBy("rider_name")->orderBy("paid")->get();
         return view("finance.filter",["competition"=>$competition,"start_fees"=>$start_fees,"filterTerm"=>$club]);
     }
 
