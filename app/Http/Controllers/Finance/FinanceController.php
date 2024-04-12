@@ -40,7 +40,7 @@ class FinanceController extends Controller
     $model->fill((array)$record);
     $start_fees[] = $model;
         return view("finance.filter",["competition"=>$competition,"start_fees"=>$start_fees,"filterTerm"=>$club]);
-    }
+    }}
 
     public function didNotPay(Competition $competition)
     {
