@@ -42,7 +42,7 @@ class StyleExport implements FromArray {
                 $temp[] = "".$style->given_mark;
                 $temp[] = "".$style->deductions;
                 $temp[] = "".$style->total_mark;
-                $temp[] = "".$start->style->updated_at;
+                $temp[] = "".$start->style->first()->updated_at;
 
 
 
