@@ -49,7 +49,7 @@ class ResultExport implements FromArray {
                 $temp[] = $start->mark;
                 $temp[] = $start->percent;
                 $temp[] = $start->collective;
-                
+                $temp[] = $start->updated_at;
                 $output[]=$temp;
         
     
