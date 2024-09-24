@@ -35,7 +35,7 @@
                             <div class="col-md-6">
                                <select id="programpart"  class="form-control @error('program') is-invalid @enderror" name="programpart"  required>
                                 <option value=""> {{__("Program part")}} </option>
-                                <option value="1"> {{__("Blocks")}} </option>
+                                <option value="1" selected> {{__("Blocks")}} </option>
                                 <option value="2"> {{__("Collective marks")}} </option>
                             
                             </select required>

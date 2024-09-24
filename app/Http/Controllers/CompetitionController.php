@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Competition;
+use App\Models\Tournament;
 use App\Models\Event;
 use App\Http\Requests\StoreCompetitionRequest;
 use App\Http\Requests\UpdateCompetitionRequest;
@@ -82,6 +83,7 @@ class CompetitionController extends Controller
      */
     public function show(Competition $competition)
     {
+
         $events = Event::where("competition_id",$competition->id)->orderBy("rank")->get();
         return view("/competition/show",[
             "competition"=>$competition,
@@ -97,7 +99,8 @@ class CompetitionController extends Controller
      */
     public function edit(Competition $competition)
     {
-        return view("/competition/edit",["competition"=>$competition]);
+        $tournaments = Tournament::all()->sortByDesc("created_at");
+        return view("/competition/edit",["competition"=>$competition,"tournaments"=>$tournaments]);
     }
 
     /**
@@ -110,10 +113,11 @@ class CompetitionController extends Controller
     public function update(UpdateCompetitionRequest $request, Competition $competition)
     {
         $data = request();
-         $data=$request->validated([
+         $data=$request->validate([
             'name' => ['required', 'string', 'max:255'],
             'venue' => ['required', 'string', 'max:255'],
             'date' => ['required', 'date'],
+            'tournament_id'=>["integer","nullable"],
             ]);
         $competition->update($data);
         return back();
@@ -155,4 +159,44 @@ class CompetitionController extends Controller
         $competition->delete();
         return redirect("/competition/index");
     }
+
+        public function sort(Competition $competition){
+
+        $this->authorize('update', $competition);
+
+
+
+        $events = $competition->event->sortBy("rank");
+
+     
+
+
+
+        return view("competition.sort",["competition"=>$competition,"events"=>$events]);
+
+    }
+    public function saveOrder(Competition $competition){
+
+
+        $this->authorize('update', $competition);
+        $data = request()->validate([
+                            'order'=>["required",'array']
+                                    ]);
+        $order = $data["order"];
+        for ($i=0;$i<count($order);$i++){
+            $event = Event::where("id",$order[$i])->first();
+            $event->rank = $i+1;
+            $event->save();
+
+        }
+
+         return response()->json([
+            'success' => true,
+            'message' => 'Order saved successfully!',
+        ], 200);
+
+    }
+
+
+
 }

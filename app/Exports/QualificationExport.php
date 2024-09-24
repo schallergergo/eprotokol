@@ -28,6 +28,7 @@ class QualificationExport implements FromArray {
     	foreach ($this->starts as $start) {
 
                 $temp=[];
+                $temp[] = $start->event->event_name;
                 $temp[] = $start->rider_id;
                 $temp[] = $start->rider_name;
                 $temp[] = $start->horse_id;
@@ -47,6 +48,7 @@ class QualificationExport implements FromArray {
 
         private function head(){
                 $temp   = [];
+                $temp[] = "event_name";
                 $temp[] = "rider_id";
                 $temp[] = "rider_name";
                 $temp[] = "horse_id";

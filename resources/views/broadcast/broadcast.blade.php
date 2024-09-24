@@ -21,8 +21,14 @@
         color: white;
       }
 
+      #sponsor {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
       .ribbon {  
-      background-color:  rgba(99,107,111,0.85);
+      background-color:  rgba(99,107,111,0.95);
       position: absolute;
       width: 80%;
       
@@ -67,6 +73,13 @@
 
 <h3 id="event" class="text-nowrap overflow-hidden pl-5 pr-5">{{$event->event_name}}</h1>
 </div>
+
+  <div id="sponsor">
+    
+    <img src="" width="500px">
+
+  </div>
+
 <div class="rounded-pill ribbon  p-2" id="rider">
   
 <h1 id="name" class="text-nowrap overflow-hidden pl-5"></h1>

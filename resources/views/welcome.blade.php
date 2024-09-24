@@ -99,9 +99,9 @@
                 
                     </div>
                     <div class="links row">
-                        <div class="col-md-4 pt-2"><span class="links"><a href="/program/index">{{__("Programs")}}</a></span></div>
-                        <div class="col-md-4 pt-2"><span class="links"><a href="/contact">{{__("Contact")}}</a></span></div>
-                     <div class="col-md-4 pt-2">
+                        <div class="col-md-6 pt-2"><span class="links"><a href="/program/index">{{__("Programs")}}</a></span></div>
+                        
+                     <div class="col-md-6 pt-2">
                     @if (session('locale')=='en')
                     
                     <span class="links"><a href="lang/hu">Magyar</a></span>

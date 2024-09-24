@@ -9,7 +9,16 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Edit competition') }}
+                
+                <span>
+
+
+                   
+                    <a href="/competition/sort/{{$competition->id}}">{{__("Sort")}}</a>
                     
+                </span>
+
+
                 <span class="float-right">
                     @if ($competition->active==1)
                     <a href="/competition/updateActive/{{$competition->id}}">{{__("Active competition")}}</a>
@@ -17,6 +26,8 @@
                     <a href="/competition/updateActive/{{$competition->id}}">{{__("Finished competition")}}</a>
                     @endif
                 </span>
+
+                
                 </div>
 
                 <div class="card-body">
@@ -85,6 +96,27 @@
                                 @elseif ($competition->discipline=="lovastusa")
                                 <option selected> {{__("Eventing")}} </option>
                                 @endif
+                             </select>
+                            </div>
+                        </div>
+
+                          <div class="form-group row">
+                            <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Tournaments') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="tournament_id"  class="form-control @error('tournament_id') is-invalid @enderror" name="tournament_id">
+                                <option value=""> {{__("Select tournament")}} </option>
+                           
+                                @foreach($tournaments as $tournament)
+
+                                <option value = "{{$tournament->id}}"
+                                    @if ($competition->tournament_id == $tournament->id)selected @endif 
+                                    > 
+                                    {{$tournament->name}} 
+                                </option>
+
+                                @endforeach
+                               
                              </select>
                             </div>
                         </div>

@@ -7,7 +7,9 @@
             <div class="card">
                 <div class="card-header">{{ __('Profile') }} 
                     <span><a href="/start/index/{{$user->id}}">{{ __('Results') }}</a></span>
-                    <span><a href="/home">{{ __('Home') }}</a></span> </div>
+                    <span><a href="/home">{{ __('Home') }}</a></span>
+                    <span>{{$clubByStart}}</span>
+                    </div>
                     
                     
 

@@ -28,4 +28,11 @@ class Event extends Model
    public function sponsor(){
       return $this->belongsTo(Sponsor::class);
    }
+
+   public function isLonge(){
+    for ($i=34; $i<38; $i++){
+        if ($this->program_id == $i ) return true;
+        }
+    return false;
+   }
 }
