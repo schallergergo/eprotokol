@@ -5,7 +5,7 @@
 namespace App\Imports;
 
 
-
+use Carbon\Carbon;
 use App\Models\Result;
 
 use App\Models\Start;
@@ -74,7 +74,7 @@ class ResultImport implements ToModel, WithValidation, WithHeadingRow, SkipsOnEr
 
  			'event_id' => $this->event->id,
 
-            'start_time' =>$data["time"],
+            'start_time' =>$this->convertTime($data["time"]),
             
 
  			'rider_id'=> str_replace(" ", "",$data['rider_licence']),
@@ -106,6 +106,38 @@ class ResultImport implements ToModel, WithValidation, WithHeadingRow, SkipsOnEr
     }
 
 
+    private function convertTime($excelTime){
+
+        if ($this->isTimeString($excelTime))  return Carbon::parse($excelTime)->format('H:i:s');
+
+        // If it's a floating-point number, convert it to a real time
+        if (is_numeric($excelTime)) {
+            return $this->excelTimeToRealTime($excelTime);
+        }
+
+
+    }
+
+     private function isTimeString($value)
+    {
+        // Check if the value matches a time format (HH:MM, HH:MM:SS)
+        return preg_match("/^\d{1,2}:\d{2}(:\d{2})?$/", $value);
+    }
+
+    private function excelTimeToRealTime($excelTime)
+    {
+        // Excel time starts from 1900-01-01
+        $baseDate = Carbon::createFromDate(1900, 1, 1)->startOfDay();
+
+        // Excel uses 1 for 1900-01-01, but in PHP it starts at 0, so subtract 1 from days
+        $days = floor($excelTime) - 1;
+        $seconds = ($excelTime - floor($excelTime)) * 86400;
+
+        // Add days and seconds to the base date
+        $realTime = $baseDate->addDays($days)->addSeconds($seconds);
+
+        return $realTime->format('H:i:s');
+    }
 
     public function rules(): array
 
