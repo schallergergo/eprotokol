@@ -34,7 +34,7 @@ var marks=document.getElementsByClassName("mark");
               }
 
             }
-            $.ajax({
+             request = $.ajax({
 
               headers: {'X-CSRF-TOKEN': token},
                type:'POST',
@@ -42,4 +42,39 @@ var marks=document.getElementsByClassName("mark");
                data:{"assessment":jsonObj,"error":error},
                
             });
+	request.done(function( msg ) {	
+		alerted=false;
+		});
+	request.fail(function( jqXHR, textStatus ) {
+		if (!alerted){
+            		alert( "Request failed: no internet" );
+			download(resultID+".txt",generateText(jsonObj));
+			alerted=true;
+		}
+          });
          }
+
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+function generateText(jsonObj){
+
+
+  out="";
+  for (i=0;i<jsonObj.length;i++) out+=jsonObj[i].mark+"\t";
+
+  out+="\n";
+  for (i=0;i<jsonObj.length;i++) out+=i+1+".: "+jsonObj[i].remark+"\n";
+  return out;
+}

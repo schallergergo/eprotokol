@@ -101,18 +101,18 @@
                         </div>
 
                           <div class="form-group row">
-                            <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Tournaments') }}</label>
+                            <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Broadcast') }}</label>
 
                             <div class="col-md-6">
-                                <select id="tournament_id"  class="form-control @error('tournament_id') is-invalid @enderror" name="tournament_id">
-                                <option value=""> {{__("Select tournament")}} </option>
+                                <select id="broadcast_id"  class="form-control @error('broadcast_id') is-invalid @enderror" name="broadcast_id">
+                                <option value=""> {{__("Select event")}} </option>
                            
-                                @foreach($tournaments as $tournament)
+                                @foreach($events as $event)
 
-                                <option value = "{{$tournament->id}}"
-                                    @if ($competition->tournament_id == $tournament->id)selected @endif 
+                                <option value = "{{$event->id}}"
+                                    @if ($competition->broadcast_id == $event->id)selected @endif 
                                     > 
-                                    {{$tournament->name}} 
+                                    {{$event->event_name}} 
                                 </option>
 
                                 @endforeach

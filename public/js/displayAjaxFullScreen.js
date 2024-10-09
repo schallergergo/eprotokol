@@ -72,7 +72,7 @@ function hasAnyPoints(json){
 function notStarted(event_name,sponsor_logo){
 
     document.getElementById("header_name").innerText=event_name;
-    document.getElementById("rider_name").innerHTML='<img src="'+sponsor_logo+'" class="img-fluid m-10" height="350"  width="900" alt="Eprotokol logo">';
+    document.getElementById("rider_name").innerHTML='<img src="'+sponsor_logo+'" class="img-fluid m-10" alt="Eprotokol logo">';
         document.getElementById("horse_name").innerText="";
     document.getElementById("club_name").innerText="";
     document.getElementById("result").innerHTML="";

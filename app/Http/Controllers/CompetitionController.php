@@ -100,7 +100,8 @@ class CompetitionController extends Controller
     public function edit(Competition $competition)
     {
         $tournaments = Tournament::all()->sortByDesc("created_at");
-        return view("/competition/edit",["competition"=>$competition,"tournaments"=>$tournaments]);
+        $events = $competition->event;
+        return view("/competition/edit",["competition"=>$competition,"tournaments"=>$tournaments,"events"=>$events]);
     }
 
     /**
@@ -118,6 +119,7 @@ class CompetitionController extends Controller
             'venue' => ['required', 'string', 'max:255'],
             'date' => ['required', 'date'],
             'tournament_id'=>["integer","nullable"],
+            'broadcast_id' => ['required', 'integer'],
             ]);
         $competition->update($data);
         return back();
