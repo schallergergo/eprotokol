@@ -13,7 +13,7 @@ function ajax(){
     console.log(ln);
     if (ln==0)
     {
-        notStarted("","/storage/logo/logo_med.png");
+        notStarted(formatTime(new Date()),"/storage/logo/logo_med.png");
         return;
     }
     id=events[count%ln];
@@ -118,4 +118,11 @@ function generateResult(json){
     
    }
    return output;
+}
+
+
+function formatTime(date) {
+    let hours = date.getHours().toString().padStart(2, '0');
+    let minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
 }
