@@ -2,12 +2,15 @@
 $(document).ready(ajax);
 setInterval(ajax, 5000);
 count=0;
-getEvents();
-
+sponsor_count=0;
+events = getEvents();
+competition = document.getElementById("competition_id").value;
 
 function ajax(){
-    events=getEvents();
+    events = getEvents();
+    console.log(events);
     ln=events.length;
+    console.log(ln);
     if (ln==0)
     {
         notStarted("","/storage/logo/logo_med.png");
@@ -15,6 +18,39 @@ function ajax(){
     }
     id=events[count%ln];
     count++;
+    if (id == -1) ajaxSponsor(competition); //the backend gets the c this is a shitty solution but it works, so....
+    else ajaxNormal(id);
+
+}
+
+function ajaxSponsor(id){
+
+ events=getEvents();
+
+    var token = $('meta[name="csrf-token"]').attr('content');
+
+           var request= $.ajax({
+
+            headers: {'X-CSRF-TOKEN': token},
+              url: '/broadcast/sponsors/'+id+'/json',
+              type: 'get',
+
+           });
+           request.done(function(data){
+            console.log(data);
+            obj=JSON.parse(data);
+            sponsors = obj["sponsors"];
+            sponsor_ln = sponsors.length;
+            sponsor_logo = sponsors[sponsor_count%sponsor_ln];
+            sponsor_count++;
+            notStarted("Szponsor",sponsor_logo);
+
+});
+
+}
+
+function ajaxNormal(id){
+    console.log(id);
     var token = $('meta[name="csrf-token"]').attr('content');
 
            var request= $.ajax({
@@ -35,8 +71,6 @@ function ajax(){
 
 
 });
-           
-
 }
 
 function getEvents(){
