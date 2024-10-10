@@ -435,9 +435,10 @@ Route::get('/sponsor/delete/{sponsor}', [SponsorController::class, 'destroy']);
 
 Route::get('/broadcast/{event}',[BroadcastController::class, 'broadcast']);
 Route::get('/broadcastCompetition/{competition}',[BroadcastController::class, 'broadcastCompetition']);
-
+Route::get('/broadcastCompetition/{competition}',[BroadcastController::class, 'broadcastCompetition']);
 Route::get('/broadcast/{event}/json',[BroadcastController::class, 'json']);
 
+Route::get('/broadcast/sponsors/{competition}/json',[BroadcastController::class, 'getCompetitonSponsors']); 
 Route::get('/broadcast/competition/{competition}/json',[BroadcastController::class, 'jsonCompetition']);
 
 Route::get('/broadcast/{event}/serialized',[BroadcastController::class, 'serialized']);

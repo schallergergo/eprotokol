@@ -85,6 +85,8 @@
         </style>
 </head>
 <body>
+
+<input type="hidden" name="competition_id" id="competition_id" value="{{$competition->id}}">
 <div id="display">
 <div>
   <div id="kep">
@@ -122,6 +124,13 @@
   </label>
 </div>
 @endforeach
+
+<div class="form-check ml-2">
+  <input class="form-check-input" type="checkbox" value="-1"  id="event-sponsor" name="events">
+  <label class="form-check-label" for="event-sponsor">
+    {{__("Sponsor")}}
+  </label>
+</div>
 
 </form>
 </div>

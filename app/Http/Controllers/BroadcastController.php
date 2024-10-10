@@ -142,6 +142,17 @@ class BroadcastController extends Controller
 
 
 }
+    public function getCompetitonSponsors(Competition $competition)
+    {
+        $events = $competition->event;
+        $sponsors = array();
+        foreach ($events as $event){
+            $url = $event->sponsor->logo_url;
+            if (!in_array($url,$sponsors)) $sponsors[]=$url;
+        }
+
+        return json_encode(["sponsors"=>$sponsors]);
+    }
 
 
 
