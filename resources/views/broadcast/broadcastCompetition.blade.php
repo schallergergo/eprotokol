@@ -72,7 +72,7 @@
 </div>
 <div class="rounded-pill ribbon  p-2" id="event">
 
-<h2 id="event" class="text-nowrap overflow-hidden pl-5 pr-5"></h2>
+<h2 id="event_h" class="text-nowrap overflow-hidden pl-5 pr-5">-</h2>
 </div>
 
   <div id="sponsor">

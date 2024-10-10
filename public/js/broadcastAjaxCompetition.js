@@ -39,7 +39,7 @@ function ajax(){
             obj=JSON.parse(data);
 
             var name=generateName(obj);
-            document.getElementById("event").innerText = obj["event_name"];
+            document.getElementById("event_h").innerText = obj["event_name"];
             document.getElementById("name").innerText=name;
 
             var result=generateResult(obj);
