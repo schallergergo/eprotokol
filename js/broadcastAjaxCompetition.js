@@ -75,7 +75,7 @@ function generateResult(json){
    if (json.completed==0)output=(json.lastfilled+1)+". feladat ";
    for (i=0;i<judges.length;i++){
     judge=judges[i];
-    if(json.completed) output+="| "+judge.position+" bíró: "+judge.lastMark+" p ("+ judge.percent +"%) ";
+    if(json.completed==0) output+="| "+judge.position+" bíró: "+judge.lastMark+" p ("+ judge.percent +"%) ";
     else output+="| "+judge.position+" bíró: "+judge.mark+" p ("+ judge.percent +"%) ";
    }
    return output;
