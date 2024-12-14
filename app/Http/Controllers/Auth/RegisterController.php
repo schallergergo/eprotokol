@@ -63,7 +63,7 @@ class RegisterController extends Controller
         $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
         $responseData = json_decode($verifyResponse);
         
-        }
+        
         if (!isset($responseData['success'])) return abort(400,"reCAPTCHA validation failed!");
             
         if (!$responseData['success'] || $responseData['score'] < 0.5) {
@@ -76,6 +76,8 @@ class RegisterController extends Controller
         ]);
         return abort(422, "reCAPTCHA validation failed!");
         }
+        }
+        else dd($data);
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
