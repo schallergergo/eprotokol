@@ -64,6 +64,12 @@ return [
             'path' => storage_path('logs/login.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
+                
+    'recaptcha' => [
+        'driver' => 'single',
+        'path' => storage_path('logs/recaptcha.log'),
+        'level' => 'warning',
+    ],
         'resultOpen' => [
             'driver' => 'single',
             'path' => storage_path('logs/resultOpen.log'),

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -49,6 +50,32 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
+
+
+
+
+        
+          if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])){
+        //your site secret key
+        $secret = env("RECAPTCHA_SECRET_KEY");
+        //get verify response data
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+        $responseData = json_decode($verifyResponse);
+        
+        }
+        if (!isset($responseData['success']) abort(400,"reCAPTCHA validation failed!");
+            
+        if (!$responseData['success'] || $responseData['score'] < 0.5) {
+        // Log failed attempt
+        Log::channel('recaptcha')->warning('Failed reCAPTCHA attempt', [
+            'score' => $responseData['score'] ?? 'N/A',
+            'action' => $responseData['action'] ?? 'N/A',
+            'hostname' => $responseData['hostname'] ?? 'N/A',
+            'timestamp' => now(),
+        ]);
+        return abort(422, "reCAPTCHA validation failed!")
+        }
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
