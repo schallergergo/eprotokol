@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'hostname' => $responseData['hostname'] ?? 'N/A',
             'timestamp' => now(),
         ]);
-        return abort(422, "reCAPTCHA validation failed!")
+        return abort(422, "reCAPTCHA validation failed!");
         }
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
