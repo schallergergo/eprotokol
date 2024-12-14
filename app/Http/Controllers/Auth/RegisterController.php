@@ -64,7 +64,7 @@ class RegisterController extends Controller
         $responseData = json_decode($verifyResponse);
         
         }
-        if (!isset($responseData['success']) abort(400,"reCAPTCHA validation failed!");
+        if (!isset($responseData['success']) return abort(400,"reCAPTCHA validation failed!");
             
         if (!$responseData['success'] || $responseData['score'] < 0.5) {
         // Log failed attempt
