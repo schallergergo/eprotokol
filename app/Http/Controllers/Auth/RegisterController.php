@@ -64,9 +64,9 @@ class RegisterController extends Controller
         $responseData = json_decode($verifyResponse);
         
         
-        if (!isset($responseData['success'])) return abort(400,"reCAPTCHA validation failed!");
+
             
-        if (!$responseData['success'] || $responseData['score'] < 0.5) {
+        if (!$responseData->success || $responseData->score < 0.5) {
         // Log failed attempt
         Log::channel('recaptcha')->warning('Failed reCAPTCHA attempt', [
             'score' => $responseData['score'] ?? 'N/A',
@@ -76,8 +76,6 @@ class RegisterController extends Controller
         ]);
         return abort(422, "reCAPTCHA validation failed!");
         }
-        }
-        else dd($data);
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -85,7 +83,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
-
+    }
     /**
      * Create a new user instance after a valid registration.
      *
