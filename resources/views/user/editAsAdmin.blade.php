@@ -9,6 +9,7 @@
                     <span><a href="/start/index/{{$user->id}}">{{ __('Results') }}</a></span>
                     <span><a href="/home">{{ __('Home') }}</a></span>
                     <span>{{$clubByStart}}</span>
+                    <span class="float-right"><a href="user/delete/{{$user->id}}">{{__("Delete")}}</a></span>
                     </div>
                     
                     

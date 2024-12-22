@@ -243,7 +243,7 @@ Route::patch('/user/updateAsAdmin/{user}', [UserController::class,'updateAsAdmin
 
 Route::get('/user/search', [UserController::class,'search']);
 
-Route::patch('/user/delete/{user}', [UserController::class,'destroy']);
+Route::get('/user/delete/{user}', [UserController::class,'destroy']);
 
 
 
