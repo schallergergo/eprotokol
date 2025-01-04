@@ -36,7 +36,7 @@ class StartDataController extends Controller
 
         
 
-        $riders = Start::orderBy("rider_name")->select("rider_id","rider_name","horse_id","horse_name","club")->distinct()->get();
+        $riders = Start::orderBy("rider_name")->select("rider_id","rider_name","horse_id","horse_name","club","completed")->distinct()->get();
 
         return json_encode($riders);
 
