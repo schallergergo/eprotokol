@@ -222,6 +222,7 @@ Route::get('/start/moveDown/{start}', [StartController::class,'moveDown']);
 
 
 Route::get('/ajax/getRiderData', [StartDataController::class,'getRiderData'])->name("ajax.riderData");
+Route::get('/ajax/getRiderAndHorseData', [StartDataController::class,'getRiderAndHorseData'])->name("ajax.riderAndHorseData");
 
 Route::get('/ajax/getHorseData/{club}', [StartDataController::class,'getHorseData'])->name("ajax.horseData");
 
