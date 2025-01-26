@@ -56,7 +56,19 @@ class RegisterController extends Controller
 
 
         
-          if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])){
+
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string',  'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    
+    }
+
+    private function captcha()
+    {
+                  if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])){
         //your site secret key
         $secret = env("RECAPTCHA_SECRET_KEY");
         //get verify response data
@@ -74,16 +86,12 @@ class RegisterController extends Controller
             'hostname' => $responseData['hostname'] ?? 'N/A',
             'timestamp' => now(),
         ]);
-        return abort(422, "reCAPTCHA validation failed!");
+        return false;
         }
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'username' => ['required', 'string',  'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
     }
+    return true;
     }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -92,6 +100,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (!$this->captcha()) return abort(422, "reCAPTCHA validation failed!");
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
