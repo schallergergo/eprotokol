@@ -79,7 +79,7 @@
                             <label for="extra_info" class="col-md-4 col-form-label text-md-right">{{ __('Extra info') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="extra_info" class="form-control @error('extra_info') is-invalid @enderror" name="extra_info" value="" required></textarea>
+                                <textarea id="extra_info" class="form-control @error('extra_info') is-invalid @enderror" name="extra_info" value=""></textarea>
 
                                 @error('extra_info')
                                     <span class="invalid-feedback" role="alert">
