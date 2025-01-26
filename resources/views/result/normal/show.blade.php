@@ -62,11 +62,11 @@
                         @endif
                         @if ($block["programpart"]==1 && $program->typeofevent!="longe")
                         <div class="col-md-4 p-1 border">
-                            <pre>{{ $block['criteria'] }}</pre>
+                            <pre title = "{{$block['extra_info']}}">{{ $block['criteria'] }}</pre>
                         </div>
                         @else
                         <div class="col-md-6 p-1 border">
-                            <pre>{{ $block['criteria'] }}</pre>
+                            <pre title = "{{$block['extra_info']}}">{{ $block['criteria'] }}</pre>
                         </div>
                         @endif
                         
@@ -126,11 +126,11 @@
                         @endif
                         @if ($block["programpart"]==1)
                         <div class="col-md-4 p-1 border">
-                            <pre>{{ $block['criteria'] }}</pre>
+                            <pre title = "{{$block['extra_info']}}">{{ $block['criteria'] }}</pre>
                         </div>
                         @else
                         <div class="col-md-6 p-1 border">
-                            <pre>{{ $block['criteria'] }}</pre>
+                            <pre title = "{{$block['extra_info']}}">{{ $block['criteria'] }}</pre>
                         </div>
                         @endif
                         
