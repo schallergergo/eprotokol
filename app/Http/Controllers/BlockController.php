@@ -39,7 +39,7 @@ class BlockController extends Controller
      */
     public function store(StoreBlockRequest $request,Program $program)
     {
-        $data = request();
+        
 
 
         $data=$request->validated();
@@ -51,6 +51,7 @@ class BlockController extends Controller
             'programpart' => $data['programpart'],
             'letters'=> $data['letters'],
             'criteria'=> $data['criteria'],
+            'extra_info'=>$data["extra_info"],
             'maxmark' => $data['maxmark'],
             'coefficient' => $data['coefficient'],
         ]);

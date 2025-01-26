@@ -20,6 +20,7 @@ class StoreBlockRequest extends FormRequest
             'programpart' => ['required', 'integer'],
             'letters'=> ['required','string'],
             'criteria'=> ['required','string'],
+            'extra_info'=> ['nullable','string'],
             'maxmark' => ['required', 'integer'],
             'coefficient' => ['required', 'integer'],
         ];

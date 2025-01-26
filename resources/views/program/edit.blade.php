@@ -18,9 +18,9 @@
                             <div class="col-md-6">
                                <select id="discipline"  class="form-control @error('program') is-invalid @enderror" name="discipline"  required>
                                 <option value=""> {{__("Select a discipline")}} </option>
-                                <option value="poniklub"> {{__("Pony Club")}} </option>
-                                <option value="lovastusa"> {{__("Eventing")}} </option>
-                                <option value="dijlovas"> {{__("Dressage")}} </option>
+                                <option value="poniklub" @if($program->discipline=="poniklub") selected @endif> {{__("Pony Club")}} </option>
+                                <option value="lovastusa" @if($program->discipline=="lovastusa") selected @endif> {{__("Eventing")}} </option>
+                                <option value="dijlovas" @if($program->discipline=="dijlovas") selected @endif> {{__("Dressage")}} </option>
                             
                             </select required>
 
@@ -93,8 +93,8 @@
                             <div class="col-md-6">
                                <select id="doublesided"  class="form-control @error('program') is-invalid @enderror" name="doublesided"  required>
                                 <option value=""> {{__("Is it doublesided?")}} </option>
-                                <option value="1"> {{__("Yes")}} </option>
-                                <option value="0"> {{__("No")}} </option>
+                                <option value="1" @if($program->doublesided==1) selected @endif> {{__("Yes")}} </option>
+                                <option value="0" @if($program->doublesided==0) selected @endif > {{__("No")}} </option>
                             
                             </select required>
 

@@ -20,6 +20,7 @@ class UpdateBlockRequest extends FormRequest
             'programpart' => ['required', 'integer'],
             'letters'=> ['nullable','string'],
             'criteria'=> ['required','string'],
+            'extra_info'=> ['nullable','string'],
             'maxmark' => ['required', 'integer'],
             'coefficient' => ['required', 'integer'],
         ];
