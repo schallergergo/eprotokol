@@ -75,6 +75,19 @@
                                 @enderror
                             </div> 
                         </div>
+                           <div class="form-group row">
+                            <label for="extra_info" class="col-md-4 col-form-label text-md-right">{{ __('Extra info') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea id="extra_info" class="form-control @error('extra_info') is-invalid @enderror" name="extra_info" value="" required></textarea>
+
+                                @error('extra_info')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{__("Field is invalid")}}</strong>
+                                    </span>
+                                @enderror
+                            </div> 
+                        </div>
 
                          <div class="form-group row">
                             <label for="maxmark" class="col-md-4 col-form-label text-md-right">{{ __('Max mark') }}</label>
