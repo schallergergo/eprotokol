@@ -67,7 +67,7 @@ class RegisterController extends Controller
     }
 
     private function captcha()
-    {
+    {dd($_POST);
                   if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])){
         //your site secret key
         $secret = env("RECAPTCHA_SECRET_KEY");
@@ -85,7 +85,7 @@ class RegisterController extends Controller
             'action' => $responseData['action'] ?? 'N/A',
             'hostname' => $responseData['hostname'] ?? 'N/A',
             'timestamp' => now(),
-        ]);
+        ])
         return false;
         }
     }
