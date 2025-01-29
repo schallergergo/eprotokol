@@ -1,6 +1,6 @@
                 <div class="card">
 
-                <div class="card-header">{{ __('Edit result photo') }}
+                <div class="card-header">{{ __('Edit result') }}
                 
                     <span class="float-right"><a href="/event/show/{{$result->start->event->id}}">{{__("Back")}}</a></span>
                 
