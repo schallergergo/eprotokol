@@ -19,7 +19,7 @@
 
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{__("Error")}}</strong>
+                                        <strong>{{__("Upload an image!")}}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -32,7 +32,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Edit') }}
+                                    {{ __('Upload') }}
                                 </button>
                             </div>
                         </div>
@@ -46,11 +46,18 @@
                    
 
                   <div class="col-md-4">
-                    <a href="/storage/app/public/{{$photo->url}}" target="_blank" class="text-primary">View image</a>
+                    <a class="btn btn-info" href="/storage/app/public/{{$photo->url}}" target="_blank">{{__("View image")}}</a>
                   </div>
 
                   <div class="col-md-4 text-end">
-                    <button class="btn btn-danger">Delete</button>
+                    <a href="/resultphoto/{{$photo->id}}/delete"><button class="btn btn-danger">
+
+
+                        @if ($photo->deleted) {{__("Restore")}}
+                        @else {{__("Delete")}}
+                        @endif
+
+                    </button></a>
                   </div>
                 </div>
 

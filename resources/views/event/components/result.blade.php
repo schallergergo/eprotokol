@@ -2,12 +2,9 @@
 
                         @can ('checkAfter', $result)
 
-                        @if ($result->filled)
+
 
                         <a href="/result/show/{{$result->id}}">
-                        @else
-                        <a href="#">
-                        @endif
 
 
 

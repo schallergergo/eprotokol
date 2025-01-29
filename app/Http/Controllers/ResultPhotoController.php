@@ -49,7 +49,7 @@ class ResultPhotoController extends Controller
 
         $data=$data->validate([
 
-            'image' => ['required', 'file'],
+            'image' => ['required', 'file','image'],
             ]);
 
 
@@ -145,7 +145,7 @@ unlink($tempPath);
 
 
         $resultController = new ResultController();
-        $resultController->ResultLog($result->id,$data["mark"],$result->assessment);
+        $resultController->ResultLog($result->id,$data["mark"],$result->assessment,0);
         $result->update($data);
 
         $startController = new StartController();
@@ -161,10 +161,11 @@ unlink($tempPath);
      * @param  \App\Models\ResultPhoto  $resultPhoto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ResultPhoto $resultPhoto)
+    public function destroy(ResultPhoto  $resultPhoto)
     {
-        $this->authorize("update",$result);
-        $resultPhoto->deleted = true;
+        $this->authorize("update",$resultPhoto->result);
+        $resultPhoto->deleted = !$resultPhoto->deleted;
         $resultPhoto->save();
+        return redirect()->back();
     }
 }

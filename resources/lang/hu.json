@@ -270,6 +270,15 @@
 	"Not started":"Nem indul",
 	"Started after all":"Végül indul",
 	"Sort":"Rendezés",
-	"Printable":"Nyomtatható"
+	"Printable":"Nyomtatható",
+	"Manual edit":"Kézi kitöltés",
+	"Collective":"Összbenyomás",
+	"View photo":"Fénykép megtekintése",
+	"Upload an image!":"Képet tölts fel!",
+	"View image":"Kép megtekintése",
+	"Restore":"Helyreállítás",
+	"Given points":"Kapott pont",
+	"Add new start":"Új start hozzáadása",
+	"New start":"Új start"
 
 }

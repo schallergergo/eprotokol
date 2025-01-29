@@ -2,7 +2,7 @@
 
                 <div class="card-header">{{ __('Edit result photo') }}
                 
-
+                    <span class="float-right"><a href="/event/show/{{$result->start->event->id}}">{{__("Back")}}</a></span>
                 
                 </div> <!-- end of the header -->
 
@@ -63,7 +63,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Edit') }}
+                                    {{ __('Save') }}
                                 </button>
                             </div>
                         </div>

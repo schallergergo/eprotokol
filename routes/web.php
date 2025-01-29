@@ -269,6 +269,8 @@ Route::patch('/resultphoto/updateResult/result/{result}', [ResultPhotoController
 
 Route::post('/resultphoto/storePhoto/result/{result}', [ResultPhotoController::class, 'storePhoto']);
 
+Route::get('/resultphoto/{result_photo}/delete', [ResultPhotoController::class, 'destroy']);
+
 Route::patch('/result/update/{result}', [ResultController::class, 'update']);
 
 Route::post('/result/ajaxUpdate/{result}', [ResultController::class, 'ajaxUpdate']);

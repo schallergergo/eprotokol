@@ -6,7 +6,15 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Result changes') }}</div>
+                <div class="card-header">
+
+                    <span>{{ __('Result changes') }}</span>
+
+                    <span class="float-right"><a href="/result/show/{{$result->id}}">{{ __('Back') }}</a></span>
+
+
+
+                </div>
 
                 <div class="card-body">
 
@@ -47,8 +55,11 @@
                       
 
                         <div class="col-md-3 p-1 border">
+                            @if ($resultlog->filled)
                             <span class="align-middle"><a href="/resultlog/show/{{$resultlog->id}}" target="_blank">  {{__("View version")}}</a></span>
-                            
+                            @else
+                            <span class="align-middle"><a href="#">  {{__("Manual edit")}}</a></span>
+                            @endif
                         </div>
 
                     </div><!-- end of the row-->
