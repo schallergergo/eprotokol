@@ -127,8 +127,7 @@ class ResultController extends Controller
 
     private function notFilled(Result $result)
     {
-        $result->resultphoto->where("deleted",0)->sortBy("created_at");
-        $photos = $result->resultphoto->where("deletead",0)->sortBy("created_at");
+        $photos = $result->resultphoto->where("deleted",0)->sortBy("created_at");
         return view("result.notfilled",
 
             [
