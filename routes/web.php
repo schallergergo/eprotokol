@@ -17,6 +17,8 @@ use App\Http\Controllers\BlockController;
 
 use App\Http\Controllers\ResultController;
 
+use App\Http\Controllers\ResultPhotoController;
+
 use App\Http\Controllers\ResultlogController;
 
 use App\Http\Controllers\EventController;
@@ -261,7 +263,11 @@ Route::get('/result/search', [SearchController::class, 'show']);
 
 Route::get('/result/mail', [ResultController::class, 'mail']);
 
+Route::get('/resultphoto/edit/result/{result}', [ResultPhotoController::class, 'edit']);
 
+Route::patch('/resultphoto/updateResult/result/{result}', [ResultPhotoController::class, 'updateResult']);
+
+Route::post('/resultphoto/storePhoto/result/{result}', [ResultPhotoController::class, 'storePhoto']);
 
 Route::patch('/result/update/{result}', [ResultController::class, 'update']);
 

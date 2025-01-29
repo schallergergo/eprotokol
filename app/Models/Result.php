@@ -23,4 +23,8 @@ class Result extends Model
     public function resultlog(){
         return $this->hasMany(Resultlog::class);
     }
+
+    public function resultphoto(){
+        return $this->hasMany(ResultPhoto::class);
+    }
 }

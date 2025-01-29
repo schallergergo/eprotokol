@@ -34,7 +34,9 @@
 
                 <div class="card-header">
 
-                    {{$start->rider_name}} - {{$start->horse_name}} - {{$start->club}}
+                    <span> {{$start->rider_name}} - {{$start->horse_name}} - {{$start->club}} </span>
+
+                    <span class="float-right"> <a href="/resultphoto/edit/result/{{$result->id}}">Photo</a> </span>
 
                     
 
