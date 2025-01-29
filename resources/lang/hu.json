@@ -195,7 +195,7 @@
 	"Result changes":"Eredmény változatok",
 	"View version":"Változat megtekintése",
 	"View versions":"Változatok megtekintése",
-	"Edit result":"Pontozólap módosítása",
+	"Edit result":"Eredmény módosítása",
 	"Result log view":"Result log nézet",
 	"No results found!":"Nem található eredmény!",
 	"Delete start":"Start törlése",
@@ -279,6 +279,7 @@
 	"Restore":"Helyreállítás",
 	"Given points":"Kapott pont",
 	"Add new start":"Új start hozzáadása",
-	"New start":"Új start"
+	"New start":"Új start",
+	"Image upload":"Kép feltöltése"
 
 }
