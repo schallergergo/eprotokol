@@ -46,7 +46,7 @@
                    
 
                   <div class="col-md-4">
-                    <a href="/storage/{{$photo->url}}" target="_blank" class="text-primary">View image</a>
+                    <a href="/storage/app/public/{{$photo->url}}" target="_blank" class="text-primary">View image</a>
                   </div>
 
                   <div class="col-md-4 text-end">
