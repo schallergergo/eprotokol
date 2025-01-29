@@ -138,7 +138,14 @@ class RegisterController extends Controller
 
     {
 
- if(!isset($_POST['g-recaptcha-response'])) return false;
+        if(!isset($_POST['g-recaptcha-response'])) 
+        {
+
+            Log::channel('recaptcha')->warning('Failed reCAPTCHA attempt');
+                return false;
+        }
+
+            
         if(!empty($_POST['g-recaptcha-response'])){
 
         //your site secret key
