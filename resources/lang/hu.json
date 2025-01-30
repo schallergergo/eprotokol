@@ -283,6 +283,12 @@
 	"Image upload":"Kép feltöltése",
 	"Start fee":"Startdíj",
 	"Rearrange Start List of":"Startlista rendezése",
-	"Save Order":"Lista mentése"
-
+	"Save Order":"Lista mentése",
+	"Payed amount":"Fizetett összeg",
+	"Finance":"Pénzügy",
+	"Did not pay":"Nem fizetett",
+	"Box fee":"Boxdíj",
+	"Start total":"Össz startdíj",
+	"Box total":"Össz boxdíj",
+	"Transactions":"Tranzakciók"
 }
