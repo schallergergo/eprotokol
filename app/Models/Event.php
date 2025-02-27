@@ -14,6 +14,10 @@ class Event extends Model
         return $this->hasMany(Start::class);
    }
 
+    public function eventing_info(){
+        return $this->hasOne(EventingExtraInfo::class);
+   }
+
    public function program(){
         return $this->belongsTo(Program::class);
    }
@@ -35,4 +39,46 @@ class Event extends Model
         }
     return false;
    }
+
+
+   public static function boot()
+
+    {
+
+        parent::boot();
+
+
+
+        static::created(function (Event $event) {
+
+            $competition = $event->competition;
+
+           
+
+            if ($competition->eventing) {
+                EventingExtraInfo::create([ "event_id"=>$event->id]);
+            }
+
+
+
+
+
+        });
+
+
+
+        static::deleting(function (Event $event) {
+
+            $eventing_info = $event->eventing_info;
+
+            if ($eventing_info == null) return ;
+
+            $eventing_info->delete();
+
+        });
+
+    }
+
+
+
 }

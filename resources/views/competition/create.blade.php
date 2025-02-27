@@ -75,6 +75,19 @@
                         </div>
 
 
+                        <div class="form-group row">
+                            <label for="eventing" class="col-md-4 col-form-label text-md-right">{{ __('Eventing') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="eventing"  class="form-control @error('eventing') is-invalid @enderror" name="eventing"  required>
+                                <option value="0"> {{__("No")}} </option>
+                                <option value="1"> {{__("Yes")}} </option>
+                           
+
+                             </select>
+                            </div>
+                        </div>
+
 
                        
  

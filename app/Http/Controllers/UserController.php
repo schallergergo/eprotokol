@@ -378,7 +378,10 @@ private function storeAdmin(array $data){
 
             'role'=> ['required',Rule::in(["admin","club","rider","office","penciler"])],
 
-            'club' =>['required', 'integer']
+            'club' =>['required', 'integer'],
+            
+            'email_verified_at'=>['nullable']
+
 
             ]);
 

@@ -18,6 +18,7 @@ class StoreCompetitionRequest extends FormRequest
             'venue' => ['required', 'string', 'max:255'],
             'date' => ['required', 'date'],
             'discipline' => ['required'],
+            'eventing' => ["required","boolean"],
         ];
     }
 }

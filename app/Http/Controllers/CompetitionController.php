@@ -68,6 +68,7 @@ class CompetitionController extends Controller
             'venue' => $data["venue"],
             'date' => $data["date"],
             'discipline' => $data["discipline"],
+            'eventing' => $data["eventing"],
             'office' => Auth::User()->id,
         ]);
 

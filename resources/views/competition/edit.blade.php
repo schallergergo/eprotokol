@@ -120,6 +120,18 @@
                              </select>
                             </div>
                         </div>
+                         <div class="form-group row">
+                            <label for="eventing" class="col-md-4 col-form-label text-md-right">{{ __('Eventing') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" disabled>
+                                <option value=""> @if($competition->eventing) {{__('Yes')}} @else {{__('No')}} @endif </option>
+
+                           
+
+                             </select>
+                            </div>
+                        </div>
 
                        
  

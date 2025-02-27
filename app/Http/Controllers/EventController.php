@@ -118,9 +118,6 @@ class EventController extends Controller
 
         $this->authorize('create', [Event::class,$competition]);
 
-        $data = request();
-
-
 
         //validation rules
 
@@ -131,10 +128,6 @@ class EventController extends Controller
        
 
         $office=Auth::User()->id;
-
-
-
-      
 
 
 
@@ -180,9 +173,13 @@ class EventController extends Controller
 
     {
 
-        
+    if ($event->competition->eventing)
+        {
+            $controller = new Eventing\EventingController();
+            return $controller->show($event);
+        } 
 
-         //riders in the event with no results
+    
 
     $starts=Start::where("event_id",$event->id)->get();
 
@@ -215,16 +212,15 @@ class EventController extends Controller
         
 
     }
+    $viewName = "event.show";
 
-    return view("event.show",  ["event"=>$event,
+    return view($viewName,  ["event"=>$event,
 
                                  "startedArray"=>$startedArray,
 
                                  "toStart"=>$toStart,
 
                                  "notStarted"=>$notStarted,
-
-
 
                                 ]);
 

@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Lang;
 use Maatwebsite\Excel\Facades\Excel;
 
 
-
+use App\Http\Controllers\Eventing\EventingController;
 use App\Imports\ResultImport;
 
 
@@ -210,6 +210,7 @@ class StartController extends Controller
 
 
     public function addToExtraTables(Start $newStart){
+
 
         $typeofevent=$newStart->event->program->typeofevent;
 
@@ -417,7 +418,6 @@ class StartController extends Controller
         $start->save();
 
         $this->calculateAllRank($start);
-
 
 
         return redirect("/event/show/{$start->event->id}");
@@ -746,6 +746,12 @@ class StartController extends Controller
             ];
 
         $start->update($data);
+
+        if ($start->event->competition->eventing){
+            $eventing = new EventingController();
+            $eventing->update($start);
+        }
+
 
     }
 

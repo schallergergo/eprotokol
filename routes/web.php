@@ -75,6 +75,12 @@ use App\Http\Controllers\Finance\BoxFeeController;
 
 
 
+use App\Http\Controllers\Eventing\EventingCrossController;
+
+use App\Http\Controllers\Eventing\EventingShowJumpingController;
+
+
+
 /*
 
 |--------------------------------------------------------------------------
@@ -196,6 +202,8 @@ Route::get('/block/delete/{block}', [BlockController::class,'destroy']);
 Route::get('/start/create/{event}', [StartController::class,'create']);
 
 Route::get('/start/index/{user}', [StartController::class,'index']);
+
+Route::get('/start/index/rider/{rider_id}', [StartController::class,'riderIndex']);
 
 Route::post('/start/store/{event}', [StartController::class,'store']);
 
@@ -516,6 +524,13 @@ Route::get('/style/edit/{style}', [StyleController::class, 'edit']);
 Route::patch('/style/update/{style}', [StyleController::class, 'update']);
 
 
+
+
+Route::get('/eventing/cross/edit/{eventingCross}', [EventingCrossController::class, 'edit']);
+Route::patch('/eventing/cross/update/{eventingCross}', [EventingCrossController::class, 'update']);
+
+Route::get('/eventing/showjumping/edit/{eventingShowJumping}', [EventingShowJumpingController::class, 'edit']);
+Route::patch('/eventing/showjumping/update/{eventingShowJumping}', [EventingShowJumpingController::class, 'update']);
 
 
 
