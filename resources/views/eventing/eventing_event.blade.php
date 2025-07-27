@@ -189,7 +189,7 @@
 
                             @endif
 
-                            </span>
+                                 </span>
 
                             @php
                             $eventing = $start->eventing;
@@ -230,9 +230,8 @@
 
                     </div><!-- end of the card-->
 
-
           
-
+@include("eventing.component.started_component")
 
 
 
@@ -301,11 +300,7 @@
                         </div>
 
 
-
-                    </div><!-- end of the row-->
-
-                    
-
+                    </div>
                     
 
                     @foreach ($notStarted as $start)

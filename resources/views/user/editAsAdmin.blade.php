@@ -101,6 +101,23 @@
                             </div>
                         </div>
 
+
+
+                        <div class="form-group row">
+                            <label for="extrariders" class="col-md-4 col-form-label text-md-right">{{ __('Extra riders') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="extrariders" type="text" placeholder="Valid json array..." class="form-control @error('extrariders') is-invalid @enderror" name="extrariders" value="{{ $user->extrariders}}">
+
+                                @error('extrariders')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ __("Already taken.") }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
                         <div class="form-group row">
                             <label for="email_verified_at" class="col-md-4 col-form-label text-md-right">{{ __('Email verified') }}</label>
                             <div class="col-md-6">

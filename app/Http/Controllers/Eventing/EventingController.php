@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Eventing;
 use App\Models\Eventing;
 use App\Models\Start;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEventingRequest;
 use App\Http\Requests\UpdateEventingRequest;
@@ -22,16 +23,18 @@ class EventingController extends Controller
     }
 
     public function show(Event $event){
-
-
+        $starts = DB::table("starts")
+                ->join("eventings",'eventings.start_id','=','starts.id' )
+                ->select('starts.*','eventings.completed_count')
+                ->where('starts.deleted_at',null)
+                ->where('starts.event_id',$event->id)
+                ->get();
+        $max_completed_count = $starts->max('completed_count');
          //riders in the event with no results
 
-    $starts=Start::where("event_id",$event->id)->get();
-
-    
-
-
-
+         $starts = $starts->map(function ($item) {
+                    return (new \App\Models\Start)->newFromBuilder((array) $item);
+                });
 
 
 
@@ -41,15 +44,25 @@ class EventingController extends Controller
 
 
     $categories=$starts->unique("category")->sortBy("category")->pluck("category")->all();
+    $to_start = $starts->where('completed_count' ,'<>',$max_completed_count);
 
-    
+
+
+    $started = $starts->where('completed_count',$max_completed_count);
+    $categories=$started->unique("category")->sortBy("category")->pluck("category")->all();
+    $starts_in_category = [];
+    foreach ($categories as $category) {
+        $starts_in_category[] = $started->where('category',$category);
+    }
+
     $viewName = "eventing.eventing_event";
 
     return view($viewName,  ["event"=>$event,
 
-                                 "toStart"=>$starts,
+                                 "toStart"=>$to_start,
 
                                  "notStarted"=>$notStarted,
+                                 'starts_in_category'=> $starts_in_category
 
                                 ]);
 

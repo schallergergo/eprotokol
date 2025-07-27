@@ -369,7 +369,6 @@ private function storeAdmin(array $data){
  public function updateAsAdmin(User $user)
 
     {$this->authorize('isAdmin', $user);
-
          $data = request();
 
          $newData=$data->validate([
@@ -380,7 +379,9 @@ private function storeAdmin(array $data){
 
             'club' =>['required', 'integer'],
             
-            'email_verified_at'=>['nullable']
+            'email_verified_at'=>['nullable'],
+
+            'extrariders'=>['nullable','string', 'max:255']
 
 
             ]);
@@ -416,7 +417,6 @@ private function storeAdmin(array $data){
                 $user->save();
 
             }
-
 
 
 
