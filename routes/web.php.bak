@@ -47,7 +47,6 @@ use App\Http\Controllers\ContactController;
 
 use App\Http\Controllers\DisplayController;
 
-
 use App\Http\Controllers\SiteMapController;
 
 use App\Http\Controllers\QualificationController;
@@ -117,8 +116,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 
 
 Route::get("/finance/show/{competition}", [FinanceController::class, 'show'])->name("finance.show");
-
-Route::get("/finance/export/{competition}", [FinanceController::class, 'export'])->name("finance.export");
 
 
 

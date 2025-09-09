@@ -363,11 +363,9 @@
                     <div class="col-md-2 p-1 border">
 
                             <span class="align-middle">
-                                @if ($start->eliminated) {{__("Eliminated!")}}
-                                @else
 
                                 ({{$start->rank}}.) {{$start->mark}}p  - {{number_format($start->percent,3)}}% @if ($start->collective!=0)- {{$start->collective}}p @endif
-                                @endif
+
                             </span>
 
                         </div>
