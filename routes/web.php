@@ -47,6 +47,8 @@ use App\Http\Controllers\ContactController;
 
 use App\Http\Controllers\DisplayController;
 
+use App\Http\Controllers\UsageLogController;
+
 
 use App\Http\Controllers\SiteMapController;
 
@@ -425,7 +427,7 @@ Route::get("/jumpingqualification/show",[JumpingQualificationController::class,"
 Route::get("/jumpingqualification/excel",[JumpingQualificationController::class,"qualificationExcel"]);
 
 
-
+Route::get('/usagelog/index', [UsageLogController::class, 'index'])->name('usagelog.index');
 
 
 Route::get('/official/create/{event}', [OfficialController::class, 'create']);
