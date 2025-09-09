@@ -56,7 +56,7 @@ class JumpingQualificationController extends Controller
     public function getArray(){
 
         $allStarts = collect();
-        $startDate ="2024.11.01";
+        $startDate ="2023.10.01";
 
         $caprilli_events = Event::where("created_at",">",$startDate)->whereIn("program_id",[74,75,76])->get();
         $caprilli_ids = $caprilli_events->pluck("id");
@@ -140,7 +140,7 @@ class JumpingQualificationController extends Controller
 
 private  function kezdoMinosult($rider){
     if ($rider["advanced"]) return false;
-    if ( $rider["style"]>0 &&
+    if ($rider["caprilli"] + $rider["style"]>0 &&
         $rider["pk2_finished"]>0) return true;
     if ( $rider["pk2_finished"]>0 &&
         $rider["pk3_finished"]>0) return true;

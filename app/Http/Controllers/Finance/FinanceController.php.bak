@@ -236,16 +236,6 @@ class FinanceController extends Controller
 
 }
 
-public function export(Competition $competition)
-{
-     $this->authorize("update",$competition);
-     
-    $start_fees =  StartFee::where('competition_id',$competition->id)->get();
-    $transaction_ids= $start_fees->unique('transaction_id')->pluck('transaction_id');
-    $transactions = Transaction::whereIn('id',$transaction_ids)->get();
-
-      return view("finance.export",["competition"=>$competition,"transactions"=>$transactions]);
-}
 
 
     public function didNotPay(Competition $competition)
