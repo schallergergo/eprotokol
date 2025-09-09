@@ -15,6 +15,11 @@ class CreateUsageLogsTable extends Migration
     {
         Schema::create('usage_logs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("model_id")->nullable();
+            $table->string('model');
+            $table->string('action');
+            $table->unsignedBigInteger("user_id")->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

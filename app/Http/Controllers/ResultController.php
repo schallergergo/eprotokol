@@ -19,6 +19,7 @@ use App\Http\Controllers\Result\ResultCaprilliController;
 use App\Http\Controllers\Result\ResultShortFormController;
 
 use App\Http\Controllers\Result\ResultJumpingRoundController;
+use App\Http\Controllers\UsageLogController;
 
 use App\Http\Controllers\ResultlogController;
 
@@ -35,6 +36,7 @@ use App\Models\User;
 use App\Models\Official;
 
 use App\Models\Start;
+
 
 use App\Mail\ResultMail;
 
@@ -73,7 +75,7 @@ class ResultController extends Controller
         if ($user==null) $user="anonim";
 
         else $user=$user->name;
-
+    $this->log_to_db($result,"open");
     Log::channel("resultOpen")->info($user.' opened '.$result->id);
 
     if (!$result->filled)  return $this->notFilled($result);
@@ -145,6 +147,7 @@ class ResultController extends Controller
     public function edit(Result $result){
 
         $this->lastOpened($result);
+         $this->log_to_db($result,"edit");
 
        $typeofevent=$result->start->event->program->typeofevent;
 
@@ -611,8 +614,12 @@ private function calculatePartialResult(Result $result){
 
     
 
+private function log_to_db(Result $result,string $action)
+{
 
-
+    $usage_log = new UsageLogController();
+    $usage_log->save($result,$action);
+}
     
 
 
