@@ -42,11 +42,13 @@ class UsageLogController extends Controller
 
     private function saveStart(Model $result, string $action)
     {
+
+
         UsageLog::create(
             ["model_id"=>$result->id,
             "model"=>"Result",
             "action"=>$action,
-            "user_id"=> $user = auth()->user()->id
+            "user_id"=> $user = auth()->user()?->id
             ]);
     }
     /**
