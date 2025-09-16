@@ -44,7 +44,13 @@
                              <td>
                                 <span class="badge bg-primary">{{ ucfirst($log->action) }}</span>
                             </td>
+                            @if ($log->model == 'Result')
+                            <td title = "Hover">{{ $log->model_id}}</td>
+                            @else 
                             <td>{{ $log->model_id}}</td>
+                            @endif
+                            
+
                            
                             <td>{{ Str::limit(json_encode($log->comment), 50) }}</td>
                             <td>{{ $log->created_at->format('Y-m-d H:i') }}</td>
