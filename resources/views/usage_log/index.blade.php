@@ -45,7 +45,7 @@
                                 <span class="badge bg-primary">{{ ucfirst($log->action) }}</span>
                             </td>
                             @if ($log->model == 'Result')
-                            <td title = "Hover">{{ $log->model_id}}</td>
+                            <td> <a href="/result/show/{{$log->model_id}}"></a>{{ $log->model_id}}</td>
                             @else 
                             <td>{{ $log->model_id}}</td>
                             @endif
