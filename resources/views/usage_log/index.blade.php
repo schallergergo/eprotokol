@@ -44,7 +44,7 @@
                              <td>
                                 <span class="badge bg-primary">{{ ucfirst($log->action) }}</span>
                             </td>
-                            <td>{{ class_basename($log->model_id) }}</td>
+                            <td>{{ $log->model_id}}</td>
                            
                             <td>{{ Str::limit(json_encode($log->comment), 50) }}</td>
                             <td>{{ $log->created_at->format('Y-m-d H:i') }}</td>
