@@ -134,60 +134,49 @@ class RegisterController extends Controller
 
 
 
-    private function captcha()
+   private function captcha()
+{
+    if (!isset($_POST['g-recaptcha-response'])) {
+        Log::channel('recaptcha')->warning('Failed reCAPTCHA attempt');
+        return false;
+    }
 
-    {
-
-        if(!isset($_POST['g-recaptcha-response'])) 
-        {
-
-            Log::channel('recaptcha')->warning('Failed reCAPTCHA attempt');
-                return false;
-        }
-
-            
-        if(!empty($_POST['g-recaptcha-response'])){
-
-        //your site secret key
-
+    if (!empty($_POST['g-recaptcha-response'])) {
         $secret = env("RECAPTCHA_SECRET_KEY");
 
-        //get verify response data
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+            'secret' => $secret,
+            'response' => $_POST['g-recaptcha-response'],
+        ]));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // ensures SSL check
+        $verifyResponse = curl_exec($ch);
+        curl_close($ch);
 
-        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
-
-        $responseData = json_decode($verifyResponse);
-        
-        Log::channel('recaptcha')->warning('Failed reCAPTCHA attempt', [
-
-            'score' => $responseData->score ?? 'N/A',
-
-            'action' => $responseData->action ?? 'N/A',
-
-            'hostname' => $responseData->hostname ?? 'N/A',
-
-            'timestamp' => now(),
-
-        ]);
-
-
-            
-
-        if (!$responseData->success || $responseData->score < 0.5) {
-
-        // Log failed attempt
-
-
-        return false;
-
+        if ($verifyResponse === false) {
+            Log::channel('recaptcha')->error('cURL failed contacting reCAPTCHA API');
+            return false;
         }
 
+        $responseData = json_decode($verifyResponse);
+
+        Log::channel('recaptcha')->warning('Failed reCAPTCHA attempt', [
+            'score' => $responseData->score ?? 'N/A',
+            'action' => $responseData->action ?? 'N/A',
+            'hostname' => $responseData->hostname ?? 'N/A',
+            'timestamp' => now(),
+        ]);
+
+        if (!$responseData->success || ($responseData->score ?? 0) < 0.5) {
+            return false;
+        }
     }
 
     return true;
-
-    }
-
+}
 
 
     /**

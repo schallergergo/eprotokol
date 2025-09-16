@@ -34,6 +34,7 @@ use App\Http\Controllers\StartController;
 use App\Http\Controllers\CompetitionController;
 
 use App\Http\Controllers\CompetitionStatsController;
+use App\Http\Controllers\CompetitionImportController;
 
 use App\Http\Controllers\ChampionshipController;
 
@@ -363,6 +364,10 @@ Route::get('/competition/stats/{competition}/horse/{horse}', [CompetitionStatsCo
 Route::get('/competition/stats/{competition}/riders', [CompetitionStatsController::class, 'showRiderStartNumber']);
 Route::get('/competition/stats/{competition}/rider/{rider}', [CompetitionStatsController::class, 'showRiderStarts'])->name('competition.stats.rider');
 
+Route::get('/competition/import/{competition}', [CompetitionImportController::class, 'import'])->name('competition.import');
+
+
+Route::post('/competition/saveImport/{competition}', [CompetitionImportController::class, 'saveImport'])->name('competition.saveImport');
 
 Route::get('/competition/index', [CompetitionController::class, 'index']);
 
