@@ -95,6 +95,10 @@
                                 <option selected> {{__("Pony Club")}} </option>
                                 @elseif ($competition->discipline=="lovastusa")
                                 <option selected> {{__("Eventing")}} </option>
+                                 @elseif ($competition->discipline=="dijlovas")
+                                <option selected> {{__("Dressage")}} </option>
+                                 @elseif ($competition->discipline=="joker")
+                                <option selected> {{__("Joker")}} </option>
                                 @endif
                              </select>
                             </div>

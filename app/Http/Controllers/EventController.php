@@ -444,6 +444,35 @@ class EventController extends Controller
         return Excel::download(new \App\Exports\Kondor\ResultExport($event), $event_name);
 
     }
+    
+    
+    public function exportEventingEvent(Event $event){
+
+        $this->authorize('update', $event);
+
+        $event_name = str_replace("/", "-", $event->event_name.'_eventingresults.xlsx');
+
+         $typeofevent = $event->program->typeofevent;
+
+        if ($typeofevent=="rounds" || $typeofevent=="pkx")
+
+             return Excel::download(new \App\Exports\Kondor\JumpingRoundExport($event), $event_name);
+
+
+
+         if ($typeofevent=="style")
+
+            return Excel::download(new \App\Exports\Kondor\StyleExport($event), $event_name);
+
+
+
+
+
+
+
+        return Excel::download(new \App\Exports\EventingResultExport($event), $event_name);
+
+    }
 
 
 

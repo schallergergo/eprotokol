@@ -23,7 +23,7 @@
 
                              <span title="{{__('Percentage')}}">{{$result->percent}}% </span> - 
 
-                             <span title="{{__('Collective mark')}}">{{$start->collective}}p </span>
+                             <span title="{{__('Collective mark')}}">{{$result->collective}}p </span>
 
 
 

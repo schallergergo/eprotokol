@@ -29,7 +29,7 @@ class UsageLogController extends Controller
             $query->where('model', 'like', "%{$request->model}%");
         }
 
-        $logs = $query->latest()->paginate(20);
+        $logs = $query->latest()->paginate(100);
 
         // Get distinct model types for buttons
         $models = UsageLog::selectRaw('DISTINCT(model) as model')

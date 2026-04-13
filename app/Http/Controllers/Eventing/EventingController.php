@@ -95,20 +95,57 @@ class EventingController extends Controller
 
     }
 
-    private function calculateRank(Eventing $eventing)
-    {
-        /*-
-        0 -> eventing.fault
-        1 -> cross.total_fault
-        2 -> start.mark
-        3 -> cross.time_allowed_diff
-        4 -> sj.total_faults
-        5 -> sj.time
-        6 -> start.collective
-        7 -> never gonna happen
+   public function calculateRank(Event $event)
+        {
+            $starts = $this->getEventingStarts($event);
         
-        */
-    }
+            if ($starts->isEmpty()) {
+                return;
+            }
+        
+            $currentCategory = null;
+            $rank = 0;
+        
+            foreach ($starts as $start) {
+        
+                // New category → reset rank
+                if ($start->category !== $currentCategory) {
+                    $currentCategory = $start->category;
+                    $rank = 1;
+                } else {
+                    $rank++;
+                }
+        
+                $start->rank = $rank;
+                $start->save();
+            }
+            return redirect('/event/show/'.$event->id);
+        }
+    
+   private function getEventingStarts(Event $event)
+        {
+            return Start::hydrate(
+                DB::table('eventings as e')
+                    ->join('starts as s', 's.id', '=', 'e.start_id')
+                    ->leftJoin('eventing_show_jumpings as sj', 'sj.start_id', '=', 's.id')
+                    ->leftJoin('eventing_crosses as ec', 'ec.start_id', '=', 's.id')
+                    ->leftJoin('eventing_extra_infos as i', 'i.event_id', '=', 's.event_id')
+                    ->where('s.event_id', $event->id)
+                    ->where('s.deleted_at',null)
+                    ->select('s.*')
+                    ->orderBy('s.category')
+                    ->orderBy('e.fault')
+                    ->orderBy('ec.total_fault')
+                    ->orderBy('s.mark')
+                    ->orderByRaw('ABS(i.cross_time_allowed - ec.time)')
+                    ->orderBy('sj.total_fault')
+                    ->orderBy('sj.time')
+                    ->orderBy('s.collective')
+                    ->get()
+                    ->toArray()
+            )->unique('id')->values();
+        }
+
 
     /**
      * Remove the specified resource from storage.

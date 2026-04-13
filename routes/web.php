@@ -23,6 +23,8 @@ use App\Http\Controllers\ResultlogController;
 
 use App\Http\Controllers\EventController;
 
+use App\Http\Controllers\JokerEventController;
+
 use App\Http\Controllers\StartlistController;
 
 use App\Http\Controllers\PhantomEventController;
@@ -78,7 +80,7 @@ use App\Http\Controllers\Finance\FinanceController;
 use App\Http\Controllers\Finance\BoxFeeController;
 
 
-
+use App\Http\Controllers\Eventing\EventingController;
 use App\Http\Controllers\Eventing\EventingCrossController;
 
 use App\Http\Controllers\Eventing\EventingShowJumpingController;
@@ -237,6 +239,9 @@ Route::get('/start/moveDown/{start}', [StartController::class,'moveDown']);
 
 
 
+Route::get('/joker/edit/{start}', [JokerEventController::class,'edit']);
+Route::patch('/joker/update/{start}', [JokerEventController::class,'update']);
+
 Route::get('/ajax/getRiderData', [StartDataController::class,'getRiderData'])->name("ajax.riderData");
 Route::get('/ajax/getRiderAndHorseData', [StartDataController::class,'getRiderAndHorseData'])->name("ajax.riderAndHorseData");
 
@@ -324,7 +329,7 @@ Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
 Route::get('/event/export/{event}', [EventController::class, 'exportEvent']);
 
 Route::get('/event/exportByKondor/{event}', [EventController::class, 'exportEventByKondor']);
-
+Route::get('/event/eventingexport/{event}', [EventController::class, 'exportEventingEvent']);
 
 
 Route::get('/event/deletedStarts/{event}', [EventController::class, 'deletedStarts']);
@@ -433,6 +438,7 @@ Route::get("/jumpingqualification/excel",[JumpingQualificationController::class,
 
 
 Route::get('/usagelog/index', [UsageLogController::class, 'index'])->name('usagelog.index');
+Route::get('/usagelog/show/{usage_log}', [UsageLogController::class, 'show'])->name('usagelog.show');
 
 
 Route::get('/official/create/{event}', [OfficialController::class, 'create']);
@@ -535,7 +541,7 @@ Route::patch('/style/update/{style}', [StyleController::class, 'update']);
 
 
 
-
+Route::get('/eventing/calculateRank/{event}', [EventingController::class, 'calculateRank']);
 Route::get('/eventing/cross/edit/{eventingCross}', [EventingCrossController::class, 'edit']);
 Route::patch('/eventing/cross/update/{eventingCross}', [EventingCrossController::class, 'update']);
 

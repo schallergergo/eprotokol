@@ -30,6 +30,7 @@
                      <span><a href="/finance/didnotpay/competition/{{$competition->id}}">{{__("Did not pay")}}</a></span>
 
                      <span><a href="/boxfee/index/{{$competition->id}}">{{__("Box fees")}}</a></span>
+                     <span><a href="/boxfee/create/{{$competition->id}}">{{__("Box fees")}} import</a></span>
 
                         	
 

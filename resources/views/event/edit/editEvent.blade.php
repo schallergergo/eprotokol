@@ -118,6 +118,33 @@
                         </div>
 
 
+                              @if($event->competition->discipline == 'joker')
+
+                          <div class="form-group row">
+
+                            <label for="max_mark" class="col-md-4 col-form-label text-md-right">{{ __('Max mark') }}</label>
+
+                            <div class="col-md-6">
+
+                                <input id="max_mark" type="number" class="form-control @error('max_mark') is-invalid @enderror" name="max_mark" value="{{$event->max_mark }}" disabled>
+
+
+
+                                @error('max_mark')
+
+                                    <span class="invalid-feedback" role="alert">
+
+                                        <strong>{{__("Something is wrong... I know very helpful.")}}</strong>
+
+                                    </span>
+
+                                @enderror
+
+                            </div>
+
+                        </div>
+
+                    @endif
 
 
 

@@ -203,12 +203,16 @@
                            
                             <br>
 
-                            @endcan
+                            
+                            @if ($event->competition->discipline =='joker')
+                                 <span class="align-middle"><a href="/joker/edit/{{$start->id}}" target="">{{__("Edit result")}}</a></span><br>
 
+                            @endif
+                            @endcan
+                            @if ($event->competition->discipline !='joker')
                             @foreach ($start->result->sortBy('position') as $result)
 
                             
-
                             @can('update',$result)
 
 
@@ -220,7 +224,7 @@
                              @endcan
 
                              @endforeach
-
+                             @endif
                              
 
                               @foreach ($start->jumping_round as $round)
