@@ -35,7 +35,8 @@ class EventingResultExport implements FromArray {
                 $temp[] = $start->horse_name;
                 $temp[] = $start->club;
                 $temp[] = $start->original_category;
-                foreach ($start->result as $result){
+                foreach ($start->result->sortBy('position') as $result){
+                    $temp[]=$result->position;
                     foreach (json_decode($result->assessment) as $assessment)
                     {
 
@@ -83,6 +84,7 @@ class EventingResultExport implements FromArray {
                 $temp[] = "club";
                 $temp[] = "category";
             for ($i=0;$i<$numOfStarts;$i++){
+                $temp[]= 'position';
                 for ($j=1;$j<=$this->event->program->numofblocks;$j++)
                     $temp[] = $j;
             

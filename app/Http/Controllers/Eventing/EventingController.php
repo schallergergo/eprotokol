@@ -91,7 +91,20 @@ class EventingController extends Controller
 
         $eventing->save();
 
-        $this->calculateRank($eventing);
+        $this->calculateRank($start->event);
+
+    }
+     public function rankingView(Event $event)
+    {
+
+        $eventing = $event->eventing;
+        $starts = $event->start;
+        $categories = $starts->unique('category')->pluck('category');
+        $startsWithCategory = [];
+        foreach ($categories as $category){
+           $startsWithCategory[$category] = $starts->where('category', $category);
+        }
+        return view('eventing.ranking',['competition'=>$event->competition,'categories'=>$startsWithCategory,]);
 
     }
 

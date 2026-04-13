@@ -540,7 +540,7 @@ Route::get('/style/edit/{style}', [StyleController::class, 'edit']);
 Route::patch('/style/update/{style}', [StyleController::class, 'update']);
 
 
-
+Route::get('/eventing/ranking/{event}', [EventingController::class, 'rankingView']);
 Route::get('/eventing/calculateRank/{event}', [EventingController::class, 'calculateRank']);
 Route::get('/eventing/cross/edit/{eventingCross}', [EventingCrossController::class, 'edit']);
 Route::patch('/eventing/cross/update/{eventingCross}', [EventingCrossController::class, 'update']);
