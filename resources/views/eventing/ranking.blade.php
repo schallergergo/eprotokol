@@ -108,14 +108,14 @@
                         <td>{{ $entry->rider_name }}</td>
                         <td>{{ $entry->horse_name }}</td>
                         <td>{{ $entry->club ?? '-' }}</td>
-
+                        <td>
                         {{-- Judge scores --}}
                         @foreach($entry->result->sortBy('position') as $result)
-                            <td>
+                            
                                 {{ $result->position }} : {{ number_format($result->mark,1) }} p - {{number_format($result->percent,2)}} % <br>
-                            </td>
+                            
                         @endforeach
-
+                        </td>
                         <td>{{ number_format($entry->mark,1) }} p - {{number_format($entry->percent,2)}} % <br></td>
                         <td>
                             {{ $entry->eventing_cross->total_fault ?? '-' }} 
