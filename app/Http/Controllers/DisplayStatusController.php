@@ -38,8 +38,8 @@ class DisplayStatusController extends Controller
             'title' => $validated['title'] ?? null,
             'message' => $validated['message'] ?? null,
 
-            'completed_data' => $validated['completedStartData'] ?? null,
-            'pending_data' => $validated['pendingStartData'] ?? null,
+            'completed_data' => json_encode($validated['completedStartData']) ?? null,
+            'pending_data' => json_encode($validated['pendingStartData']) ?? null,
         ]
     );
 
