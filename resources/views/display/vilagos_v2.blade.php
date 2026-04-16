@@ -143,7 +143,7 @@ input:checked + .slider:before {
 <div class="display-row">
 
 <div class="display">
-  <h1>nulladik</h1>
+  <h1>itt lesz leírás</h1>
 
 </div>
 
