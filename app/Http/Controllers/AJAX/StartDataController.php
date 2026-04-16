@@ -11,12 +11,37 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Start;
+use App\Models\Result;
+
+use App\Models\Event;
+
 
 
 
 class StartDataController extends Controller
 
 {
+
+     public function getEventStarts(Event $event){
+
+        
+    $starts = Start::with('result')->select('id', 'rider_name','horse_name','club','mark','percent','collective','completed','updated_at')
+        ->where('event_id', $event->id)
+        ->orderBy('rank')
+        ->get();
+        return json_encode($starts);
+    }
+
+    public function getStartResults(Start $start){
+
+        
+    $results = Result::select('id','mark','percent','collective','completed','updated_at')
+        ->where('start_id', $start->id)
+
+        ->get();
+
+        return json_encode($results);
+    }
 
     
 

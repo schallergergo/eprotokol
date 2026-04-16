@@ -49,6 +49,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
 
 use App\Http\Controllers\DisplayController;
+use App\Http\Controllers\DisplayStatusController;
 
 use App\Http\Controllers\UsageLogController;
 
@@ -241,6 +242,12 @@ Route::get('/start/moveDown/{start}', [StartController::class,'moveDown']);
 
 Route::get('/joker/edit/{start}', [JokerEventController::class,'edit']);
 Route::patch('/joker/update/{start}', [JokerEventController::class,'update']);
+
+
+
+Route::get('/ajax/getEventStarts/{event}', [StartDataController::class,'getEventStarts']);
+Route::get('/ajax/getStartResult/{start}', [StartDataController::class,'getStartResults']);
+
 
 Route::get('/ajax/getRiderData', [StartDataController::class,'getRiderData'])->name("ajax.riderData");
 Route::get('/ajax/getRiderAndHorseData', [StartDataController::class,'getRiderAndHorseData'])->name("ajax.riderAndHorseData");
@@ -510,6 +517,7 @@ Route::get('/display/settings/{event}',[DisplayController::class, 'settings']);
 Route::get('/display/{event}',[DisplayController::class, 'display']);
 
 Route::get('/display/vilagos/{competition}',[DisplayController::class, 'vilagos']);
+Route::get('/display/vilagos_v2/{competition}',[DisplayController::class, 'vilagos_v2']);
 
 Route::get('/display/tatter/{competition}',[DisplayController::class, 'tatter']);
 
@@ -517,7 +525,8 @@ Route::get('/display/compsetting/{competition}',[DisplayController::class, 'comp
 
 Route::post('/display/storecompsetting/{competition}',[DisplayController::class, 'storeCompsetting']);
 
-
+Route::get('/display/getStatus/{competition}', [DisplayStatusController::class,'getDisplayStatus']);
+Route::post('/display/pushToLive/{competition}', [DisplayStatusController::class,'pushToLive']);
 
 
 

@@ -23,6 +23,13 @@ class DisplayController extends Controller
     ]);
     }
 
+        public function vilagos_v2(Competition $competition){
+        return view("display.vilagos_v2",[
+        'competition'=>$competition
+
+    ]);
+    }
+
     public function tatter(Competition $competition){
         return view("display.tatter",[
         'competition'=>$competition
@@ -51,6 +58,8 @@ class DisplayController extends Controller
         $competition->save();
         return redirect()->back();
     }
+
+     
 
 
     public function display(Event $event){
