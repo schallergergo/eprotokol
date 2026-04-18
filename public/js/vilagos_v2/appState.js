@@ -9,6 +9,8 @@ App.state = {
 
     completedStartData: null,
     pendingStartData: null,
+    automaticEvents: null,
+    automaticArray: null,
 
     display: 'default', // default | event | start | result | info
     title: '',
@@ -23,6 +25,8 @@ App.setState = function (data) {
     App.state.display = data.display;
     App.state.title = data.title;
     App.state.message = data.message;
+    App.state.automaticEvents = data.automaticEvents;
+    App.state.automaticArray = data.automaticArray;
 }
 
 function getResultString(start) {

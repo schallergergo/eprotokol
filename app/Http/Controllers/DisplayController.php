@@ -30,6 +30,14 @@ class DisplayController extends Controller
     ]);
     }
 
+    public function vilagos_v2_fullscreen(Competition $competition){
+        return view("display.vilagos_v2_fullscreen",[
+        'competition'=>$competition
+
+    ]);
+    }
+
+
     public function tatter(Competition $competition){
         return view("display.tatter",[
         'competition'=>$competition

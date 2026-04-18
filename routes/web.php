@@ -518,7 +518,7 @@ Route::get('/display/{event}',[DisplayController::class, 'display']);
 
 Route::get('/display/vilagos/{competition}',[DisplayController::class, 'vilagos']);
 Route::get('/display/vilagos_v2/{competition}',[DisplayController::class, 'vilagos_v2']);
-
+Route::get('/display/vilagos_v2_fullscreen/{competition}',[DisplayController::class, 'vilagos_v2_fullscreen']);
 Route::get('/display/tatter/{competition}',[DisplayController::class, 'tatter']);
 
 Route::get('/display/compsetting/{competition}',[DisplayController::class, 'compsetting']);

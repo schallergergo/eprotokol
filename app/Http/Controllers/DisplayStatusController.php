@@ -14,6 +14,7 @@ class DisplayStatusController extends Controller
     public function pushToLive(Competition $competition)
 {
     $request = request();
+    //dd($request);
     $validated = $request->validate([
         'competitionId' => 'required|integer',
         'eventId' => 'nullable|integer',
@@ -25,7 +26,10 @@ class DisplayStatusController extends Controller
         
         'completedStartData' => 'nullable|array',
         'pendingStartData' => 'nullable|array',
+        'automaticEvents' => 'sometimes|array',
+        'automaticArray' => 'sometimes|array',
     ]);
+    if (!isset($validated['automaticEvents'])) $validated['automaticEvents'] =[];
     // ✅ Save (one state per competition)
     //dump($request);
     //dd($validated);
@@ -39,7 +43,8 @@ class DisplayStatusController extends Controller
             'message' => $validated['message'] ?? null,
 
             'completed_data' => json_encode($validated['completedStartData']) ?? null,
-            'pending_data' => json_encode($validated['pendingStartData']) ?? null,
+            'automatic_events' => json_encode($validated['automaticEvents']) ?? null,
+            //'automaticArray' => json_encode($validated['automaticArray']) ?? null,
         ]
     );
 

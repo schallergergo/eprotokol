@@ -26,9 +26,10 @@ function pushToLive() {
         display: App.state.display,
         mode: App.state.mode,
         title: App.state.title,
-        message: App.state.message
+        message: App.state.message,
+        automaticEvents:getAutomaticEvents()
     };
-
+    console.log(payload);
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': token
@@ -78,3 +79,11 @@ $('#pushTestBtn').on('click', function () {
     */
     App.render();
 });
+
+function getAutomaticEvents() {
+    return $('input[name="events"]:checked')
+        .map(function () {
+            return $(this).val();
+        })
+        .get();
+}

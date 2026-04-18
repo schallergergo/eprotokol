@@ -44,6 +44,8 @@ function startLivePolling() {
             // 🔥 parse JSON fields
             const completed = data.completed_data ? JSON.parse(data.completed_data) : null;
             const pending = data.pending_data ? JSON.parse(data.pending_data) : null;
+            const automaticEvents = data.completed_data ? JSON.parse(data.automatic_events) : null;
+            const automaticArray = data.pending_data ? JSON.parse(data.automatic_array) : null;
 
             // ✅ update state
             App.setState({
@@ -53,7 +55,9 @@ function startLivePolling() {
                 title: data['title'],
                 message: data['message'],
                 completedStartData: completed,
-                pendingStartData: pending
+                pendingStartData: pending,
+                automaticEvents:automaticEvents,
+                automaticArray:automaticArray
             });
             console.log('set?');
             console.log(App.state);

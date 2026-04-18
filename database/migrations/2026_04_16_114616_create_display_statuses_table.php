@@ -23,6 +23,8 @@ class CreateDisplayStatusesTable extends Migration
             $table->string('message')->nullable();
             $table->json('completed_data')->nullable();
             $table->json('pending_data')->nullable();
+            $table->json('automatic_events')->nullable();
+            $table->json('automatic_array')->nullable();
             $table->timestamps();
         });
     }

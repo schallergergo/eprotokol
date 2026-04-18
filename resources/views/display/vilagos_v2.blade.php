@@ -152,8 +152,16 @@ input:checked + .slider:before {
 
 <div class="display">
  
-<h1>masodik</h1>
 
+@foreach($competition->event as $event)
+  <div class="form-check ml-2">
+  <input class="form-check-input" type="checkbox" value="{{$event->id}}"  id="event-{{$event->id}}" name="events">
+  <label class="form-check-label" for="event-{{$event->id}}">
+    {{$event->event_name}}
+  </label>
+</div>
+
+@endforeach
 </div>
 
 
