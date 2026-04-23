@@ -25,22 +25,22 @@ class StartDataController extends Controller
      public function getEventStarts(Event $event){
 
         
-    $starts = Start::with('result')->select('id', 'rider_name','horse_name','club','mark','percent','collective','completed','updated_at')
+    $starts = Start::select('id', 'rider_name','horse_name','club','mark','percent','collective','completed','updated_at')
         ->where('event_id', $event->id)
         ->orderBy('rank')
-        ->get();
+        ->get()->map(function ($s) {
+        $s->id = (string) $s->id;
+        return $s;
+    });
         return json_encode($starts);
     }
 
     public function getStartResults(Start $start){
 
-        
-    $results = Result::select('id','mark','percent','collective','completed','updated_at')
-        ->where('start_id', $start->id)
-
-        ->get();
-
-        return json_encode($results);
+        $starts = Start::with('result')->select('id', 'rider_name','horse_name','club','mark','percent','collective','completed','updated_at')
+        ->where('id', $start->id)
+        ->first(1);
+        return json_encode($starts);
     }
 
     

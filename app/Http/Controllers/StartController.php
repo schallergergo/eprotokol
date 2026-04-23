@@ -577,93 +577,7 @@ class StartController extends Controller
 
     }
 
-
-
-    public function moveUp(Start $start){
-
-        $this->authorize('update', $start );
-
-        $minimumRank=Start::where("event_id",$start->event_id)->min("rank");
-
-        $rank=$start->rank-1;
-
-        $startToSwap=Start::where("event_id",$start->event_id)->where("rank",$rank)->get();
-
-
-
-        while($rank>$minimumRank && count($startToSwap)==0){
-
-            $rank=$rank-1;
-
-            $startToSwap=Start::where("event_id",$start->event_id)->where("rank",$rank)->get();
-
-        }
-
-        if (count($startToSwap)!=0){
-
-            $startToSwap=$startToSwap->first();
-
-            $temp=$start->rank;
-
-            $start->rank=$startToSwap->rank;
-
-            $startToSwap->rank=$temp;
-
-            $start->save();
-
-            $startToSwap->save();
-
-        }
-
-        return back();
-
-    }
-
-
-
-    public function moveDown(Start $start){
-
-        $this->authorize('update', $start );
-
-        $maximumRank=Start::where("event_id",$start->event_id)->max("rank");
-
-        $rank=$start->rank+1;
-
-        $startToSwap=Start::where("event_id",$start->event_id)->where("rank",$rank)->get();
-
-
-
-        while($rank<$maximumRank && count($startToSwap)==0){
-
-            $rank=$rank+1;
-
-            $startToSwap=Start::where("event_id",$start->event_id)->where("rank",$rank)->get();
-
-        }
-
-        if (count($startToSwap)!=0){
-
-            $startToSwap=$startToSwap->first();
-
-            $temp=$start->rank;
-
-            $start->rank=$startToSwap->rank;
-
-            $startToSwap->rank=$temp;
-
-            $start->save();
-
-            $startToSwap->save();
-
-        }
-
-        return back();
-
-    }
-
-
-
-    
+   
 
 
 
@@ -685,6 +599,7 @@ class StartController extends Controller
 
             $this->calculateRank($start);
 
+            $this->setEliminated($start,$completedResults);
              try {
 
                 if (env("MAIL_ACTIVE",true)) $this->sendMail($start,$completed);
@@ -756,27 +671,18 @@ class StartController extends Controller
     }
 
 
+    private function setEliminated(Start $start, Collection $completedResults){
 
+     $eliminated = false;
 
+        foreach ($completedResults as $result){
 
+            $eliminated=$eliminated && $result->eliminated;
 
+        }
 
-    public function calculateAllRank(Start $start){
-
-        
-
-        $starts=Start::where("event_id",$start->event_id)
-
-                            ->where("completed",1)->get();
-
-        $starts=$starts->unique("category");
-
-
-
-       foreach( $starts as $start) $this->calculateRank($start);
-
-        
-
+      $start->eliminated = $eliminated;
+      $start->save();
 
 
     }

@@ -46,7 +46,8 @@ function loadStarts(eventId, container) {
 
             let pending = [];
             let completed = [];
-
+            console.log('data');
+            console.log(data);
             // 🔹 Split
             data.forEach(function (start) {
                 if (start.completed) {
@@ -94,16 +95,7 @@ function loadStarts(eventId, container) {
             App.state.pendingStartData = pending.length > 0 ? pending[0] : null;
             App.state.completedStartData = completed.length > 0 ? completed[0] : null;
 
-                    // 🔹 Auto-select first pending
-        if (pending.length > 0) {
-            pendingDropdown.val(pending[0].id).trigger('change');
-        }
-
-        // 🔹 Auto-select first completed
-        if (completed.length > 0) {
-            completedDropdown.val(completed[0].id).trigger('change');
-        }
-
+       
             console.log('STATE UPDATED:', App.state);
         },
 

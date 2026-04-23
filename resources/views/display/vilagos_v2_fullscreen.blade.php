@@ -110,6 +110,7 @@
   <script src="{{ asset('js/vilagos_v2/liveToggle.js') }}"></script>
   <script src="{{ asset('js/vilagos_v2/pushToLive.js') }}"></script>
   <script src="{{ asset('js/vilagos_v2/getStarts.js') }}"></script>
+
   <script src="{{ asset('js/vilagos_v2/infoHandler.js') }}"></script>
 
 

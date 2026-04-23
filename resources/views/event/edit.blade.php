@@ -37,6 +37,8 @@
 
                 @include("event.edit.categories")
 
+                @include("event.edit.swapstarts")
+
 
 
 

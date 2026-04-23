@@ -653,6 +653,60 @@ public function updateCategory (Event $event){
 
 }
 
+
+ public function swapStarts(Event $event){
+
+        $this->authorize('update',$event);
+
+        $data = request();
+         $validate=$data->validate([
+
+            'start1' => ['required', 'integer'],
+            'start2' => ['required', 'integer'],
+
+            ]);
+        $start1 = Start::findOrFail($data['start1']);
+        $start2 = Start::findOrFail($data['start2']);
+
+        if ($start1->event->id !=$event->id ||
+            $start2->event->id !=$event->id)
+            return 'EVENT DOES NOT MATCH';
+        $rider_id = $start1->rider_id; 
+        $rider_name= $start1->rider_name;
+        $horse_id = $start1->horse_id;
+        $horse_name = $start1->horse_name;
+        $club = $start1->club;
+        $category = $start1->category;
+        $original_category = $start1->original_category;
+        $twoIds = $start1->twoIds;
+
+        $start1->rider_id = $start2->rider_id;
+        $start1->rider_name = $start2->rider_name;
+        $start1->horse_id = $start2->horse_id;
+        $start1->horse_name = $start2->horse_name;
+        $start1->club = $start2->club;
+        $start1->category = $start2->category;
+        $start1->original_category = $start2->original_category;
+        $start1->twoIds = $start2->twoIds;
+
+        $start2->rider_id = $rider_id;
+        $start2->rider_name = $rider_name;
+        $start2->horse_id = $horse_id;
+        $start2->horse_name = $horse_name;
+        $start2->club = $club;
+        $start2->category = $category;
+        $start2->original_category = $original_category;
+        $start2->twoIds = $twoIds;
+
+        $start1->save();
+        $start2->save();
+
+        return redirect()->back();
+
+    }
+
+
+
 public function updateSecondStart(Event $event){
     if (!$event->islonge()) return abort(403);
 

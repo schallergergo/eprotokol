@@ -71,7 +71,7 @@ use App\Http\Controllers\StyleController;
 use App\Http\Controllers\api\ApiContoller;
 
 use App\Http\Controllers\AJAX\StartDataController;
-
+use App\Http\Controllers\AJAX\CompetitionDataController;
 
 
 use App\Http\Controllers\Finance\TransactionController;
@@ -244,9 +244,10 @@ Route::get('/joker/edit/{start}', [JokerEventController::class,'edit']);
 Route::patch('/joker/update/{start}', [JokerEventController::class,'update']);
 
 
+Route::get('/ajax/getCompetitionStarts/{competition}', [CompetitionDataController::class,'getCompetitionStarts']);
 
 Route::get('/ajax/getEventStarts/{event}', [StartDataController::class,'getEventStarts']);
-Route::get('/ajax/getStartResult/{start}', [StartDataController::class,'getStartResults']);
+Route::get('/ajax/getStartResults/{start}', [StartDataController::class,'getStartResults']);
 
 
 Route::get('/ajax/getRiderData', [StartDataController::class,'getRiderData'])->name("ajax.riderData");
@@ -341,6 +342,7 @@ Route::get('/event/eventingexport/{event}', [EventController::class, 'exportEven
 
 Route::get('/event/deletedStarts/{event}', [EventController::class, 'deletedStarts']);
 
+Route::post('/event/swapStarts/{event}', [EventController::class, 'swapStarts']);
 
 
 Route::post('/event/updateCategory/{event}', [EventController::class, 'updateCategory']);
@@ -515,7 +517,7 @@ Route::get('/team_member/delete/{team_member}',[TeamMemberController::class, 'de
 Route::get('/display/settings/{event}',[DisplayController::class, 'settings']);
 
 Route::get('/display/{event}',[DisplayController::class, 'display']);
-
+Route::get('/display/last_starts/{competition}',[DisplayController::class, 'last_starts']);
 Route::get('/display/vilagos/{competition}',[DisplayController::class, 'vilagos']);
 Route::get('/display/vilagos_v2/{competition}',[DisplayController::class, 'vilagos_v2']);
 Route::get('/display/vilagos_v2_fullscreen/{competition}',[DisplayController::class, 'vilagos_v2_fullscreen']);
