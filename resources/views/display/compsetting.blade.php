@@ -186,7 +186,7 @@
 
     <a href="/display/tatter/{{$competition->id}}" class="p-2" target="_blank">Tatter {{__("Display")}}</a>
 
-    <a href="/display/vilagos/{{$competition->id}}" class="p-2">Világos {{__("Display")}}</a>
+    <a href="/display/vilagos_v2/{{$competition->id}}" class="p-2">Világos {{__("Display")}}</a>
 
 @foreach($competition->event as $event)
 

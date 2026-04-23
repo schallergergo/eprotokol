@@ -43,5 +43,8 @@
   <button class="btn btn-secondary btn-block refresh-starts">
     Refresh starts
   </button>
+<a href="/display/vilagos/{{$competition->id}}">Automatic display</a>
+<a href="/display/vilagos_v2_fullscreen/{{$competition->id}}">Full screen</a>
+<a href="/display/last_starts/{{$competition->id}}">Last starts</a>
 
 </div>

@@ -17,13 +17,8 @@ class DisplayController extends Controller
 
 
     public function last_starts(Competition $competition){
-        $event = Event::find(699);
         return view("display.last_starts",[
-        'competition'=>$competition,
-        'event' => $event,
-        'starts'=> $event->start,
-
-
+        'competition'=>$competition
     ]);
     }
 

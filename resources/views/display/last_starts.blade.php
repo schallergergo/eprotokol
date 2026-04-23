@@ -34,69 +34,12 @@
     <div class="card">
 
         <div class="card-header text-center fs-4">
-           <span>{{$event->competition->name}}</span>  - <span id='event_name'>{{$event->event_name}}</span>
+           <span>{{$competition->name}}</span>  - <span id='event_name'></span>
         </div>
 
         <div class="card-body">
 
-            @foreach ($starts as $start)
-
-                <div class="row mb-3 border align-items-center text-center">
-
-                    <div class="col-md-2 p-2">
-                        {{$start->rider_name}} ({{$start->rider_id}})
-                    </div>
-
-                    <div class="col-md-2 p-2 ">
-                        {{$start->horse_name}} ({{$start->horse_id}})
-                    </div>
-
-                    <div class="col-md-2 p-2 ">
-                        {{$start->club}}
-                    </div>
-
-                    <div class="col-md-2 p-2">
-                        {{$start->category}}
-                    </div>
-
-                    <div class="col-md-2 p-2">
-                        @if ($start->eliminated)
-                            {{ __("Eliminated!") }}
-                        @else
-                            {{$start->mark}}p - {{number_format($start->percent, 3)}}%
-                            @if ($start->collective != 0)
-                                - {{$start->collective}}p
-                            @endif
-                        @endif
-                    </div>
-
-                    <div class="col-md-2 p-2">
-                        {{-- Assuming $start has related results --}}
-                        @foreach($start->result as $result)
-
-                            @if ($result->eliminated)
-                                {{ __("Eliminated!") }}
-                            @else
-                                <span title="{{__('Judge')}}">
-                                    {{$result->position}}:
-                                </span>
-                                <span title="{{__('Point')}}">
-                                    {{$result->mark}}p
-                                </span> -
-                                <span title="{{__('Percentage')}}">
-                                    {{$result->percent}}%
-                                </span> -
-                                <span title="{{__('Collective mark')}}">
-                                    {{$result->collective}}p
-                                </span>
-                            @endif
-
-                        @endforeach
-                    </div>
-
-                </div>
-
-            @endforeach
+        
 
         </div>
     </div>
