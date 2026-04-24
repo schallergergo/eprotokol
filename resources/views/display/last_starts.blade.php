@@ -16,11 +16,19 @@
             font-size: 1.2rem;
         }
 
+
+
         .card {
             background-color: #fff;
             border: none;
         }
 
+
+        .header-image {
+            height: 50px;
+            border: none;
+        }
+        
         .border {
             border-color: #444 !important;
         }
@@ -32,10 +40,15 @@
 <div class="container-fluid p-4">
 
     <div class="card">
+        <div class="card-header fs-4 d-flex align-items-center justify-content-between">
+            
+            <img class="header-image" src="/storage/logo/logo_med.png">
 
-        <div class="card-header text-center fs-4">
-           <span>{{$competition->name}}</span>  - <span id='event_name'></span>
-        </div>
+            <div class="mx-auto text-center">
+                {{$competition->name}} - <span id="event_name"></span>
+            </div>
+
+    </div>
 
         <div class="card-body">
 
