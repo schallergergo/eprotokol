@@ -89,12 +89,14 @@ input:checked + .slider:before {
 
      .display-row {
         display: flex;
+        flex-wrap: wrap; /* 👈 THIS is the key */
       }
 
       .display {
         width: 520px;
         height: 280px;
         background-color: #dedede;
+         flex: 0 0 auto;
       }
       #rider {
 
@@ -149,20 +151,7 @@ input:checked + .slider:before {
 
 @include('display.vilagos_v2.second_b')
 
-
-<div class="display">
- 
-
-@foreach($competition->event as $event)
-  <div class="form-check ml-2">
-  <input class="form-check-input" type="checkbox" value="{{$event->id}}"  id="event-{{$event->id}}" name="events">
-  <label class="form-check-label" for="event-{{$event->id}}">
-    {{$event->event_name}}
-  </label>
-</div>
-
-@endforeach
-</div>
+@include('display.vilagos_v2.third_b')
 
 
 </div>

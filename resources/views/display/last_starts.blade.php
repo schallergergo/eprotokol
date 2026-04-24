@@ -84,7 +84,7 @@ function render() {
 
         start.result.forEach(result => {
             if (result.eliminated) {
-                resultsHtml += `Eliminated! `;
+                resultsHtml += `Kizárva `;
             } else {
                 resultsHtml += `
                     <span title="Judge">${result.position}:</span>
@@ -117,7 +117,7 @@ function render() {
                 <div class="col-md-2 p-2">
                     ${
                         start.eliminated
-                        ? 'Eliminated!'
+                        ? 'Kizárva'
                         : `${start.mark}p - ${Number(start.percent).toFixed(3)}% ${start.collective != 0 ? '- ' + start.collective + 'p' : ''}`
                     }
                 </div>
