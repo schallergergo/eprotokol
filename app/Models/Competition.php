@@ -59,5 +59,15 @@ class Competition extends Model
 
     }
 
+    public function display_status(){
+
+
+
+        return $this->hasOne(DisplayStatus::class);
+
+        
+
+    }
+
 }
 

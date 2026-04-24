@@ -30,8 +30,10 @@ class DisplayController extends Controller
     }
 
         public function vilagos_v2(Competition $competition){
+        $selected_events = $competition->display_status->automatic_events;
         return view("display.vilagos_v2",[
-        'competition'=>$competition
+        'competition'=>$competition,
+        'selected_events'=>json_decode($selected_events),
 
     ]);
     }

@@ -6,7 +6,10 @@
                 <input class="form-check-input" type="checkbox"
                        value="{{$event->id}}"
                        id="event-{{$event->id}}"
-                       name="events[]">
+                       name="events[]"
+                       @if (in_array($event->id , $selected_events)) checked
+                       @endif
+                       >
 
                 <label class="form-check-label" for="event-{{$event->id}}">
                     {{$event->event_name}}
