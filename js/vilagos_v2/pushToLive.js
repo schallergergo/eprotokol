@@ -17,6 +17,8 @@ function pushToLive() {
 
     var token = $('meta[name="csrf-token"]').attr('content');
     console.log(App.state);
+    events = getAutomaticEvents();
+    console.log(events);
     const payload = {
         competitionId: App.state.competitionId,
         eventId: App.state.eventId,
@@ -27,7 +29,7 @@ function pushToLive() {
         mode: App.state.mode,
         title: App.state.title,
         message: App.state.message,
-        automaticEvents:getAutomaticEvents()
+        automaticEvents: events
     };
     console.log(payload);
     $.ajax({
@@ -81,7 +83,8 @@ $('#pushTestBtn').on('click', function () {
 });
 
 function getAutomaticEvents() {
-    return $('input[name="events"]:checked')
+    console.log('hello');
+    return $('input[name="events[]"]:checked')
         .map(function () {
             return $(this).val();
         })
