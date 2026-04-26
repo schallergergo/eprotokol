@@ -47,6 +47,8 @@
             <div class="mx-auto text-center">
                 {{$competition->name}} - <span id="event_name"></span>
             </div>
+            <span id='time_slot'> </span>
+
 
     </div>
 
@@ -85,9 +87,15 @@ function render() {
 
     const index = step % data.length;
     const event = data[index];
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
 
     // Update event name
     document.getElementById('event_name').innerText = event.event_name;
+    document.getElementById('time_slot').innerText = timeString;    
 
     const container = document.querySelector('.card-body');
     container.innerHTML = '';
