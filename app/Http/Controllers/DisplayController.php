@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Competition;
+use App\Models\DisplayStatus;
 use App\Models\Event;
 use App\Models\Start;
 use App\Models\Result;
@@ -30,6 +31,8 @@ class DisplayController extends Controller
     }
 
         public function vilagos_v2(Competition $competition){
+        $display = DisplayStatus::where('competition_id',$competition->id)->first();
+        if ($display == null) $display = DisplayStatus::create(['competition_id'=>$competition->id]);
         $selected_events = $competition->display_status->automatic_events;
         return view("display.vilagos_v2",[
         'competition'=>$competition,

@@ -687,6 +687,22 @@ class StartController extends Controller
 
     }
 
+     public function calculateAllRank(Start $start){
+
+        
+
+        $starts=Start::where("event_id",$start->event_id)
+
+                            ->where("completed",1)->get();
+
+        $starts=$starts->unique("category");
+
+
+
+       foreach( $starts as $start) $this->calculateRank($start);
+
+        }
+
 
 
     public function calculateRank(Start $start){
