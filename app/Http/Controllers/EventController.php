@@ -524,7 +524,7 @@ public function startlist(Event $event){
                                     ]);
         $order = $data["order"];
 
-        $start_times = $event->start->sortBy("rank")->pluck("start_time");
+        $start_times = $event->start->where('completed',0)->sortBy("rank")->pluck("start_time");
 
         if (count($start_times)!= count($order)) return response()->json([
             'success' => false,
