@@ -48,7 +48,7 @@
 
                     <div class="row mb-2 border">
 
-                        <div class="col-md-3 p-1 border d-none d-md-block">
+                        <div class="col-md-3 p-1 border d-md-block">
 
                             <span class="align-middle font-weight-bold">{{__("Rider")}}</span>
 
@@ -56,7 +56,7 @@
 
                         
 
-                        <div class="col-md-3 p-1 border d-none d-md-block">
+                        <div class="col-md-3 p-1 border d-md-block">
 
                             <span class="align-middle font-weight-bold">{{__("Horse")}}</span>
 
@@ -64,7 +64,7 @@
 
 
 
-                        <div class="col-md-2 p-1 border d-none d-md-block ">
+                        <div class="col-md-2 p-1 border d-md-block ">
 
                             <span class="align-middle font-weight-bold">{{__("Club")}}</span>
 
@@ -72,13 +72,13 @@
 
 
 
-                        <div class="col-md-2 p-1 border d-none d-md-block">
+                        <div class="col-md-2 p-1 border d-md-block">
 
                             <span class="align-middle font-weight-bold">{{__("Event")}}</span>
 
                         </div>
 
-                        <div class="col-md-2 p-1 border d-none d-md-block">
+                        <div class="col-md-2 p-1 border d-md-block">
 
                              <span class="align-middle font-weight-bold">
 

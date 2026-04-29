@@ -32,9 +32,20 @@ class StyleController extends Controller
 
     public function createStyle(Start $start){
 
+         $ponyCategory = DB::table('events as e')
+        ->join('starts as s', 's.event_id', '=', 'e.id')
+        ->join('styles as st', 'st.start_id', '=', 's.id')
+        ->where('e.program_id', 69)
+        ->where('s.horse_id', $start->horse_id) // dynamic
+        ->orderByDesc('st.updated_at')
+        ->value('st.pony_category');
+        if ($ponyCategory === null) $ponyCategory = 'NA';
 
 
-        Style::create(["start_id"=>$start->id]);
+        Style::create([
+            "start_id"=>$start->id,
+            "pony_category"=>$ponyCategory,
+        ]);
 
 
 
@@ -64,6 +75,7 @@ class StyleController extends Controller
 
         $this->authorize("update",$style);
         $this->log_to_db($style,"edit");
+        $past_category = $style->pony_category;
 
         return view("style.edit",[ 
 
