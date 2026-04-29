@@ -17,6 +17,7 @@ use App\Http\Requests\UpdateStyleRequest;
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 
