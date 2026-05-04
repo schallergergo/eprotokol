@@ -423,7 +423,7 @@ class EventController extends Controller
 
        $starts = $event->start;
 
-       return json_encode(["competition_name"=>$competition->name,"event_name"=>$event->event_name,"starts"=>$starts]);
+       return json_encode(["competition_name"=>$event->competition->name,"event_name"=>$event->event_name,"starts"=>$starts]);
 
 
     }
