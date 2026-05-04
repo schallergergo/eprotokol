@@ -422,8 +422,10 @@ class EventController extends Controller
      public function exportZipEvent(Event $event){
 
        $starts = $event->start;
+       $competition = $event->competition;
+       $ids = $competition->event->pluck("id");
 
-       return json_encode(["competition_name"=>$event->competition->name,"event_name"=>$event->event_name,"starts"=>$starts]);
+       return json_encode(["competition_name"=>$event->competition->name,"event_name"=>$event->event_name,"starts"=>$starts,'other_ids'=>$ids]);
 
 
     }
