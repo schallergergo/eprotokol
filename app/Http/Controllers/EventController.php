@@ -30,6 +30,8 @@ use App\Http\Controllers\OfficialController;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\Exports\ZipResultExport;
+
 use App\Exports\ResultExport;
 
 use App\Exports\JumpingRoundExport;
@@ -414,6 +416,19 @@ class EventController extends Controller
         return Excel::download(new ResultExport($event), $event_name);
 
     }
+
+
+
+     public function exportZipEvent(Event $event){
+
+       $starts = $event->start;
+
+       return json_encode(["competition_name"=>$competition->name,"event_name"=>$event->event_name,"starts"=>$starts]);
+
+
+    }
+
+
 
 
 

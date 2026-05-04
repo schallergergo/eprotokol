@@ -335,6 +335,7 @@ Route::patch('/event/updateStartlist/{event}', [EventController::class, 'updateS
 Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
 
 Route::get('/event/export/{event}', [EventController::class, 'exportEvent']);
+Route::get('/event/exportzip/{event}', [EventController::class, 'exportZipEvent']);
 
 Route::get('/event/exportByKondor/{event}', [EventController::class, 'exportEventByKondor']);
 Route::get('/event/eventingexport/{event}', [EventController::class, 'exportEventingEvent']);
