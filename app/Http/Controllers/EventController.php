@@ -425,7 +425,7 @@ class EventController extends Controller
        $competition = $event->competition;
        $ids = $competition->event->pluck("id");
 
-       return json_encode(["competition_name"=>$event->competition->name,"event_name"=>$event->event_name,"starts"=>$starts,'other_ids'=>$ids]);
+       return json_encode(["competition_name"=>$competition->name,"event_name"=>$event->event_name,"starts"=>$starts,'other_ids'=>$ids]);
 
 
     }
