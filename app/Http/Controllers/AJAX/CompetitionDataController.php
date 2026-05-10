@@ -24,7 +24,27 @@ class CompetitionDataController extends Controller
 
 {
 
-     public function getCompetitionStarts(Competition $competition){
+    public function getCompetitionStarts($competition)
+    {
+
+
+
+
+
+        $data = Start::from('starts')
+            ->leftJoin('events', 'starts.event_id', '=', 'events.id')
+            ->where('events.competition_id', $competition)
+            ->where('starts.completed','>',0)
+            //->orderBy('starts.updated_at', 'desc')
+            ->select('starts.*','events.event_name')
+            ->limit(15)
+            ->get();
+
+            return json_encode($data);
+
+    }
+
+     public function getEventStartsForCompetition(Competition $competition){
 
         $display_status = DisplayStatus::where('competition_id',$competition->id)->first();
        if ( !$display_status ) return [];

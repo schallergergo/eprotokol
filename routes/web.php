@@ -244,9 +244,10 @@ Route::get('/joker/edit/{start}', [JokerEventController::class,'edit']);
 Route::patch('/joker/update/{start}', [JokerEventController::class,'update']);
 
 
-Route::get('/ajax/getCompetitionStarts/{competition}', [CompetitionDataController::class,'getCompetitionStarts']);
-
+Route::get('/ajax/getEventStartsForCompetition/{competition}', [CompetitionDataController::class,'getEventStartsForCompetition']);
+Route::get('/ajax/getCompetitionStarts/{event}', [CompetitionDataController::class,'getCompetitionStarts']);
 Route::get('/ajax/getEventStarts/{event}', [StartDataController::class,'getEventStarts']);
+
 Route::get('/ajax/getStartResults/{start}', [StartDataController::class,'getStartResults']);
 
 
@@ -518,7 +519,9 @@ Route::get('/team_member/delete/{team_member}',[TeamMemberController::class, 'de
 Route::get('/display/settings/{event}',[DisplayController::class, 'settings']);
 
 Route::get('/display/{event}',[DisplayController::class, 'display']);
-Route::get('/display/last_starts/{competition}',[DisplayController::class, 'last_starts']);
+Route::get('/display/last_starts/{competition}/events',[DisplayController::class, 'last_starts_events']);
+Route::get('/display/last_starts/{competition}/competition',[DisplayController::class, 'last_starts_competition']);
+
 Route::get('/display/vilagos/{competition}',[DisplayController::class, 'vilagos']);
 Route::get('/display/vilagos_v2/{competition}',[DisplayController::class, 'vilagos_v2']);
 Route::get('/display/vilagos_v2_fullscreen/{competition}',[DisplayController::class, 'vilagos_v2_fullscreen']);

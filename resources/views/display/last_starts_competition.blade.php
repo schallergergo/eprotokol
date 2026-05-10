@@ -45,7 +45,7 @@
             <img class="header-image" src="/storage/logo/logo_med.png">
 
             <div class="mx-auto text-center">
-                {{$competition->name}} - <span id="event_name"></span>
+                {{$competition->name}}
             </div>
             <span id='time_slot'> </span>
 
@@ -85,8 +85,6 @@ async function fetchData() {
 function render() {
     if (!data.length) return;
 
-    const index = step % data.length;
-    const event = data[index];
     const now = new Date();
     const timeString = now.toLocaleTimeString('en-GB', {
         hour: '2-digit',
@@ -94,30 +92,19 @@ function render() {
     });
 
     // Update event name
-    document.getElementById('event_name').innerText = event.event_name;
     document.getElementById('time_slot').innerText = timeString;    
 
     const container = document.querySelector('.card-body');
     container.innerHTML = '';
 
-    event.starts.forEach(start => {
-        let resultsHtml = '';
-
-        start.result.forEach(result => {
-            if (result.eliminated) {
-                resultsHtml += `Kizárva `;
-            } else {
-                resultsHtml += `
-                    <span title="Judge">${result.position}:</span>
-                    <span title="Point">${result.mark}p</span> -
-                    <span title="Percentage">${result.percent}%</span> -
-                    <span title="Collective mark">${result.collective}p</span><br>
-                `;
-            }
-        });
+    data.forEach(start => {
 
         const row = `
             <div class="row mb-3 border align-items-center text-center">
+                <div class="col-md-2 p-2">
+                    ${start.event_name}
+                </div>
+            
 
                 <div class="col-md-2 p-2">
                     ${start.rider_name} (${start.rider_id})
@@ -143,9 +130,7 @@ function render() {
                     }
                 </div>
 
-                <div class="col-md-2 p-2">
-                    ${resultsHtml}
-                </div>
+
 
             </div>
         `;

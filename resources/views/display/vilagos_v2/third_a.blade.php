@@ -45,6 +45,7 @@
   </button>
 <a href="/display/vilagos/{{$competition->id}}">Automatic display</a>
 <a href="/display/vilagos_v2_fullscreen/{{$competition->id}}">Full screen</a>
-<a href="/display/last_starts/{{$competition->id}}">Last starts</a>
+<a href="/display/last_starts/{{$competition->id}}/events">Last starts events</a>
+<a href="/display/last_starts/{{$competition->id}}/competition">Last starts competition</a>
 
 </div>

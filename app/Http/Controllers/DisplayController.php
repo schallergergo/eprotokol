@@ -18,7 +18,13 @@ class DisplayController extends Controller
 
 
     public function last_starts(Competition $competition){
-        return view("display.last_starts",[
+        return view("display.last_starts_event",[
+        'competition'=>$competition
+    ]);
+    }
+
+        public function last_starts_competition(Competition $competition){
+        return view("display.last_starts_competition",[
         'competition'=>$competition
     ]);
     }
